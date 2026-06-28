@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오토매장 독립 운동 — 무료 웨비나</title>
+<style>
+:root{--ink:#231a12;--primary:#B85042;--primary-dk:#8F3B30;--gold:#C9852E;--gold-dk:#A86A2E;
+--cream:#F6EEE7;--sage:#5E7E6E;--sage-dk:#3F5A4C;--panel:#EFF3F0;--bench:#FBF3E9;--line:#E7DCCE;--bg:#FAF7F3;--muted:#8A7B6B;--card:#fff;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Malgun Gothic','맑은 고딕',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px}
+.btn{display:inline-block;background:var(--primary);color:#fff;font-weight:800;font-size:17px;padding:16px 30px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(184,80,66,.32);transition:transform .12s,background .15s}
+.btn:hover{background:var(--primary-dk);transform:translateY(-1px)}
+.btn.lg{font-size:19px;padding:18px 38px}
+/* sticky bar */
+.sticky{position:sticky;top:0;z-index:60;background:rgba(35,26,18,.97);backdrop-filter:blur(6px);color:#fff}
+.sticky .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 22px}
+.sticky b{font-size:15px}.sticky .s{color:#E8D9C5;font-size:12px;margin-left:8px}
+.sticky a{background:var(--gold);color:#231a12;font-weight:800;font-size:13.5px;padding:9px 16px;border-radius:8px;text-decoration:none}
+/* hero */
+.hero{background:linear-gradient(180deg,#231a12 0%,#2f231a 100%);color:#fff;padding:62px 0 58px;text-align:center}
+.hero .kicker{display:inline-block;background:rgba(201,133,46,.18);color:var(--gold);font-weight:800;font-size:13px;letter-spacing:1px;padding:6px 14px;border-radius:20px}
+.hero h1{font-size:42px;font-weight:900;line-height:1.18;margin:18px 0 10px}
+.hero h1 .g{color:var(--gold)}
+.hero p.sub{font-size:18px;color:#EBDCC9;max-width:640px;margin:0 auto 26px}
+.hero .trust{color:#a8967f;font-size:13px;margin-top:18px}
+.hero .mag{display:inline-block;margin-top:8px;color:#EBDCC9;font-size:13.5px;background:rgba(255,255,255,.07);padding:8px 14px;border-radius:8px}
+section{padding:54px 0}
+.center{text-align:center}
+h2{font-size:30px;font-weight:900;line-height:1.25;margin-bottom:8px}
+h2 .g{color:var(--primary)}
+.lead{color:var(--muted);font-size:16px;margin-bottom:22px}
+.enemy{background:#2f231a;color:#fff}
+.enemy h2{color:#fff}.enemy .lead{color:#cbb89f}
+.elist{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:24px}
+@media(max-width:760px){.elist{grid-template-columns:1fr}}
+.ecard{background:#3a2c20;border-radius:12px;padding:20px}
+.ecard .x{color:var(--primary);font-weight:900;font-size:15px}
+.ecard p{color:#d8c8b4;font-size:14px;margin-top:6px}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media(max-width:760px){.pillars{grid-template-columns:1fr}}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;box-shadow:0 1px 3px rgba(35,26,18,.05)}
+.pill .n{display:inline-block;width:34px;height:34px;border-radius:50%;background:var(--cream);color:var(--primary-dk);font-weight:900;text-align:center;line-height:34px;margin-bottom:8px}
+.pill h4{font-size:17px;font-weight:800}.pill p{color:var(--muted);font-size:14px;margin-top:4px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+.stat{flex:1;min-width:160px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center}
+.stat .n{font-size:30px;font-weight:900;color:var(--primary)}
+.stat .t{font-size:13px;color:var(--muted);margin-top:4px}
+.quote{background:var(--bench);border-radius:12px;padding:18px 22px;margin-top:16px;font-size:15px}
+.quote b{color:var(--gold-dk)}
+/* offer + form */
+.offer{background:linear-gradient(180deg,#B85042 0%,#8F3B30 100%);color:#fff}
+.offer h2{color:#fff}
+.formcard{background:#fff;color:var(--ink);border-radius:16px;padding:28px;max-width:520px;margin:24px auto 0;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+.formcard h3{font-size:20px;font-weight:900;text-align:center}
+.formcard .gift{background:var(--bench);border-radius:10px;padding:12px 14px;font-size:13.5px;margin:14px 0;text-align:center}
+.formcard label{display:block;font-size:13px;font-weight:700;margin:12px 0 5px}
+.formcard input,.formcard select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:9px;font-size:15px;font-family:inherit;background:#fff}
+.formcard .btn{width:100%;margin-top:18px}
+.formcard .fine{font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px}
+.done{display:none;text-align:center;padding:18px}
+.done.show{display:block}.done .c{font-size:40px;color:var(--sage)}
+/* faq */
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px}
+.faq summary{font-weight:700;cursor:pointer;font-size:15.5px}
+.faq p{color:var(--muted);font-size:14px;margin-top:8px}
+footer{background:#231a12;color:#a8967f;font-size:12.5px;padding:30px 0;text-align:center}
+.note{background:#FBECEA;border:1px solid #E6BdB6;border-radius:8px;padding:10px 14px;font-size:12.5px;color:var(--primary-dk);margin:14px auto 0;max-width:520px}
+</style></head>
+<body>
+<div class="sticky"><div class="wrap"><div><b>오토매장 독립 운동</b><span class="s">by 진짜 둘</span></div><a href="#apply">무료 웨비나 신청 ▸</a></div></div>
+
+<header class="hero"><div class="wrap">
+<span class="kicker">오토매장 독립 운동 · 무료 웨비나</span>
+<h1>가게에 갇힌 사장에서,<br><span class="g">가게를 거느린 사업가로.</span></h1>
+<p class="sub">당신이 없어도 도는 가게, <b>오토매장</b>. 사장이 매달리지 않아도 매출이 도는 시스템을 만드는 법을 무료 웨비나에서 공개합니다.</p>
+<a href="#apply" class="btn lg">무료 웨비나 신청하기</a>
+<div class="mag">🎁 신청자 전원 — <b>오토매장 자가진단 + 네이버 플레이스 상위 체크리스트</b> 무료 증정</div>
+<div class="trust">진짜 둘 1·2기 수강생들의 실제 변화로 검증 · 임사부(운영·시스템) × 손영래(마케팅)</div>
+</div></header>
+
+<section class="enemy"><div class="wrap center">
+<h2>왜 이렇게 열심히 하는데,<br>사장만 갈려나갈까요?</h2>
+<p class="lead">문제는 당신의 노력이 아닙니다. <b>구조</b>입니다.</p>
+<div class="elist">
+<div class="ecard"><div class="x">✕ 가맹비만 받는 프랜차이즈</div><p>가맹비·로열티는 받아가지만, 정작 '사장이 빠져도 도는 가게'는 만들어주지 않습니다.</p></div>
+<div class="ecard"><div class="x">✕ 혼자 더듬는 마케팅</div><p>유튜브 보며 플레이스·광고를 독학하다 "네이버만 아는 점수"에 막혀버립니다.</p></div>
+<div class="ecard"><div class="x">✕ 사장이 빠지면 멈추는 가게</div><p>하루도 못 쉬고, 10년 뒤에도 똑같이 가게에 묶여 있습니다.</p></div>
+</div>
+</div></section>
+
+<section><div class="wrap center">
+<h2>해답은 <span class="g">오토매장</span>입니다</h2>
+<p class="lead">장사를 잘하게 만드는 게 아니라, <b>장사가 알아서 되게</b> 만듭니다. 오토매장은 4가지가 사장 없이 돌아가는 상태입니다.</p>
+<div class="pillars">
+<div class="pill"><span class="n">1</span><h4>마케팅 오토</h4><p>플레이스·광고가 알아서 손님을 데려온다.</p></div>
+<div class="pill"><span class="n">2</span><h4>운영·직원 오토</h4><p>SOP·매뉴얼·교육으로 직원이 알아서 굴린다.</p></div>
+<div class="pill"><span class="n">3</span><h4>메뉴·상품 오토</h4><p>누가 만들어도 같은 맛·품질. 표준 레시피·발주.</p></div>
+<div class="pill"><span class="n">4</span><h4>디지털·AI 오토</h4><p>예약·웨이팅·리뷰·CRM·AI로 반복업무 자동화.</p></div>
+</div>
+</div></section>
+<section style="background:var(--bench)"><div class="wrap center">
+<h2>이미 <span class="g">결과</span>로 증명됐습니다</h2>
+<p class="lead">진짜 둘 1·2기 수강생들의 실제 변화 (사례는 동의 범위 내 공개)</p>
+<div class="stats">
+<div class="stat"><div class="n">250등→1등</div><div class="t">한 고깃집, 동네 '맛집' 플레이스 1위 (유입 약 2배)</div></div>
+<div class="stat"><div class="n">광고비 70원</div><div class="t">파워링크로 검색 첫 페이지 앞단 노출</div></div>
+<div class="stat"><div class="n">이탈율 ≈ 0</div><div class="t">'의도적 웨이팅' 도입 후 — 게다가 직원이 웃으며 일한다</div></div>
+</div>
+<div class="quote">한 수강생 — "<b>24년에 이걸 못 만났더라면, 저는 조용히 사라졌을 수도 있었습니다.</b> 과제 때문에 억지로라도 하게 됐고, 가게가 진짜 달라지고 있습니다."</div>
+</div></section>
+
+<section><div class="wrap center">
+<h2>오토매장 독립 운동</h2>
+<p class="lead">우리는 '식당 사장'을 넘어 <b>오토매장 사업가</b>가 되려는 사장들의 운동입니다. 임사부의 운영·시스템과 손영래의 마케팅이, 당신의 가게를 오토로 만듭니다.<br>입학은 '신생아'처럼 비우는 것에서 시작합니다 — <b>비우면, 빛납니다.</b></p>
+<a href="#apply" class="btn">무료 웨비나에서 만나기 ▸</a>
+</div></section>
+
+<section class="offer" id="apply"><div class="wrap center">
+<h2>무료 웨비나 신청</h2>
+<p class="lead" style="color:#FBE6DF">'사장 없이도 도는 가게'의 첫 스위치를, 단 한 번의 웨비나에서.</p>
+<div class="formcard">
+<form id="leadForm" onsubmit="return submitLead(event)">
+  <h3>오토매장 후보생 등록</h3>
+  <div class="gift">🎁 신청 즉시 — 오토매장 자가진단 + 플레이스 상위 체크리스트 무료 증정</div>
+  <label>이름(대표님 성함)</label><input required name="name" placeholder="홍길동">
+  <label>휴대폰 번호</label><input required name="phone" type="tel" placeholder="010-0000-0000" inputmode="numeric">
+  <label>업종 / 매장명</label><input required name="biz" placeholder="예) 고깃집 / OO식당">
+  <label>지금 가장 답답한 것 한 가지</label><input name="pain" placeholder="예) 플레이스 노출, 직원, 매출 정체...">
+  <label>매주 과제·실습 참여 가능하세요?</label>
+  <select name="commit"><option value="">선택</option><option>네, 가능합니다</option><option>조건부 가능</option><option>아직 모르겠어요</option></select>
+  <button class="btn" type="submit">무료 웨비나 신청하기</button>
+  <p class="fine">제출 시 카카오 채널 친구로 연결되어 자료와 웨비나 안내를 받습니다. 마케팅 활용에 동의합니다.</p>
+</form>
+<div class="done" id="done"><div class="c">✓</div><h3>신청이 접수되었습니다!</h3><p style="color:var(--muted);font-size:14px;margin-top:8px">카카오 채널 안내와 무료 자료를 곧 보내드립니다. 오토매장 사업가의 여정을 환영합니다.</p></div>
+</div>
+
+</div></section>
+
+<section class="faq"><div class="wrap">
+<h2 class="center">자주 묻는 질문</h2><div style="margin-top:22px">
+<details><summary>웨비나는 정말 무료인가요?</summary><p>네, 무료입니다. 신청자 전원께 오토매장 자가진단과 플레이스 체크리스트도 함께 드립니다.</p></details>
+<details><summary>장사 초보도 들을 수 있나요?</summary><p>네. 1단계는 '오늘 따라 하면 숫자가 바뀌는' quick win부터 시작합니다. 정체기 사장님, 확장하려는 사장님 모두를 위한 길이 있습니다.</p></details>
+<details><summary>프랜차이즈와 뭐가 다른가요?</summary><p>가맹비만 받고 끝나는 게 아니라, '사장이 빠져도 도는 오토매장 시스템(마케팅·운영·메뉴·디지털)'을 직접 만들도록 함께합니다.</p></details>
+<details><summary>바쁜데 시간을 낼 수 있을까요?</summary><p>그래서 '오토'입니다. 사장이 매달리는 시간을 줄이는 게 목표입니다. 단, 첫 2주의 실행이 변화를 만듭니다.</p></details>
+</div></div></section>
+
+<section class="center" style="background:#2f231a;color:#fff"><div class="wrap">
+<h2 style="color:#fff">당신이 없어도 도는 가게,<br>지금 시작하세요.</h2>
+<p class="lead" style="color:#cbb89f">식당 사장을 넘어, 오토매장 사업가로.</p>
+<a href="#apply" class="btn lg">무료 웨비나 신청하기</a>
+</div></section>
+
+<footer>오토매장 독립 운동 · 진짜 둘 / 더장사 · 장사왕 임사부　|　무료 웨비나 → 원데이 강의 → 진짜 둘 인큐베이팅</footer>
+
+<script>
+/* ▼▼▼ 구글 시트 연결: 아래 따옴표 안에 Apps Script 웹앱 URL을 붙여넣으세요 ▼▼▼
+   (설정 방법은 '랜딩폼_구글시트_연결가이드.md' 참고) */
+const SHEET_URL = "https://script.google.com/macros/s/AKfycby2ddVJN770viLvCSI_wrsIaw2FSRVSkGNP1P6BxhLCF3VCrk2aXHmrDF3JuLzN7Bft/exec";  // 예: https://script.google.com/macros/s/AKfycb.../exec
+function submitLead(e){e.preventDefault();
+ var f=e.target;
+ if(!f.name.value||!f.phone.value||!f.biz.value){alert("이름·휴대폰·업종/매장을 입력해 주세요.");return false;}
+ var btn=f.querySelector("button[type=submit]"); if(btn){btn.disabled=true;btn.textContent="신청 접수 중...";}
+ function showDone(){document.getElementById("leadForm").style.display="none";document.getElementById("done").classList.add("show");window.scrollTo({top:document.getElementById("apply").offsetTop-20,behavior:"smooth"});}
+ if(!SHEET_URL){ showDone(); return false; } // URL 미설정 시 데모로만 동작
+ fetch(SHEET_URL,{method:"POST",body:new FormData(f)})
+   .then(function(){showDone();})
+   .catch(function(){showDone();}); // 응답을 못 읽어도 시트에는 기록됩니다
+ return false;}
+</script>
+</body></html>
