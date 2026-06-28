@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>랜딩페이지 생성기 (문답형)</title>
+<style>
+:root{--ink:#2B2118;--primary:#B85042;--primary-dk:#8F3B30;--gold:#C9852E;--line:#E7DCCE;--bg:#FAF7F3;--muted:#8A7B6B;--card:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+.top{background:var(--ink);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:20}
+.top h1{font-size:17px;font-weight:800}.top .sub{color:#E8D9C5;font-size:12px}
+.top .btns{display:flex;gap:8px}
+.top button{font-family:inherit;font-size:13px;font-weight:700;border:none;border-radius:8px;padding:9px 14px;cursor:pointer}
+#dl{background:var(--gold);color:#231a12}#cp{background:#4a3a2c;color:#fff}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:0;height:calc(100vh - 56px)}
+@media(max-width:880px){.layout{grid-template-columns:1fr;height:auto}}
+.form{overflow-y:auto;padding:18px 20px 60px}
+.preview{border-left:1px solid var(--line);background:#efe7dd;position:sticky;top:56px;height:calc(100vh - 56px)}
+@media(max-width:880px){.preview{position:static;height:70vh;border-left:none;border-top:1px solid var(--line)}}
+.preview iframe{width:100%;height:100%;border:none;background:#fff}
+fieldset{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px;background:var(--card)}
+legend{font-size:13px;font-weight:800;color:var(--primary-dk);padding:0 6px}
+label{display:block;font-size:12px;font-weight:700;margin:10px 0 4px;color:var(--ink)}
+input,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:#fff;color:var(--ink)}
+textarea{resize:vertical;min-height:46px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hint{font-size:11px;color:var(--muted);margin-top:8px}
+input[type=color]{height:38px;padding:3px}
+</style></head><body>
+<div class="top">
+  <div><h1>랜딩페이지 생성기 <span class="sub">— 질문에 답하면 자동 완성</span></h1></div>
+  <div class="btns"><button id="cp">HTML 복사</button><button id="dl">HTML 다운로드</button></div>
+</div>
+<div class="layout">
+  <div class="form" id="form">
+
+  <fieldset><legend>1. 브랜드 · 상단바</legend>
+    <label>브랜드/운동명</label><input data-k="BRAND" value="오토매장 독립 운동">
+    <div class="row2"><div><label>운영 주체(by)</label><input data-k="BY" value="진짜 둘"></div>
+    <div><label>상단 버튼 문구</label><input data-k="NAVCTA" value="무료 웨비나 신청"></div></div>
+    <label>강조 색상(메인)</label><input type="color" data-k="PRIMARY" value="#B85042">
+  </fieldset>
+
+  <fieldset><legend>2. 히어로 (첫 화면 = 후크)</legend>
+    <label>상단 배지(작은 라벨)</label><input data-k="KICKER" value="오토매장 독립 운동 · 무료 웨비나">
+    <label>헤드라인 1줄</label><input data-k="H1A" value="가게에 갇힌 사장에서,">
+    <label>헤드라인 2줄 (강조)</label><input data-k="H1B" value="가게를 거느린 사업가로.">
+    <label>서브 설명</label><textarea data-k="SUB">당신이 없어도 도는 가게, 오토매장. 사장이 매달리지 않아도 매출이 도는 시스템을 만드는 법을 무료 웨비나에서 공개합니다.</textarea>
+    <label>메인 CTA 버튼</label><input data-k="CTA" value="무료 웨비나 신청하기">
+    <label>리드마그넷 배지(증정물)</label><input data-k="MAGNET" value="🎁 신청자 전원 — 오토매장 자가진단 + 네이버 플레이스 상위 체크리스트 무료 증정">
+    <label>신뢰 문구</label><input data-k="TRUST" value="진짜 둘 1·2기 수강생들의 실제 변화로 검증">
+  </fieldset>
+
+  <fieldset><legend>3. 문제 · 적 (Story)</legend>
+    <label>섹션 제목</label><input data-k="ENEMY_H" value="왜 이렇게 열심히 하는데, 사장만 갈려나갈까요?">
+    <label>섹션 부제</label><input data-k="ENEMY_SUB" value="문제는 당신의 노력이 아닙니다. 구조입니다.">
+    <div class="row2"><div><label>문제1 제목</label><input data-k="E1T" value="가맹비만 받는 프랜차이즈"></div><div><label>문제1 설명</label><input data-k="E1D" value="정작 사장이 빠져도 도는 가게는 만들어주지 않습니다."></div></div>
+    <div class="row2"><div><label>문제2 제목</label><input data-k="E2T" value="혼자 더듬는 마케팅"></div><div><label>문제2 설명</label><input data-k="E2D" value="유튜브 보며 독학하다 노출에 막혀버립니다."></div></div>
+    <div class="row2"><div><label>문제3 제목</label><input data-k="E3T" value="사장이 빠지면 멈추는 가게"></div><div><label>문제3 설명</label><input data-k="E3D" value="하루도 못 쉬고 가게에 묶여 있습니다."></div></div>
+  </fieldset>
+
+  <fieldset><legend>4. 해결책 (4가지 기둥)</legend>
+    <label>섹션 제목</label><input data-k="SOL_H" value="해답은 오토매장입니다">
+    <label>섹션 부제</label><input data-k="SOL_SUB" value="장사를 잘하게 만드는 게 아니라, 장사가 알아서 되게 만듭니다.">
+    <div class="row2"><div><label>기둥1 제목</label><input data-k="P1T" value="마케팅 오토"></div><div><label>기둥1 설명</label><input data-k="P1D" value="플레이스·광고가 알아서 손님을 데려온다."></div></div>
+    <div class="row2"><div><label>기둥2 제목</label><input data-k="P2T" value="운영·직원 오토"></div><div><label>기둥2 설명</label><input data-k="P2D" value="SOP·매뉴얼로 직원이 알아서 굴린다."></div></div>
+    <div class="row2"><div><label>기둥3 제목</label><input data-k="P3T" value="메뉴·상품 오토"></div><div><label>기둥3 설명</label><input data-k="P3D" value="누가 만들어도 같은 맛·품질."></div></div>
+    <div class="row2"><div><label>기둥4 제목</label><input data-k="P4T" value="디지털·AI 오토"></div><div><label>기둥4 설명</label><input data-k="P4D" value="예약·웨이팅·CRM·AI로 반복업무 자동화."></div></div>
+  </fieldset>
+
+  <fieldset><legend>5. 증거 (성공 사례)</legend>
+    <label>섹션 제목</label><input data-k="PROOF_H" value="이미 결과로 증명됐습니다">
+    <label>섹션 부제</label><input data-k="PROOF_SUB" value="실제 수강생들의 변화 (동의 범위 내 공개)">
+    <div class="row2"><div><label>지표1 숫자</label><input data-k="S1N" value="250등→1등"></div><div><label>지표1 설명</label><input data-k="S1T" value="동네 맛집 플레이스 1위 (유입 약 2배)"></div></div>
+    <div class="row2"><div><label>지표2 숫자</label><input data-k="S2N" value="광고비 70원"></div><div><label>지표2 설명</label><input data-k="S2T" value="검색 첫 페이지 앞단 노출"></div></div>
+    <div class="row2"><div><label>지표3 숫자</label><input data-k="S3N" value="이탈율 ≈ 0"></div><div><label>지표3 설명</label><input data-k="S3T" value="웨이팅 도입 후 — 직원이 웃으며 일한다"></div></div>
+    <label>고객 인용구</label><textarea data-k="QUOTE">"이걸 못 만났더라면 조용히 사라졌을 수도 있었습니다. 가게가 진짜 달라지고 있습니다."</textarea>
+  </fieldset>
+
+  <fieldset><legend>6. 운동 소개</legend>
+    <label>섹션 제목</label><input data-k="MOV_H" value="오토매장 독립 운동">
+    <label>본문</label><textarea data-k="MOV_P">우리는 '식당 사장'을 넘어 오토매장 사업가가 되려는 사장들의 운동입니다. 입학은 '신생아'처럼 비우는 것에서 시작합니다 — 비우면, 빛납니다.</textarea>
+    <label>버튼 문구</label><input data-k="MOV_CTA" value="무료 웨비나에서 만나기">
+  </fieldset>
+
+  <fieldset><legend>7. 신청(오퍼) · 폼 · 시트 연결</legend>
+    <label>섹션 제목</label><input data-k="OFFER_H" value="무료 웨비나 신청">
+    <label>섹션 부제</label><input data-k="OFFER_SUB" value="'사장 없이도 도는 가게'의 첫 스위치를, 단 한 번의 웨비나에서.">
+    <label>폼 제목</label><input data-k="FORM_TITLE" value="오토매장 후보생 등록">
+    <label>폼 안내(증정)</label><input data-k="GIFT" value="🎁 신청 즉시 — 오토매장 자가진단 + 플레이스 체크리스트 무료 증정">
+    <label>완료 메시지</label><input data-k="DONE_MSG" value="카카오 채널 안내와 무료 자료를 곧 보내드립니다. 오토매장 사업가의 여정을 환영합니다.">
+    <label>구글 시트 연결 URL (Apps Script /exec)</label><input data-k="SHEET_URL" value="" placeholder="https://script.google.com/macros/s/.../exec">
+    <div class="hint">비워두면 신청 시 화면만 '완료'로 바뀌고 저장은 안 됩니다. (시트 연결가이드 참고)</div>
+  </fieldset>
+
+  <fieldset><legend>8. FAQ</legend>
+    <label>섹션 제목</label><input data-k="FAQ_H" value="자주 묻는 질문">
+    <label>Q1</label><input data-k="F1Q" value="웨비나는 정말 무료인가요?"><label>A1</label><input data-k="F1A" value="네, 무료입니다. 신청자 전원께 자료도 함께 드립니다.">
+    <label>Q2</label><input data-k="F2Q" value="초보도 들을 수 있나요?"><label>A2</label><input data-k="F2A" value="네. 오늘 따라 하면 숫자가 바뀌는 단계부터 시작합니다.">
+    <label>Q3</label><input data-k="F3Q" value="프랜차이즈와 뭐가 다른가요?"><label>A3</label><input data-k="F3A" value="가맹비만 받고 끝이 아니라, 사장이 빠져도 도는 시스템을 함께 만듭니다.">
+    <label>Q4</label><input data-k="F4Q" value="바쁜데 시간을 낼 수 있을까요?"><label>A4</label><input data-k="F4A" value="그래서 '오토'입니다. 사장이 매달리는 시간을 줄이는 게 목표입니다.">
+  </fieldset>
+
+  <fieldset><legend>9. 마무리 · 푸터</legend>
+    <label>마무리 제목</label><input data-k="FIN_H" value="당신이 없어도 도는 가게, 지금 시작하세요.">
+    <label>마무리 부제</label><input data-k="FIN_SUB" value="식당 사장을 넘어, 오토매장 사업가로.">
+    <label>마무리 버튼</label><input data-k="FIN_CTA" value="무료 웨비나 신청하기">
+    <label>푸터 문구</label><input data-k="FOOTER" value="오토매장 독립 운동 · 진짜 둘 | 무료 웨비나 → 원데이 강의 → 인큐베이팅">
+  </fieldset>
+
+  </div>
+  <div class="preview"><iframe id="pv"></iframe></div>
+</div>
+<textarea id="tpl" style="display:none">
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{BRAND}} — {{NAVCTA}}</title>
+<style>
+:root{--ink:#231a12;--primary:{{PRIMARY}};--primary-dk:{{PRIMARY}};--gold:#C9852E;--gold-dk:#A86A2E;--cream:#F6EEE7;--sage:#5E7E6E;--sage-dk:#3F5A4C;--bench:#FBF3E9;--line:#E7DCCE;--bg:#FAF7F3;--muted:#8A7B6B;--card:#fff;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px}
+.btn{display:inline-block;background:var(--primary);color:#fff;font-weight:800;font-size:17px;padding:16px 30px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.btn.lg{font-size:19px;padding:18px 38px}
+.sticky{position:sticky;top:0;z-index:60;background:rgba(35,26,18,.97);color:#fff}
+.sticky .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 22px}
+.sticky b{font-size:15px}.sticky .s{color:#E8D9C5;font-size:12px;margin-left:8px}
+.sticky a{background:var(--gold);color:#231a12;font-weight:800;font-size:13.5px;padding:9px 16px;border-radius:8px;text-decoration:none}
+.hero{background:linear-gradient(180deg,#231a12,#2f231a);color:#fff;padding:62px 0 58px;text-align:center}
+.hero .kicker{display:inline-block;background:rgba(201,133,46,.18);color:var(--gold);font-weight:800;font-size:13px;padding:6px 14px;border-radius:20px}
+.hero h1{font-size:40px;font-weight:900;line-height:1.18;margin:18px 0 10px}.hero h1 .g{color:var(--gold)}
+.hero p.sub{font-size:18px;color:#EBDCC9;max-width:640px;margin:0 auto 26px}
+.hero .trust{color:#a8967f;font-size:13px;margin-top:18px}
+.hero .mag{display:inline-block;margin-top:8px;color:#EBDCC9;font-size:13.5px;background:rgba(255,255,255,.07);padding:8px 14px;border-radius:8px}
+section{padding:54px 0}.center{text-align:center}
+h2{font-size:30px;font-weight:900;line-height:1.25;margin-bottom:8px}h2 .g{color:var(--primary)}
+.lead{color:var(--muted);font-size:16px;margin-bottom:22px}
+.enemy{background:#2f231a;color:#fff}.enemy h2{color:#fff}.enemy .lead{color:#cbb89f}
+.elist{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:24px}@media(max-width:760px){.elist{grid-template-columns:1fr}}
+.ecard{background:#3a2c20;border-radius:12px;padding:20px}.ecard .x{color:var(--primary);font-weight:900;font-size:15px}.ecard p{color:#d8c8b4;font-size:14px;margin-top:6px}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}@media(max-width:760px){.pillars{grid-template-columns:1fr}}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+.pill .n{display:inline-block;width:34px;height:34px;border-radius:50%;background:var(--cream);color:var(--primary-dk);font-weight:900;text-align:center;line-height:34px;margin-bottom:8px}
+.pill h4{font-size:17px;font-weight:800}.pill p{color:var(--muted);font-size:14px;margin-top:4px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+.stat{flex:1;min-width:160px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center}
+.stat .n{font-size:28px;font-weight:900;color:var(--primary)}.stat .t{font-size:13px;color:var(--muted);margin-top:4px}
+.quote{background:var(--bench);border-radius:12px;padding:18px 22px;margin-top:16px;font-size:15px}
+.offer{background:linear-gradient(180deg,var(--primary),var(--primary-dk));color:#fff}.offer h2{color:#fff}
+.formcard{background:#fff;color:var(--ink);border-radius:16px;padding:28px;max-width:520px;margin:24px auto 0;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+.formcard h3{font-size:20px;font-weight:900;text-align:center}
+.formcard .gift{background:var(--bench);border-radius:10px;padding:12px 14px;font-size:13.5px;margin:14px 0;text-align:center}
+.formcard label{display:block;font-size:13px;font-weight:700;margin:12px 0 5px}
+.formcard input,.formcard select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:9px;font-size:15px;font-family:inherit}
+.formcard .btn{width:100%;margin-top:18px}.formcard .fine{font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px}
+.done{display:none;text-align:center;padding:18px}.done.show{display:block}.done .c{font-size:40px;color:var(--sage)}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px}
+.faq summary{font-weight:700;cursor:pointer;font-size:15.5px}.faq p{color:var(--muted);font-size:14px;margin-top:8px}
+footer{background:#231a12;color:#a8967f;font-size:12.5px;padding:30px 0;text-align:center}
+</style></head><body>
+<div class="sticky"><div class="wrap"><div><b>{{BRAND}}</b><span class="s">by {{BY}}</span></div><a href="#apply">{{NAVCTA}} ▸</a></div></div>
+<header class="hero"><div class="wrap">
+<span class="kicker">{{KICKER}}</span>
+<h1>{{H1A}}<br><span class="g">{{H1B}}</span></h1>
+<p class="sub">{{SUB}}</p>
+<a href="#apply" class="btn lg">{{CTA}}</a>
+<div class="mag">{{MAGNET}}</div>
+<div class="trust">{{TRUST}}</div>
+</div></header>
+<section class="enemy"><div class="wrap center"><h2>{{ENEMY_H}}</h2><p class="lead">{{ENEMY_SUB}}</p>
+<div class="elist">
+<div class="ecard"><div class="x">✕ {{E1T}}</div><p>{{E1D}}</p></div>
+<div class="ecard"><div class="x">✕ {{E2T}}</div><p>{{E2D}}</p></div>
+<div class="ecard"><div class="x">✕ {{E3T}}</div><p>{{E3D}}</p></div>
+</div></div></section>
+<section><div class="wrap center"><h2>{{SOL_H}}</h2><p class="lead">{{SOL_SUB}}</p>
+<div class="pillars">
+<div class="pill"><span class="n">1</span><h4>{{P1T}}</h4><p>{{P1D}}</p></div>
+<div class="pill"><span class="n">2</span><h4>{{P2T}}</h4><p>{{P2D}}</p></div>
+<div class="pill"><span class="n">3</span><h4>{{P3T}}</h4><p>{{P3D}}</p></div>
+<div class="pill"><span class="n">4</span><h4>{{P4T}}</h4><p>{{P4D}}</p></div>
+</div></div></section>
+<section style="background:var(--bench)"><div class="wrap center"><h2>{{PROOF_H}}</h2><p class="lead">{{PROOF_SUB}}</p>
+<div class="stats">
+<div class="stat"><div class="n">{{S1N}}</div><div class="t">{{S1T}}</div></div>
+<div class="stat"><div class="n">{{S2N}}</div><div class="t">{{S2T}}</div></div>
+<div class="stat"><div class="n">{{S3N}}</div><div class="t">{{S3T}}</div></div>
+</div>
+<div class="quote">{{QUOTE}}</div></div></section>
+<section><div class="wrap center"><h2>{{MOV_H}}</h2><p class="lead">{{MOV_P}}</p><a href="#apply" class="btn">{{MOV_CTA}} ▸</a></div></section>
+<section class="offer" id="apply"><div class="wrap center"><h2>{{OFFER_H}}</h2><p class="lead" style="color:#FBE6DF">{{OFFER_SUB}}</p>
+<div class="formcard">
+<form id="leadForm" onsubmit="return submitLead(event)">
+<h3>{{FORM_TITLE}}</h3>
+<div class="gift">{{GIFT}}</div>
+<label>이름</label><input required name="name" placeholder="홍길동">
+<label>휴대폰 번호</label><input required name="phone" type="tel" placeholder="010-0000-0000">
+<label>업종 / 매장명</label><input required name="biz" placeholder="예) 고깃집 / OO식당">
+<label>지금 가장 답답한 것 한 가지</label><input name="pain" placeholder="예) 플레이스 노출, 직원, 매출...">
+<label>매주 과제·실습 참여 가능하세요?</label><select name="commit"><option value="">선택</option><option>네, 가능합니다</option><option>조건부 가능</option><option>아직 모르겠어요</option></select>
+<button class="btn" type="submit">{{CTA}}</button>
+<p class="fine">제출 시 안내 자료와 일정 메시지를 받습니다. 마케팅 활용에 동의합니다.</p>
+</form>
+<div class="done" id="done"><div class="c">✓</div><h3>신청이 접수되었습니다!</h3><p style="color:var(--muted);font-size:14px;margin-top:8px">{{DONE_MSG}}</p></div>
+</div></div></section>
+<section class="faq"><div class="wrap"><h2 class="center">{{FAQ_H}}</h2><div style="margin-top:22px">
+<details><summary>{{F1Q}}</summary><p>{{F1A}}</p></details>
+<details><summary>{{F2Q}}</summary><p>{{F2A}}</p></details>
+<details><summary>{{F3Q}}</summary><p>{{F3A}}</p></details>
+<details><summary>{{F4Q}}</summary><p>{{F4A}}</p></details>
+</div></div></section>
+<section class="center" style="background:#2f231a;color:#fff"><div class="wrap"><h2 style="color:#fff">{{FIN_H}}</h2><p class="lead" style="color:#cbb89f">{{FIN_SUB}}</p><a href="#apply" class="btn lg">{{FIN_CTA}}</a></div></section>
+<footer>{{FOOTER}}</footer>
+<script>
+const SHEET_URL = "{{SHEET_URL}}";
+function submitLead(e){e.preventDefault();var f=e.target;
+ if(!f.name.value||!f.phone.value||!f.biz.value){alert("이름·휴대폰·업종을 입력해 주세요.");return false;}
+ function done(){document.getElementById("leadForm").style.display="none";document.getElementById("done").classList.add("show");}
+ if(!SHEET_URL){done();return false;}
+ fetch(SHEET_URL,{method:"POST",body:new FormData(f)}).then(done).catch(done);return false;}
+<\/script>
+</body></html>
+</textarea>
+<script>
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>");}
+function build(){
+  var tpl=document.getElementById("tpl").value;
+  document.querySelectorAll("[data-k]").forEach(function(el){
+    var k=el.getAttribute("data-k");var v=el.value;
+    var rep=(k==="SHEET_URL"||k==="PRIMARY")?v:esc(v);
+    tpl=tpl.split("{{"+k+"}}").join(rep);
+  });
+  return tpl;
+}
+function render(){document.getElementById("pv").srcdoc=build();}
+document.getElementById("form").addEventListener("input",render);
+document.getElementById("dl").addEventListener("click",function(){
+  var blob=new Blob([build()],{type:"text/html;charset=utf-8"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="index.html";a.click();
+});
+document.getElementById("cp").addEventListener("click",function(){
+  navigator.clipboard.writeText(build()).then(function(){var b=document.getElementById("cp");b.textContent="복사됨!";setTimeout(function(){b.textContent="HTML 복사";},1500);});
+});
+render();
+</script>
+</body></html>
