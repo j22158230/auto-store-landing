@@ -32,78 +32,78 @@ input[type=color]{height:38px;padding:3px}
 <div class="layout">
   <div class="form" id="form">
 
-  <fieldset><legend>1. 브랜드 · 상단바</legend>
-    <label>브랜드/운동명</label><input data-k="BRAND" value="오토매장 독립 운동">
-    <div class="row2"><div><label>운영 주체(by)</label><input data-k="BY" value="진짜 둘"></div>
-    <div><label>상단 버튼 문구</label><input data-k="NAVCTA" value="무료 웨비나 신청"></div></div>
-    <label>강조 색상(메인)</label><input type="color" data-k="PRIMARY" value="#B85042">
+  <fieldset><legend>1. 브랜드 · 상단바</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">페이지 전체 정체성. 상단 고정바·푸터에 노출됩니다.</div>
+    <label>브랜드/운동명</label><input data-k="BRAND" value="오토매장 독립 운동"><div class="hint">운동/브랜드 이름 (예: 오토매장 독립 운동).</div>
+    <div class="row2"><div><label>운영 주체(by)</label><input data-k="BY" value="진짜 둘"><div class="hint">신뢰를 주는 운영 주체 — 누가 하는가.</div></div>
+    <div><label>상단 버튼 문구</label><input data-k="NAVCTA" value="무료 웨비나 신청"><div class="hint">항상 신청으로 보내는 짧은 버튼 문구.</div></div></div>
+    <label>강조 색상(메인)</label><input type="color" data-k="PRIMARY" value="#B85042"><div class="hint">버튼·강조에 쓰일 브랜드 색.</div>
   </fieldset>
 
-  <fieldset><legend>2. 히어로 (첫 화면 = 후크)</legend>
-    <label>상단 배지(작은 라벨)</label><input data-k="KICKER" value="오토매장 독립 운동 · 무료 웨비나">
-    <label>헤드라인 1줄</label><input data-k="H1A" value="가게에 갇힌 사장에서,">
-    <label>헤드라인 2줄 (강조)</label><input data-k="H1B" value="가게를 거느린 사업가로.">
-    <label>서브 설명</label><textarea data-k="SUB">당신이 없어도 도는 가게, 오토매장. 사장이 매달리지 않아도 매출이 도는 시스템을 만드는 법을 무료 웨비나에서 공개합니다.</textarea>
-    <label>메인 CTA 버튼</label><input data-k="CTA" value="무료 웨비나 신청하기">
-    <label>리드마그넷 배지(증정물)</label><input data-k="MAGNET" value="🎁 신청자 전원 — 오토매장 자가진단 + 네이버 플레이스 상위 체크리스트 무료 증정">
-    <label>신뢰 문구</label><input data-k="TRUST" value="진짜 둘 1·2기 수강생들의 실제 변화로 검증">
+  <fieldset><legend>2. 히어로 (첫 화면 = 후크)</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">3초 안에 시선을 잡는 구간. '갇힌 사장 → 사업가' 변화를 보여주고 바로 신청으로 유도합니다.</div>
+    <label>상단 배지(작은 라벨)</label><input data-k="KICKER" value="오토매장 독립 운동 · 무료 웨비나"><div class="hint">무엇에 대한 페이지인지 한눈에 알리는 라벨.</div>
+    <label>헤드라인 1줄</label><input data-k="H1A" value="가게에 갇힌 사장에서,"><div class="hint">후크 1줄 — 고객의 '현재 상태(Before)'.</div>
+    <label>헤드라인 2줄 (강조)</label><input data-k="H1B" value="가게를 거느린 사업가로."><div class="hint">후크 2줄(강조색) — 가고 싶은 '미래(After)'.</div>
+    <label>서브 설명</label><textarea data-k="SUB">당신이 없어도 도는 가게, 오토매장. 사장이 매달리지 않아도 매출이 도는 시스템을 만드는 법을 무료 웨비나에서 공개합니다.</textarea><div class="hint">핵심 약속을 한 문장으로 — 무엇을 알려주는가.</div>
+    <label>메인 CTA 버튼</label><input data-k="CTA" value="무료 웨비나 신청하기"><div class="hint">메인 버튼 — 행동 동사 + 얻는 이득.</div>
+    <label>리드마그넷 배지(증정물)</label><input data-k="MAGNET" value="🎁 신청자 전원 — 오토매장 자가진단 + 네이버 플레이스 상위 체크리스트 무료 증정"><div class="hint">미끼(리드마그넷): 신청만 해도 받는 공짜 가치 → 신청률↑.</div>
+    <label>신뢰 문구</label><input data-k="TRUST" value="진짜 둘 1·2기 수강생들의 실제 변화로 검증"><div class="hint">신뢰 한 줄 — 실적·검증·강사 등.</div>
   </fieldset>
 
-  <fieldset><legend>3. 문제 · 적 (Story)</legend>
-    <label>섹션 제목</label><input data-k="ENEMY_H" value="왜 이렇게 열심히 하는데, 사장만 갈려나갈까요?">
-    <label>섹션 부제</label><input data-k="ENEMY_SUB" value="문제는 당신의 노력이 아닙니다. 구조입니다.">
-    <div class="row2"><div><label>문제1 제목</label><input data-k="E1T" value="가맹비만 받는 프랜차이즈"></div><div><label>문제1 설명</label><input data-k="E1D" value="정작 사장이 빠져도 도는 가게는 만들어주지 않습니다."></div></div>
-    <div class="row2"><div><label>문제2 제목</label><input data-k="E2T" value="혼자 더듬는 마케팅"></div><div><label>문제2 설명</label><input data-k="E2D" value="유튜브 보며 독학하다 노출에 막혀버립니다."></div></div>
-    <div class="row2"><div><label>문제3 제목</label><input data-k="E3T" value="사장이 빠지면 멈추는 가게"></div><div><label>문제3 설명</label><input data-k="E3D" value="하루도 못 쉬고 가게에 묶여 있습니다."></div></div>
+  <fieldset><legend>3. 문제 · 적 (Story)</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">고객의 답답함에 공감하고, '네 탓이 아니라 구조(공동의 적) 탓'으로 프레임을 잡는 구간입니다.</div>
+    <label>섹션 제목</label><input data-k="ENEMY_H" value="왜 이렇게 열심히 하는데, 사장만 갈려나갈까요?"><div class="hint">고객이 속으로 하는 말을 질문으로 — 공감 후크.</div>
+    <label>섹션 부제</label><input data-k="ENEMY_SUB" value="문제는 당신의 노력이 아닙니다. 구조입니다."><div class="hint">'당신 탓이 아니라 구조 탓' 프레임.</div>
+    <div class="row2"><div><label>문제1 제목</label><input data-k="E1T" value="가맹비만 받는 프랜차이즈"><div class="hint">공동의 적 ① — 고객이 분노·공감할 장애물.</div></div><div><label>문제1 설명</label><input data-k="E1D" value="정작 사장이 빠져도 도는 가게는 만들어주지 않습니다."><div class="hint">왜 그게 문제인지 한 줄.</div></div></div>
+    <div class="row2"><div><label>문제2 제목</label><input data-k="E2T" value="혼자 더듬는 마케팅"><div class="hint">공동의 적 ② .</div></div><div><label>문제2 설명</label><input data-k="E2D" value="유튜브 보며 독학하다 노출에 막혀버립니다."><div class="hint">왜 문제인지 한 줄.</div></div></div>
+    <div class="row2"><div><label>문제3 제목</label><input data-k="E3T" value="사장이 빠지면 멈추는 가게"><div class="hint">공동의 적 ③ .</div></div><div><label>문제3 설명</label><input data-k="E3D" value="하루도 못 쉬고 가게에 묶여 있습니다."><div class="hint">왜 문제인지 한 줄.</div></div></div>
   </fieldset>
 
-  <fieldset><legend>4. 해결책 (4가지 기둥)</legend>
-    <label>섹션 제목</label><input data-k="SOL_H" value="해답은 오토매장입니다">
-    <label>섹션 부제</label><input data-k="SOL_SUB" value="장사를 잘하게 만드는 게 아니라, 장사가 알아서 되게 만듭니다.">
-    <div class="row2"><div><label>기둥1 제목</label><input data-k="P1T" value="마케팅 오토"></div><div><label>기둥1 설명</label><input data-k="P1D" value="플레이스·광고가 알아서 손님을 데려온다."></div></div>
-    <div class="row2"><div><label>기둥2 제목</label><input data-k="P2T" value="운영·직원 오토"></div><div><label>기둥2 설명</label><input data-k="P2D" value="SOP·매뉴얼로 직원이 알아서 굴린다."></div></div>
-    <div class="row2"><div><label>기둥3 제목</label><input data-k="P3T" value="메뉴·상품 오토"></div><div><label>기둥3 설명</label><input data-k="P3D" value="누가 만들어도 같은 맛·품질."></div></div>
-    <div class="row2"><div><label>기둥4 제목</label><input data-k="P4T" value="디지털·AI 오토"></div><div><label>기둥4 설명</label><input data-k="P4D" value="예약·웨이팅·CRM·AI로 반복업무 자동화."></div></div>
+  <fieldset><legend>4. 해결책 (4가지 기둥)</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">우리 해법이 '어떻게' 이뤄지는지 4개 축으로 보여줘 신뢰를 줍니다.</div>
+    <label>섹션 제목</label><input data-k="SOL_H" value="해답은 오토매장입니다"><div class="hint">해결책 한 줄 — 전환 약속.</div>
+    <label>섹션 부제</label><input data-k="SOL_SUB" value="장사를 잘하게 만드는 게 아니라, 장사가 알아서 되게 만듭니다."><div class="hint">차별점 — 남과 무엇이 다른가.</div>
+    <div class="row2"><div><label>기둥1 제목</label><input data-k="P1T" value="마케팅 오토"><div class="hint">해결의 축 ① (어떻게 이뤄지나).</div></div><div><label>기둥1 설명</label><input data-k="P1D" value="플레이스·광고가 알아서 손님을 데려온다."><div class="hint">한 줄 설명.</div></div></div>
+    <div class="row2"><div><label>기둥2 제목</label><input data-k="P2T" value="운영·직원 오토"><div class="hint">해결의 축 ② .</div></div><div><label>기둥2 설명</label><input data-k="P2D" value="SOP·매뉴얼로 직원이 알아서 굴린다."><div class="hint">한 줄 설명.</div></div></div>
+    <div class="row2"><div><label>기둥3 제목</label><input data-k="P3T" value="메뉴·상품 오토"><div class="hint">해결의 축 ③ .</div></div><div><label>기둥3 설명</label><input data-k="P3D" value="누가 만들어도 같은 맛·품질."><div class="hint">한 줄 설명.</div></div></div>
+    <div class="row2"><div><label>기둥4 제목</label><input data-k="P4T" value="디지털·AI 오토"><div class="hint">해결의 축 ④ .</div></div><div><label>기둥4 설명</label><input data-k="P4D" value="예약·웨이팅·CRM·AI로 반복업무 자동화."><div class="hint">한 줄 설명.</div></div></div>
   </fieldset>
 
-  <fieldset><legend>5. 증거 (성공 사례)</legend>
-    <label>섹션 제목</label><input data-k="PROOF_H" value="이미 결과로 증명됐습니다">
-    <label>섹션 부제</label><input data-k="PROOF_SUB" value="실제 수강생들의 변화 (동의 범위 내 공개)">
-    <div class="row2"><div><label>지표1 숫자</label><input data-k="S1N" value="250등→1등"></div><div><label>지표1 설명</label><input data-k="S1T" value="동네 맛집 플레이스 1위 (유입 약 2배)"></div></div>
-    <div class="row2"><div><label>지표2 숫자</label><input data-k="S2N" value="광고비 70원"></div><div><label>지표2 설명</label><input data-k="S2T" value="검색 첫 페이지 앞단 노출"></div></div>
-    <div class="row2"><div><label>지표3 숫자</label><input data-k="S3N" value="이탈율 ≈ 0"></div><div><label>지표3 설명</label><input data-k="S3T" value="웨이팅 도입 후 — 직원이 웃으며 일한다"></div></div>
-    <label>고객 인용구</label><textarea data-k="QUOTE">"이걸 못 만났더라면 조용히 사라졌을 수도 있었습니다. 가게가 진짜 달라지고 있습니다."</textarea>
+  <fieldset><legend>5. 증거 (성공 사례)</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">'진짜 된다'를 숫자·후기로 증명하는 사회적 증거 구간입니다.</div>
+    <label>섹션 제목</label><input data-k="PROOF_H" value="이미 결과로 증명됐습니다"><div class="hint">증거 섹션 제목.</div>
+    <label>섹션 부제</label><input data-k="PROOF_SUB" value="실제 수강생들의 변화 (동의 범위 내 공개)"><div class="hint">사례 출처·범위(과장 금지, 동의 범위).</div>
+    <div class="row2"><div><label>지표1 숫자</label><input data-k="S1N" value="250등→1등"><div class="hint">임팩트 있는 숫자 ① (전→후가 보이게).</div></div><div><label>지표1 설명</label><input data-k="S1T" value="동네 맛집 플레이스 1위 (유입 약 2배)"><div class="hint">그 숫자 한 줄 설명.</div></div></div>
+    <div class="row2"><div><label>지표2 숫자</label><input data-k="S2N" value="광고비 70원"><div class="hint">임팩트 있는 숫자 ② .</div></div><div><label>지표2 설명</label><input data-k="S2T" value="검색 첫 페이지 앞단 노출"><div class="hint">한 줄 설명.</div></div></div>
+    <div class="row2"><div><label>지표3 숫자</label><input data-k="S3N" value="이탈율 ≈ 0"><div class="hint">임팩트 있는 숫자 ③ .</div></div><div><label>지표3 설명</label><input data-k="S3T" value="웨이팅 도입 후 — 직원이 웃으며 일한다"><div class="hint">한 줄 설명.</div></div></div>
+    <label>고객 인용구</label><textarea data-k="QUOTE">"이걸 못 만났더라면 조용히 사라졌을 수도 있었습니다. 가게가 진짜 달라지고 있습니다."</textarea><div class="hint">고객의 진짜 목소리 — 감정·전환의 순간.</div>
   </fieldset>
 
-  <fieldset><legend>6. 운동 소개</legend>
-    <label>섹션 제목</label><input data-k="MOV_H" value="오토매장 독립 운동">
-    <label>본문</label><textarea data-k="MOV_P">우리는 '식당 사장'을 넘어 오토매장 사업가가 되려는 사장들의 운동입니다. 입학은 '신생아'처럼 비우는 것에서 시작합니다 — 비우면, 빛납니다.</textarea>
-    <label>버튼 문구</label><input data-k="MOV_CTA" value="무료 웨비나에서 만나기">
+  <fieldset><legend>6. 운동 소개</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">단순 강의가 아니라 '운동(무브먼트)'이라는 소속감·대의를 전합니다.</div>
+    <label>섹션 제목</label><input data-k="MOV_H" value="오토매장 독립 운동"><div class="hint">운동 이름/제목 — 소속감.</div>
+    <label>본문</label><textarea data-k="MOV_P">우리는 '식당 사장'을 넘어 오토매장 사업가가 되려는 사장들의 운동입니다. 입학은 '신생아'처럼 비우는 것에서 시작합니다 — 비우면, 빛납니다.</textarea><div class="hint">우리가 누구이고 왜 모이는가 (대의·정체성).</div>
+    <label>버튼 문구</label><input data-k="MOV_CTA" value="무료 웨비나에서 만나기"><div class="hint">신청으로 보내는 버튼.</div>
   </fieldset>
 
-  <fieldset><legend>7. 신청(오퍼) · 폼 · 시트 연결</legend>
-    <label>섹션 제목</label><input data-k="OFFER_H" value="무료 웨비나 신청">
-    <label>섹션 부제</label><input data-k="OFFER_SUB" value="'사장 없이도 도는 가게'의 첫 스위치를, 단 한 번의 웨비나에서.">
-    <label>폼 제목</label><input data-k="FORM_TITLE" value="오토매장 후보생 등록">
-    <label>폼 안내(증정)</label><input data-k="GIFT" value="🎁 신청 즉시 — 오토매장 자가진단 + 플레이스 체크리스트 무료 증정">
-    <label>완료 메시지</label><input data-k="DONE_MSG" value="카카오 채널 안내와 무료 자료를 곧 보내드립니다. 오토매장 사업가의 여정을 환영합니다.">
-    <label>구글 시트 연결 URL (Apps Script /exec)</label><input data-k="SHEET_URL" value="" placeholder="https://script.google.com/macros/s/.../exec">
+  <fieldset><legend>7. 신청(오퍼) · 폼 · 시트 연결</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">실제 전환이 일어나는 곳. 미끼를 다시 강조하고 신청을 받습니다.</div>
+    <label>섹션 제목</label><input data-k="OFFER_H" value="무료 웨비나 신청"><div class="hint">신청 유도 헤드라인.</div>
+    <label>섹션 부제</label><input data-k="OFFER_SUB" value="'사장 없이도 도는 가게'의 첫 스위치를, 단 한 번의 웨비나에서."><div class="hint">지금 신청해야 할 이유 한 줄.</div>
+    <label>폼 제목</label><input data-k="FORM_TITLE" value="오토매장 후보생 등록"><div class="hint">폼 제목 — 신분 부여(예: 후보생 등록).</div>
+    <label>폼 안내(증정)</label><input data-k="GIFT" value="🎁 신청 즉시 — 오토매장 자가진단 + 플레이스 체크리스트 무료 증정"><div class="hint">신청 즉시 받는 것 — 미끼 재강조.</div>
+    <label>완료 메시지</label><input data-k="DONE_MSG" value="카카오 채널 안내와 무료 자료를 곧 보내드립니다. 오토매장 사업가의 여정을 환영합니다."><div class="hint">신청 직후 안내(다음에 무엇이 오는지).</div>
+    <label>구글 시트 연결 URL (Apps Script /exec)</label><input data-k="SHEET_URL" value="" placeholder="https://script.google.com/macros/s/.../exec"><div class="hint">신청 데이터가 저장될 구글시트 연결(Apps Script /exec).</div>
     <div class="hint">비워두면 신청 시 화면만 '완료'로 바뀌고 저장은 안 됩니다. (시트 연결가이드 참고)</div>
   </fieldset>
 
-  <fieldset><legend>8. FAQ</legend>
-    <label>섹션 제목</label><input data-k="FAQ_H" value="자주 묻는 질문">
-    <label>Q1</label><input data-k="F1Q" value="웨비나는 정말 무료인가요?"><label>A1</label><input data-k="F1A" value="네, 무료입니다. 신청자 전원께 자료도 함께 드립니다.">
-    <label>Q2</label><input data-k="F2Q" value="초보도 들을 수 있나요?"><label>A2</label><input data-k="F2A" value="네. 오늘 따라 하면 숫자가 바뀌는 단계부터 시작합니다.">
-    <label>Q3</label><input data-k="F3Q" value="프랜차이즈와 뭐가 다른가요?"><label>A3</label><input data-k="F3A" value="가맹비만 받고 끝이 아니라, 사장이 빠져도 도는 시스템을 함께 만듭니다.">
-    <label>Q4</label><input data-k="F4Q" value="바쁜데 시간을 낼 수 있을까요?"><label>A4</label><input data-k="F4A" value="그래서 '오토'입니다. 사장이 매달리는 시간을 줄이는 게 목표입니다.">
+  <fieldset><legend>8. FAQ</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">신청 직전의 망설임(반론)을 미리 없애 이탈을 막습니다.</div>
+    <label>섹션 제목</label><input data-k="FAQ_H" value="자주 묻는 질문"><div class="hint">FAQ 섹션 제목.</div>
+    <label>Q1</label><input data-k="F1Q" value="웨비나는 정말 무료인가요?"><div class="hint">자주 묻는 질문 ① — 흔한 반론.</div><label>A1</label><input data-k="F1A" value="네, 무료입니다. 신청자 전원께 자료도 함께 드립니다."><div class="hint">안심시키는 답.</div>
+    <label>Q2</label><input data-k="F2Q" value="초보도 들을 수 있나요?"><div class="hint">질문 ② .</div><label>A2</label><input data-k="F2A" value="네. 오늘 따라 하면 숫자가 바뀌는 단계부터 시작합니다."><div class="hint">답.</div>
+    <label>Q3</label><input data-k="F3Q" value="프랜차이즈와 뭐가 다른가요?"><div class="hint">질문 ③ (경쟁/차별 관련 좋음).</div><label>A3</label><input data-k="F3A" value="가맹비만 받고 끝이 아니라, 사장이 빠져도 도는 시스템을 함께 만듭니다."><div class="hint">답.</div>
+    <label>Q4</label><input data-k="F4Q" value="바쁜데 시간을 낼 수 있을까요?"><div class="hint">질문 ④ (시간·부담 관련 좋음).</div><label>A4</label><input data-k="F4A" value="그래서 '오토'입니다. 사장이 매달리는 시간을 줄이는 게 목표입니다."><div class="hint">답.</div>
   </fieldset>
 
-  <fieldset><legend>9. 마무리 · 푸터</legend>
-    <label>마무리 제목</label><input data-k="FIN_H" value="당신이 없어도 도는 가게, 지금 시작하세요.">
-    <label>마무리 부제</label><input data-k="FIN_SUB" value="식당 사장을 넘어, 오토매장 사업가로.">
-    <label>마무리 버튼</label><input data-k="FIN_CTA" value="무료 웨비나 신청하기">
-    <label>푸터 문구</label><input data-k="FOOTER" value="오토매장 독립 운동 · 진짜 둘 | 무료 웨비나 → 원데이 강의 → 인큐베이팅">
+  <fieldset><legend>9. 마무리 · 푸터</legend><div class="hint" style="margin:4px 0 2px;color:var(--primary-dk)">마지막으로 한 번 더 행동을 요청합니다.</div>
+    <label>마무리 제목</label><input data-k="FIN_H" value="당신이 없어도 도는 가게, 지금 시작하세요."><div class="hint">마지막 행동 요청 제목.</div>
+    <label>마무리 부제</label><input data-k="FIN_SUB" value="식당 사장을 넘어, 오토매장 사업가로."><div class="hint">한 줄 정체성/약속 재강조.</div>
+    <label>마무리 버튼</label><input data-k="FIN_CTA" value="무료 웨비나 신청하기"><div class="hint">마지막 버튼.</div>
+    <label>푸터 문구</label><input data-k="FOOTER" value="오토매장 독립 운동 · 진짜 둘 | 무료 웨비나 → 원데이 강의 → 인큐베이팅"><div class="hint">푸터 — 주체·퍼널 단계 등.</div>
   </fieldset>
 
   </div>
