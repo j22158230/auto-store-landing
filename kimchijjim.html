@@ -186,6 +186,14 @@ footer{background:var(--deep);color:#e9d3c6;font-size:12px;padding:26px 0;text-a
 .mtbl td{color:var(--ink);font-weight:600}.mtbl td b{color:var(--red)}
 .mtbl tr:last-child td{border-bottom:none}
 .mtbl .soon{color:var(--mut);font-weight:700}
+.reviews{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:26px;text-align:left}
+@media(max-width:860px){.reviews{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.reviews{grid-template-columns:1fr}}
+.rev{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 4px 14px rgba(94,27,16,.05);display:flex;flex-direction:column}
+.rev .stars{color:var(--gold);font-size:13.5px;letter-spacing:1px;font-weight:800}
+.rev .who{font-weight:800;color:var(--deep);font-size:13.5px;margin:6px 0 8px}
+.rev .txt{color:#4a3a2f;font-size:14px;flex:1;line-height:1.65}
+.rev .menu{margin-top:12px;font-size:11.5px;font-weight:700;color:var(--brown);background:var(--cream);border-radius:6px;padding:5px 9px;align-self:flex-start}
 </style></head><body>
 
 <!-- 1. 상단 고정 메뉴 -->
@@ -289,6 +297,26 @@ footer{background:var(--deep);color:#e9d3c6;font-size:12px;padding:26px 0;text-a
 <div class="menu-card"><div class="thumb"><span class="fb">메뉴 이미지 준비 중</span><img src="menu_samgyup.jpg" width="900" height="675" loading="lazy" alt="삼겹 묵은지 김치찜" onerror="this.style.display='none'"></div><div class="menu-body"><div class="mn">삼겹 묵은지 김치찜</div><div class="mp">24,900원</div><div class="md">단품 · 삼겹 토핑</div><span class="tagk">김치찌개 선택 가능</span></div></div>
 </div>
 <div class="moremenu">이 외에도 스팸·꽁치·직화우삼겹 등 <b>다양한 토핑 메뉴 운영이 가능</b>합니다.</div>
+</div></section>
+
+<!-- 실제 고객 리뷰 -->
+<section class="sec-cream"><div class="wrap center">
+<span class="kicker">배달의민족 실제 리뷰</span>
+<h2>먹어본 사람들이 <b>남긴 후기</b></h2>
+<p class="lead">평택 서정점 배달의민족에 실제 고객이 남긴 리뷰입니다.</p>
+<div class="reviews">
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">부와앙</div><div class="txt">"김치찜도 맛있지만 콩나물밥이 킥입니다"</div><div class="menu">[1.5인분] 김치찜 혼밥 세트</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">붕붕</div><div class="txt">"진짜 맛있어요. 삼겹살도 후진 고기 아니고 몇 쪼가리 들어간 수준이 아니에요. 이 집으로 정착해도 되겠어요"</div><div class="menu">삼겹 왕창넣은 묵은지 김치찌개 세트</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">뚜기</div><div class="txt">"웅왕!! 진짜 맛있어욤 ㅎㅎ 김치찜은 여기 정착할 것 같애요. 양도 많고 맛있고!"</div><div class="menu">삼겹 왕창넣은 묵은지 김치찜 세트</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">점프하는랩칼</div><div class="txt">"고기도 진짜 많고 부드럽고 짜지 않고! 너무 맛있게 잘 먹었습니다"</div><div class="menu">[2.5인] 목살 김치찜 단품</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">매콤킹콩</div><div class="txt">"첨 시켜봤는데 맛이 미쳤다는 뜻 🦍"</div><div class="menu">[1.5인분] 김치찜 혼밥 세트</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">삼바추는소룡포</div><div class="txt">"음식의 양, 맛, 배달 속도까지 딱 좋습니다. 맵기 1단계인데 아이들도 맛있게 잘 먹네요"</div><div class="menu">목살 왕창넣은 묵은지 김치찜 세트</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">천랑</div><div class="txt">"이틀 연속 먹어도 질리지가 않았어요. 너무 맛있었습니다"</div><div class="menu">[1.5인분] 김치찜 혼밥 세트</div></div>
+<div class="rev"><div class="stars">★★★★★ 4.9</div><div class="who">운동하는야채김밥</div><div class="txt">"가격대비 양도 많고 맛도 있고 포장도 깔끔하고 배달도 빠르고, 뭐 하나 빠지는 게 없네요"</div><div class="menu">맥반석 목살 직화구이 300g</div></div>
+<div class="rev"><div class="stars">★★★★★ 4.9</div><div class="who">갈비찜은순살이지</div><div class="txt">"저렴한데 양 진짜 많고 너무 맛나게 먹었습니다"</div><div class="menu">[1.5인분] 김치찜 혼밥 세트</div></div>
+</div>
+<div style="margin-top:22px"><a href="https://s.baemin.com/yg000E3Xy8c5e" target="_blank" rel="noopener noreferrer" class="linkbtn">🔗 배달의민족에서 실제 리뷰 보기</a></div>
+<p class="disc">배달의민족에 등록된 실제 고객 리뷰이며, 개인 취향에 따라 느낌은 다를 수 있습니다.</p>
 </div></section>
 
 <!-- 8. 계약부터 오픈까지 -->
