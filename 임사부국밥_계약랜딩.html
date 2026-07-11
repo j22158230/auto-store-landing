@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>해장요리전문 임사부국밥 — 검증된 배달 전문 브랜드</title>
+<meta name="description" content="해장요리전문 임사부국밥 — 기존 주방을 활용해 배달 매출을 더하는 배달 전문 브랜드 도입 상담.">
+<meta property="og:title" content="해장요리전문 임사부국밥 — 검증된 배달 전문 브랜드">
+<meta property="og:description" content="검증된 배달 전문 브랜드. 표준 레시피·현장교육·배달앱 운영지원. 도입 가능 여부 상담.">
+<meta property="og:type" content="website">
+<!-- OG 이미지 등록 자리: <meta property="og:image" content="https://j22158230.github.io/auto-store-landing/menu_samgyup.jpg"> -->
+<!-- 파비콘 등록 자리: <link rel="icon" href="favicon.ico"> -->
+<style>
+:root{--ivory:#FBF6EE;--cream:#F5EBDC;--card:#ffffff;--line:#E7D9C6;--ink:#2A1A12;--mut:#7A6A5B;--brown:#8A5A2B;--red:#C0392B;--deep:#5E1B10;--deep2:#7A2417;--gold:#C9852E}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Malgun Gothic','Apple SD Gothic Neo',-apple-system,sans-serif;background:var(--ivory);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;padding-bottom:0;word-break:keep-all}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+img{max-width:100%}
+a{color:inherit}
+/* 버튼 */
+.btn{display:inline-block;background:var(--red);color:#fff;font-weight:900;font-size:17px;padding:15px 30px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;transition:transform .12s,box-shadow .12s,background .12s;box-shadow:0 8px 20px rgba(192,57,43,.26)}
+.btn:hover{background:#a82f22;transform:translateY(-2px);box-shadow:0 12px 26px rgba(192,57,43,.32)}
+.btn:active{transform:translateY(0)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn.lg{font-size:19px;padding:17px 38px}
+.btn.ghost{background:#fff;color:var(--red);border:2px solid var(--red);box-shadow:none}
+.btn.ghost:hover{background:#fff5f2}
+.linkbtn{display:inline-block;background:#fff;border:2px solid var(--brown);color:var(--brown);font-weight:800;padding:11px 20px;border-radius:10px;text-decoration:none;transition:background .12s,transform .12s}
+.linkbtn:hover{background:#f6eddf;transform:translateY(-1px)}
+.linkbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+/* 상단 고정 메뉴 */
+.sticky{position:sticky;top:0;z-index:70;background:rgba(251,246,238,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.sticky .wrap{display:flex;align-items:center;justify-content:space-between;padding:11px 22px}
+.sticky b{font-size:16px;color:var(--deep)}.sticky .s{color:var(--mut);font-size:12px;margin-left:8px}
+.sticky .navcta{background:var(--red);color:#fff;font-weight:800;font-size:13.5px;padding:9px 16px;border-radius:8px;text-decoration:none}
+.sticky .navcta:hover{background:#a82f22}
+/* 섹션 */
+section{padding:56px 0}
+.sec-ivory{background:var(--ivory)}.sec-cream{background:var(--cream)}.sec-white{background:#fff}
+.sec-deep{background:linear-gradient(160deg,var(--deep),var(--deep2));color:#fff}
+h2{font-size:30px;font-weight:900;line-height:1.3;margin-bottom:10px;color:var(--ink);scroll-margin-top:80px}
+.sec-deep h2{color:#fff}
+h2 b{color:var(--red)}.sec-deep h2 b{color:#F4C56B}
+.center{text-align:center}
+.lead{color:var(--mut);font-size:16px;max-width:760px;margin:0 auto 8px}
+.sec-deep .lead{color:#f0dccf}
+.kicker{display:inline-block;font-size:12.5px;letter-spacing:1px;font-weight:800;color:var(--brown);background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 14px;margin-bottom:12px}
+.sec-deep .kicker{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#F4C56B}
+/* 히어로 */
+.hero{background:radial-gradient(900px 420px at 15% -10%,#fff3e6 0%,var(--ivory) 60%);padding:52px 0 46px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
+.hero h1{font-size:40px;font-weight:900;line-height:1.2;margin:14px 0 12px;color:var(--ink)}.hero h1 b{color:var(--red)}
+.hero .sub{color:var(--mut);font-size:16.5px;margin-bottom:18px}
+.hero .points{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.hero .points span{background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 12px;font-size:13px;font-weight:700;color:var(--deep)}
+.hero-media{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px rgba(94,27,16,.20);border:1px solid var(--line)}
+.hero-media .cap{position:absolute;left:12px;bottom:12px;background:rgba(46,26,18,.82);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px}
+/* 이미지 썸네일 + fallback */
+.thumb{position:relative;width:100%;aspect-ratio:4/3;background:repeating-linear-gradient(45deg,#efe1cf,#efe1cf 14px,#e7d5bf 14px,#e7d5bf 28px);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thumb .fb{position:absolute;color:var(--brown);font-weight:800;font-size:14px;z-index:0;text-align:center;padding:0 10px}
+.thumb img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block}
+.hero-media .thumb{aspect-ratio:16/11}
+/* 카드 그리드 */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:1fr 1fr 1fr 1fr}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(94,27,16,.05)}
+.card h4{font-size:18px;font-weight:800;color:var(--deep);margin-bottom:6px}
+.card p{color:#5b4a3d;font-size:14px}
+.card .num{width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.card .ic{font-size:26px;margin-bottom:6px}
+.connect{max-width:760px;margin:22px auto 0;background:#fff;border:1px dashed var(--brown);border-radius:12px;padding:16px 18px;color:var(--deep);font-weight:700;text-align:center}
+/* 성과 카드(딥) */
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:24px;text-align:center}
+.stat .v{font-size:32px;font-weight:900;color:#F4C56B;font-variant-numeric:tabular-nums}
+.stat .l{font-size:14px;color:#fff;margin-top:4px;font-weight:700}
+.stat .d{font-size:12px;color:#e0c3b4;margin-top:6px}
+.proof-img{margin-top:22px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.18)}
+.proof-ph{aspect-ratio:16/7;background:repeating-linear-gradient(45deg,#4a150c,#4a150c 16px,#571a10 16px,#571a10 32px);display:flex;align-items:center;justify-content:center;color:#f0d0c2;font-weight:800;text-align:center;padding:0 16px}
+.cap-line{color:#f0dccf;font-size:12.5px;margin-top:10px;text-align:center}
+.notice{max-width:820px;margin:14px auto 0;font-size:12px;color:#e6c9bb;background:rgba(0,0,0,.16);border-radius:10px;padding:12px 14px;line-height:1.6}
+/* 프로세스 */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:10px;margin-top:24px}
+.flow .step{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center}
+.flow .step .ic{font-size:26px}.flow .step .t{font-weight:800;color:var(--deep);font-size:14.5px;margin-top:6px}
+.flow .arrow{align-self:center;color:var(--brown);font-weight:900;font-size:22px}
+/* 메뉴 */
+.menugrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+.menu-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(94,27,16,.06)}
+.menu-body{padding:14px 16px}
+.menu-body .mn{font-weight:800;color:var(--deep);font-size:17px}
+.menu-body .mp{color:var(--red);font-weight:900;font-size:17px;margin-top:2px}
+.menu-body .md{color:var(--mut);font-size:13px;margin-top:5px}
+.menu-body .tagk{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:700;color:var(--brown);background:#f6eddf;border-radius:6px;padding:3px 8px}
+.moremenu{max-width:760px;margin:20px auto 0;text-align:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;color:var(--deep);font-weight:700}
+/* 프로세스 카드(계약~오픈) */
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;counter-reset:st}
+.stepcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;position:relative}
+.stepcard .n{width:32px;height:32px;border-radius:50%;background:var(--deep);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.stepcard h4{font-size:16px;color:var(--deep);margin-bottom:6px}.stepcard p{font-size:13.5px;color:#5b4a3d}
+/* 교육 리스트 */
+.edu{max-width:760px;margin:22px auto 0}
+.edu li{list-style:none;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:9px 0;font-size:14.5px;color:var(--deep);font-weight:600;position:relative;padding-left:40px}
+.edu li::before{content:"✓";position:absolute;left:16px;color:var(--red);font-weight:900}
+.hlbox{max-width:760px;margin:20px auto 0;background:#fff5ef;border:1px solid #e3b9ab;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;color:var(--deep);font-size:14.5px}
+/* 비용 표 */
+.tablewrap{max-width:760px;margin:22px auto 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.cost{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:320px}
+table.cost th,table.cost td{padding:14px 16px;text-align:left;font-size:14.5px;border-bottom:1px solid var(--line)}
+table.cost th{background:var(--cream);color:var(--deep);font-weight:800;width:44%}
+table.cost td{color:var(--ink);font-weight:600}
+table.cost tr:last-child td,table.cost tr:last-child th{border-bottom:none}
+.cost-note{max-width:760px;margin:14px auto 0;font-size:13px;color:var(--mut);text-align:center}
+.listlinks{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+/* 추천 대상 */
+.checklist{max-width:760px;margin:22px auto 0}
+.checklist li{list-style:none;background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 16px 13px 44px;margin:9px 0;font-size:15px;color:var(--deep);font-weight:600;position:relative}
+.checklist li::before{content:"✔";position:absolute;left:16px;color:#2e9e5b;font-weight:900}
+/* FAQ */
+.faq details{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px}
+.faq summary{font-weight:700;cursor:pointer;font-size:15.5px;color:var(--deep);list-style:none}
+.faq summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"＋";float:right;color:var(--red);font-weight:900}
+.faq details[open] summary::after{content:"－"}
+.faq p{color:var(--mut);font-size:14px;margin-top:10px}
+/* 폼 */
+.formcard{max-width:560px;margin:24px auto 0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;text-align:left;box-shadow:0 10px 26px rgba(94,27,16,.08)}
+.formcard h3{font-size:20px;font-weight:900;text-align:center;color:var(--deep)}
+.formcard .gift{background:#f6eddf;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13.5px;margin:14px 0;text-align:center;color:var(--deep)}
+.formcard label{display:block;font-size:13px;font-weight:700;margin:12px 0 5px;color:#5b4a3d}
+.formcard input,.formcard select,.formcard textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:9px;font-size:16px;font-family:inherit;background:#fff;color:var(--ink)}
+.formcard textarea{min-height:84px;resize:vertical}
+.formcard input:focus,.formcard select:focus,.formcard textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(192,57,43,.15)}
+.consent{display:flex;gap:9px;align-items:flex-start;margin-top:14px;font-size:13px;color:#5b4a3d}
+.consent input{width:auto;margin-top:3px}
+.formcard .btn{width:100%;margin-top:18px}
+.formcard .btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.formcard .fine{font-size:11.5px;color:var(--mut);text-align:center;margin-top:10px}
+.formerr{display:none;margin-top:12px;background:#fdecea;border:1px solid #e3b9ab;color:#9a2e1e;font-size:13.5px;padding:11px 14px;border-radius:9px;text-align:center}
+.formerr.show{display:block}
+.done{display:none;text-align:center;padding:16px}.done.show{display:block}.done .c{font-size:42px;color:#2e9e5b}
+/* 주의/면책 */
+.disc{font-size:11.5px;color:#9c8a79;max-width:760px;margin:16px auto 0;line-height:1.6}
+/* 모바일 고정 CTA */
+.mobilecta{display:none}
+footer{background:var(--deep);color:#e9d3c6;font-size:12px;padding:26px 0;text-align:center}
+.src{color:#c9a690;font-size:11.5px;margin-top:10px}
+/* 반응형 */
+@media(max-width:860px){
+ .hero-grid{grid-template-columns:1fr;gap:20px}
+ .hero-media{order:-1}
+ .hero h1{font-size:31px}
+ .g3,.g4,.steps4{grid-template-columns:1fr 1fr}
+ h2{font-size:25px}
+}
+@media(max-width:560px){
+ .g2,.g3,.g4,.steps4,.menugrid{grid-template-columns:1fr}
+ .flow{flex-direction:column}.flow .arrow{transform:rotate(90deg)}
+ .hero h1{font-size:26px}
+ .stat .v{font-size:25px}
+ h2{font-size:22px}
+ .bignum,.costbox .big{font-size:32px}
+ .hero .sub{font-size:15.5px}
+ section{padding:44px 0}
+ body{padding-bottom:76px}
+ .mobilecta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:80;padding:10px 14px;background:rgba(251,246,238,.98);border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(94,27,16,.10)}
+ .mobilecta a{flex:1;text-align:center}
+ .sticky .navcta{display:none}
+}
+.datapanel{margin-top:22px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:22px}
+.dp-title{color:#F4C56B;font-weight:800;font-size:15px;margin-bottom:14px;text-align:left}
+.pbars{display:flex;flex-direction:column;gap:12px}
+.pbar{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:12px}
+.pbar .pn{font-size:13px;color:#fff;font-weight:700;text-align:left}
+.pbar .ptrack{height:16px;background:rgba(255,255,255,.10);border-radius:8px;overflow:hidden}
+.pbar .ptrack i{display:block;height:100%;background:linear-gradient(90deg,#E8A44C,#F4C56B);border-radius:8px}
+.pbar .pv{font-size:12.5px;color:#f0dccf;font-weight:700;white-space:nowrap}
+.pfunnel{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}
+.pfunnel .pf{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:8px 14px;text-align:center}
+.pfunnel .pf b{display:block;color:#fff;font-size:16px}.pfunnel .pf span{font-size:11px;color:#e0c3b4}
+.pfunnel i{color:#F4C56B;font-weight:900;font-style:normal}
+.pfunnel .pfrate{background:#F4C56B;color:#5E1B10;font-weight:900;border-radius:10px;padding:8px 14px;font-size:14px}
+@media(max-width:560px){.pbar{grid-template-columns:76px 1fr}.pbar .pv{grid-column:1/-1;text-align:right}}
+.mtbl{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:340px}
+.mtbl th,.mtbl td{padding:13px 16px;text-align:left;font-size:14.5px;border-bottom:1px solid var(--line)}
+.mtbl th{background:var(--cream);color:var(--deep);font-weight:800}
+.mtbl td{color:var(--ink);font-weight:600}.mtbl td b{color:var(--red)}
+.mtbl tr:last-child td{border-bottom:none}
+.mtbl .soon{color:var(--mut);font-weight:700}
+.reviews{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:26px;text-align:left}
+@media(max-width:860px){.reviews{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.reviews{grid-template-columns:1fr}}
+.rev{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 4px 14px rgba(94,27,16,.05);display:flex;flex-direction:column}
+.rev .stars{color:var(--gold);font-size:13.5px;letter-spacing:1px;font-weight:800}
+.rev .who{font-weight:800;color:var(--deep);font-size:13.5px;margin:6px 0 8px}
+.rev .txt{color:#4a3a2f;font-size:14px;flex:1;line-height:1.65}
+.rev .menu{margin-top:12px;font-size:11.5px;font-weight:700;color:var(--brown);background:var(--cream);border-radius:6px;padding:5px 9px;align-self:flex-start}
+.award-img{width:100%;max-width:720px;margin:0 auto 16px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 26px rgba(94,27,16,.16);display:block}
+.award-img img{width:100%;display:block}
+.award{background:linear-gradient(160deg,#fff7e9,#f3e2c4);border:2px solid var(--gold);border-radius:16px;padding:22px;max-width:720px;margin:0 auto;box-shadow:0 8px 22px rgba(201,133,46,.18)}
+.award-badge{display:inline-block;font-size:12px;font-weight:900;letter-spacing:1px;color:#fff;background:var(--deep);border-radius:20px;padding:5px 14px;margin-bottom:10px}
+.award-title{font-size:21px;font-weight:900;color:var(--deep);line-height:1.35}.award-title b{color:var(--red)}
+.award-sub{font-size:14.5px;color:var(--brown);font-weight:800;margin-top:9px}
+.timebox{max-width:720px;margin:18px auto 0;background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:10px;padding:15px 18px;font-size:14.5px;color:var(--deep);text-align:left}
+.timebox b{color:var(--red)}
+</style></head><body>
+
+<!-- 1. 상단 고정 메뉴 -->
+<div class="sticky"><div class="wrap">
+<div><b>해장요리전문 임사부국밥</b><span class="s">도입 안내</span></div>
+<a class="navcta" href="#apply">도입 가능 여부 상담 ▸</a>
+</div></div>
+
+<!-- 2. 히어로 -->
+<header class="hero"><div class="wrap">
+<div class="hero-grid">
+<div>
+<span class="kicker">오전·점심 배달 매출을 채우는 해장요리전문 브랜드</span>
+<h1>아침·점심 배달 매출이 비어 있다면,<br><b>국밥으로 채우세요</b></h1>
+<p class="sub">평택 서정점 실제 운영 기준, 오픈 첫 달 배달 3사 합산 월 매출 <b>22,048,100원</b>. 기존 주방을 활용해 오전·점심 시간대 매출을 추가할 수 있는 해장요리전문 브랜드입니다.</p>
+<div class="points"><span>기존 주방 활용</span><span>표준 레시피</span><span>현장교육 지원</span><span>배달앱 운영교육</span></div>
+<a href="#apply" class="btn lg">배달 운영상태 확인하기</a>
+</div>
+<div class="hero-media">
+<div class="thumb"><span class="fb">대표 메뉴 이미지 준비 중</span><img src="gukbap_hero.jpg" width="1200" height="825" alt="해장요리전문 임사부국밥 대표 메뉴" loading="lazy" onerror="this.style.display='none'"></div>
+<div class="cap">해장요리전문 임사부국밥 대표 메뉴</div>
+</div>
+</div>
+</div></header>
+
+<!-- 수상 · 시간대 강점 -->
+<section class="sec-cream"><div class="wrap center">
+<div class="award">
+<span class="award-badge">🏆 2024 First Brand Premium</span>
+<div class="award-title">포브스코리아 <b>[2024 고객 신뢰도 1위 프리미엄 브랜드]</b></div>
+<div class="award-sub">임사부는 포브스코리아 [2024 고객 신뢰도 1위 프리미엄 브랜드]에 소개된 브랜드입니다.</div>
+<div style="margin-top:14px"><a href="https://www.forbeskorea.co.kr/news/articleView.html?idxno=340411" target="_blank" rel="noopener noreferrer" class="linkbtn">📰 포브스 기사 확인하기</a></div>
+</div>
+<div class="timebox">☀️ <b>오전·점심 매출에 강한 브랜드</b> — 이른 아침부터 점심까지, 홀 매출 외에 추가 매출을 원하는 사장님께 딱 맞습니다.</div>
+</div></section>
+
+<!-- 3. 사장님의 현실적인 고민 -->
+<section class="sec-cream"><div class="wrap center">
+<h2>매장은 운영하고 있지만<br><b>이런 고민</b>이 있으신가요?</h2>
+<div class="grid g4" style="margin-top:26px;text-align:left">
+<div class="card"><div class="ic">🍽️</div><h4>배달 매출 추가</h4><p>홀 매출만으로는 부족해 배달 매출을 추가하고 싶습니다.</p></div>
+<div class="card"><div class="ic">🧑‍🍳</div><h4>추가 인력 부담</h4><p>새로운 브랜드를 시작하고 싶지만 추가 인력이 부담됩니다.</p></div>
+<div class="card"><div class="ic">📉</div><h4>높은 원가</h4><p>원가가 높아 광고비를 충분히 사용하기 어렵습니다.</p></div>
+<div class="card"><div class="ic">📱</div><h4>배달앱 운영</h4><p>배달앱을 시작해도 어떻게 운영해야 할지 모르겠습니다.</p></div>
+</div>
+<div class="connect">해장요리전문 임사부국밥은 기존 주방을 활용하면서 조리·메뉴·배달앱 운영을 하나의 시스템으로 제공합니다.</div>
+</div></section>
+
+<!-- 4. 평택 서정점 실제 성과 -->
+<section class="sec-deep"><div class="wrap center">
+<span class="kicker">평택 서정점 실제 운영 결과</span>
+<h2>말보다 <b>실제 운영 결과</b>로 보여드립니다</h2>
+<div class="grid g3" style="margin-top:26px">
+<div class="stat"><div class="v">22,048,100원</div><div class="l">3사 합산 오픈 첫 달 매출</div><div class="d">2026.6.1 ~ 6.30</div></div>
+<div class="stat"><div class="v">1,130건</div><div class="l">3사 합산 총 주문</div><div class="d">배민 636 · 쿠팡 485 · 요기요 9</div></div>
+<div class="stat"><div class="v">14.8%</div><div class="l">클릭 대비 주문 전환율</div><div class="d">배민 4,297클릭 → 636주문</div></div>
+</div>
+<div class="datapanel">
+<div class="dp-title">배달 3사 실제 운영 데이터 (매출 · 주문)</div>
+<div class="pbars">
+<div class="pbar"><span class="pn">배달의민족</span><span class="ptrack"><i style="width:100%"></i></span><span class="pv">13,299,100원 · 636건</span></div>
+<div class="pbar"><span class="pn">쿠팡이츠</span><span class="ptrack"><i style="width:64%"></i></span><span class="pv">8,563,100원 · 485건</span></div>
+<div class="pbar"><span class="pn">요기요</span><span class="ptrack"><i style="width:2%"></i></span><span class="pv">185,900원 · 9건</span></div>
+</div>
+<div class="pfunnel"><div class="pf"><b>123,738</b><span>노출</span></div><i>›</i><div class="pf"><b>4,297</b><span>클릭</span></div><i>›</i><div class="pf"><b>636</b><span>주문</span></div><div class="pfrate">전환율 14.8%</div></div>
+</div>
+<div class="cap-line">평택 서정점 · 배달 3사 실제 운영 데이터 (배민·쿠팡이츠·요기요 셀프서비스 기준, 2026년 6월)</div>
+<div class="notice">위 수치는 평택 서정점의 특정 기간 실제 운영 결과이며, 매장 위치·운영시간·광고비·상권 및 점주의 운영 방식에 따라 결과가 달라질 수 있습니다.</div>
+<div style="margin-top:18px"><a href="https://s.baemin.com/HL000E3XDbzQh" target="_blank" rel="noopener noreferrer" class="linkbtn">🔗 배달의민족 실제 매장 보기</a></div>
+</div></section>
+
+<!-- 월별 매출 업데이트 -->
+<section class="sec-cream"><div class="wrap center">
+<span class="kicker">매월 업데이트</span>
+<h2>매출은 <b>계속 공개</b>합니다</h2>
+<p class="lead">한 번의 성과가 아니라, 매달의 실제 매출을 투명하게 업데이트합니다.</p>
+<div class="tablewrap"><table class="mtbl">
+<tr><th>기준 월</th><th>배달 3사 합산 매출</th><th>비고</th></tr>
+<tr><td>2026년 6월</td><td><b>22,048,100원</b></td><td>오픈 첫 달</td></tr>
+<tr><td>2026년 7월</td><td class="soon">집계 중 · 업데이트 예정</td><td>—</td></tr>
+</table></div>
+<p class="cost-note">매출 수치는 배달의민족·쿠팡이츠·요기요 셀프서비스 데이터 기준이며, 매장·기간·상권에 따라 결과가 달라질 수 있습니다.</p>
+</div></section>
+
+<!-- 5. 성과가 만들어진 이유 -->
+<section class="sec-white"><div class="wrap center">
+<h2>매출 숫자보다 중요한 것은<br><b>성과를 만든 운영 구조</b>입니다</h2>
+<p class="lead">임사부국밥은 복잡한 조리 과정을 줄이고, 표준 레시피와 세트 구성을 기반으로 <b>1인·소수 인원 운영을 고려해 설계된 브랜드</b>입니다. 평택 서정점 사례처럼 주문이 집중되는 시간대에도 대응할 수 있도록 조리·포장·배달앱 운영을 하나의 흐름으로 교육합니다.</p>
+<div class="grid g4" style="margin-top:26px;text-align:left">
+<div class="card"><div class="ic">🍲</div><h4>직접 조리하는 브랜드 메뉴</h4><p>매장에서 직접 조리해 브랜드 고유의 맛을 만들고 원가 구조를 관리합니다.</p></div>
+<div class="card"><div class="ic">🔁</div><h4>단순한 조리 동선</h4><p>표준화된 조리 과정으로 여러 메뉴를 복잡하게 준비하지 않아도 됩니다.</p></div>
+<div class="card"><div class="ic">🧾</div><h4>주문 전환을 고려한 메뉴</h4><p>고객이 메뉴를 빠르게 이해하고 선택하도록 세트와 대표 메뉴를 구성합니다.</p></div>
+<div class="card"><div class="ic">📊</div><h4>배달앱 운영관리</h4><p>노출·클릭·주문 전환·운영지수를 점검하고 개선하는 방법을 교육합니다.</p></div>
+</div>
+</div></section>
+
+<!-- 영상 영역: 실제 URL 등록 시에만 노출 (현재 숨김) -->
+<!--
+<section class="sec-white"><div class="wrap center">
+<h2>직접 끓이는 <b>그 맛</b>, 영상으로</h2>
+<div class="videowrap"> [영상 embed 자리] </div>
+</div></section>
+-->
+
+<!-- 7. 대표 메뉴 -->
+<section class="sec-cream"><div class="wrap center">
+<h2>대표 <b>메뉴</b></h2>
+<p class="lead">해장요리전문 임사부국밥의 대표 메뉴입니다. (금액은 배달가 기준)</p>
+<div class="menugrid">
+<div class="menu-card"><div class="thumb"><span class="fb">메뉴 이미지 준비 중</span><img src="gukbap_m1.jpg" width="900" height="675" loading="lazy" alt="머릿고기 돼지국밥" onerror="this.style.display='none'"></div><div class="menu-body"><div class="mn">머릿고기 돼지국밥</div><div class="mp">11,400원</div><div class="md">든든한 국물의 대표 돼지국밥</div></div></div>
+<div class="menu-card"><div class="thumb"><span class="fb">메뉴 이미지 준비 중</span><img src="gukbap_m2.jpg" width="900" height="675" loading="lazy" alt="머릿고기+순대 모듬국밥" onerror="this.style.display='none'"></div><div class="menu-body"><div class="mn">머릿고기+순대 모듬국밥</div><div class="mp">11,400원</div><div class="md">머릿고기와 순대를 한 그릇에</div></div></div>
+<div class="menu-card"><div class="thumb"><span class="fb">메뉴 이미지 준비 중</span><img src="gukbap_m3.jpg" width="900" height="675" loading="lazy" alt="국밥 &amp; 수육 세트" onerror="this.style.display='none'"></div><div class="menu-body"><div class="mn">국밥 &amp; 수육 세트</div><div class="mp">19,500원</div><div class="md">혼술해장 세트 · 국밥+수육</div></div></div>
+<div class="menu-card"><div class="thumb"><span class="fb">메뉴 이미지 준비 중</span><img src="gukbap_m4.jpg" width="900" height="675" loading="lazy" alt="얼큰한 매운해장국밥" onerror="this.style.display='none'"></div><div class="menu-body"><div class="mn">매운해장국밥</div><div class="mp">12,900원</div><div class="md">얼큰하게 속 푸는 매운 국물 국밥</div></div></div>
+</div>
+<div class="moremenu">이 외에도 국밥 단품·직화고기 세트·분식·수제 돈까스 등 <b>다양한 메뉴 운영이 가능</b>합니다.</div>
+</div></section>
+
+<!-- 실제 고객 리뷰 -->
+<section class="sec-cream"><div class="wrap center">
+<span class="kicker">배달의민족 실제 리뷰</span>
+<h2>먹어본 사람들이 <b>남긴 후기</b></h2>
+<p class="lead">아래 리뷰는 평택 서정점 배달의민족에 실제 고객이 남긴 리뷰입니다. 하단 버튼을 통해 실제 매장 리뷰를 직접 확인할 수 있습니다.</p>
+<div class="reviews">
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">굶주린치와와</div><div class="txt">"식재료는 거짓말 하지 않습니다. 보통 수육은 그냥 보내는데 여기는 따뜻한 육수에 같이 보내주셔서 촉촉하게 잘 먹었어요. 밥도 잘 하고 누린내·군내도 없네요."</div><div class="menu">[혼술해장세트] 임사부국밥 &amp; 수육or편육 세트</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">맛있으면짖는개</div><div class="txt">"굳이 병천까지 갈 필요 없네요. 여기 순대, 국밥 진짜 제대로입니다. 양이 엄청 많고 국물 진하고, 특히 다대기가 안 짜서 너무 좋네요."</div><div class="menu">[술상1위] 병천순대+수육 &amp; 국밥</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">김창민</div><div class="txt">"밥·새우젓·깍두기 같은 기본부터 함박스테이크·돈까스 조리까지 여러모로 신경 쓰신 것 같습니다. 국밥은 여기서 시켜 먹겠습니다."</div><div class="menu">[든든한] 머릿고기 돼지국밥</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">옆집짱구오빠</div><div class="txt">"크게 기대 안 했는데 생각과 달리 넘 맛있네요. 국물도 깔끔하고 얼큰하네요. 다음에 또 찾아 뵙겠습니당~"</div><div class="menu">[해장용] 얼큰한 매운해장국밥</div></div>
+<div class="rev"><div class="stars">★★★★★ 4.9</div><div class="who">Lisa1027</div><div class="txt">"국물이 아주 진한 게 입맛을 사로잡고 해장 제대로 되겠더라구요. 깍두기도 너무 맛있어요! 해장할 때 자주 시켜 먹을 것 같아요."</div><div class="menu">[해장용] 얼큰한 매운해장국밥</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">늘보</div><div class="txt">"여기 배달 진짜 빠르고 맛있어요~ 재주문 꼭이요~ 사장님 가게문 닫지 마세요~~"</div><div class="menu">[든든한] 머릿고기 돼지국밥</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">폰은정</div><div class="txt">"배달도 빠르게 오고 양도 많고 맛있었어요!"</div><div class="menu">[든든한] 머릿고기 돼지국밥</div></div>
+<div class="rev"><div class="stars">★★★★★ 5.0</div><div class="who">쿠루</div><div class="txt">"국물이 깔끔하고 순대가 정말 쫄깃해서 정말 맛있는 식사가 됐습니다. 다음에 또 생각나면 주문해야겠어요."</div><div class="menu">[쫄깃한] 산더미 찰순대 순대만국밥</div></div>
+<div class="rev"><div class="stars">★★★★★ 4.8</div><div class="who">세인</div><div class="txt">"국물 진한 진국과 어울어진 순대국 한 그릇, 국물이 끝내줍니다. 넘나 맛있게 먹었습니다."</div><div class="menu">국밥 + 두부 김치</div></div>
+</div>
+<div style="margin-top:22px"><a href="https://s.baemin.com/HL000E3XDbzQh" target="_blank" rel="noopener noreferrer" class="linkbtn">🔗 배달의민족에서 실제 리뷰 보기</a></div>
+<p class="disc">배달의민족에 등록된 실제 고객 리뷰이며, 개인 취향에 따라 느낌은 다를 수 있습니다.</p>
+</div></section>
+
+<!-- 8. 계약부터 오픈까지 -->
+<section class="sec-white"><div class="wrap center">
+<h2>계약만 하고 <b>끝나는 브랜드가 아닙니다</b></h2>
+<p class="lead">상담부터 오픈, 오픈 후 점검까지 함께합니다.</p>
+<div class="steps4">
+<div class="stepcard"><div class="n">1</div><h4>매장 및 상권 상담</h4><p>현재 매장, 주방 구조, 배달 운영 여부를 확인합니다.</p></div>
+<div class="stepcard"><div class="n">2</div><h4>브랜드 입점 세팅</h4><p>메뉴 구성, 배달 플랫폼 입점, 메뉴판과 이미지를 준비합니다.</p></div>
+<div class="stepcard"><div class="n">3</div><h4>일당백 현장교육</h4><p>조리·포장·주문 접수·배달앱 운영을 현장에서 교육합니다.</p></div>
+<div class="stepcard"><div class="n">4</div><h4>오픈 및 운영점검</h4><p>오픈 후 운영지수와 주문 데이터를 확인하고 개선 방향을 안내합니다.</p></div>
+</div>
+</div></section>
+
+<!-- 9. 일당백 현장교육 및 운영 지원 -->
+<section class="sec-ivory"><div class="wrap center">
+<h2>조리만 알려드리는 <b>교육이 아닙니다</b></h2>
+<p class="lead">오픈 후 실제 운영에 필요한 전 과정을 현장에서 교육합니다.</p>
+<ul class="edu">
+<li>표준 레시피와 조리 동선</li>
+<li>주문 접수와 포장 실습</li>
+<li>배달의민족·쿠팡이츠·요기요 입점 및 운영</li>
+<li>노출·클릭·주문 전환 데이터 확인</li>
+<li>운영지수 관리</li>
+<li>리뷰 및 고객 응대 기본 운영</li>
+</ul>
+<div class="hlbox">현장교육은 교육 품질을 위해 회차별 참여 인원을 제한합니다. 상담 후 매장 상황과 교육 가능 일정을 확인해 안내합니다.</div>
+<div class="hlbox" style="border-left-color:var(--gold);background:#fff8ec;margin-top:12px">🎁 현장교육에 참여하는 매장에는 배달 운영 노하우를 담은 <b>구독형 서비스 ‘배달 정답지’ 최신본</b>을 선착순으로 무료 제공합니다.</div>
+</div></section>
+
+<!-- 10. 도입 비용 -->
+<section class="sec-white"><div class="wrap center">
+<h2>도입 전 <b>비용부터 정확히</b> 확인하세요</h2>
+<div class="tablewrap"><table class="cost">
+<tr><th>브랜드 신규 도입비</th><td>200만원</td></tr>
+<tr><th>초도 식자재</th><td>별도 · 약 100만원 수준</td></tr>
+<tr><th>초도 부자재</th><td>별도 · 약 50만원 수준</td></tr>
+<tr><th>플랫폼 입점 및 광고비</th><td>매장별 별도</td></tr>
+<tr><th>추가 설비 및 집기</th><td>보유 여부에 따라 다름</td></tr>
+</table></div>
+<p class="cost-note">정확한 총비용은 매장에 보유한 설비, 운영 메뉴, 초도 수량에 따라 달라집니다. 상담 시 매장 상황을 확인한 뒤 항목별 비용을 안내합니다.</p>
+<div class="listlinks">
+<a href="https://docs.google.com/spreadsheets/d/1tiQq7sBZc69CvfaFKfI74Zqo4qWSGN2q/edit?usp=sharing&amp;ouid=100468884091796133511&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer" class="linkbtn">📋 식자재 리스트 보기</a>
+<a href="https://docs.google.com/spreadsheets/d/11LEHIXc6h-QGxy-_MN4c_bVr1fgq-JITCGxhPptZP8c/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="linkbtn">📦 부자재 리스트 보기</a>
+</div>
+</div></section>
+
+<!-- 11. 추천 대상 -->
+<section class="sec-cream"><div class="wrap center">
+<h2>이런 사장님께 <b>적합합니다</b></h2>
+<ul class="checklist">
+<li>기존 음식점 또는 유휴 주방을 운영하고 있는 사장님</li>
+<li>홀 매출 외에 배달 매출을 추가하고 싶은 사장님</li>
+<li>복잡한 메뉴보다 집중된 메뉴 구성을 원하는 사장님</li>
+<li>직접 교육에 참여하고 운영 방식을 배우려는 사장님</li>
+<li>배달앱 데이터와 운영지수를 관리하고 싶은 사장님</li>
+</ul>
+<p class="lead" style="margin-top:16px">매장 구조와 운영 상황에 따라 도입 적합 여부가 달라질 수 있습니다. 상담에서 현재 매장을 기준으로 확인해드립니다.</p>
+</div></section>
+
+<!-- 12. FAQ -->
+<section class="sec-white faq"><div class="wrap"><h2 class="center">자주 묻는 질문</h2><div style="max-width:820px;margin:24px auto 0">
+<details><summary>기존 매장에 브랜드만 추가할 수 있나요?</summary><p>네. 기존 주방과 운영 시간을 활용해 배달 전용 브랜드로 추가하는 방식이 가능합니다. 매장 구조는 상담에서 함께 확인합니다.</p></details>
+<details><summary>창업 경험이 없어도 가능한가요?</summary><p>표준 레시피와 일당백 현장교육을 통해 조리·포장·배달앱 운영을 단계적으로 익히실 수 있습니다.</p></details>
+<details><summary>정말 혼자 운영할 수 있나요?</summary><p>단품 중심의 단순한 조리 구조로 설계되어 있습니다. 다만 매장 규모·주문량·운영 시간에 따라 필요한 인력은 달라질 수 있습니다.</p></details>
+<details><summary>메뉴 구성은 어떻게 되나요?</summary><p>대표 메뉴와 세트 구성으로 운영하며, 구체적 메뉴는 상담과 자료를 통해 안내드립니다.</p></details>
+<details><summary>총 도입 비용은 얼마인가요?</summary><p>브랜드 신규 도입비는 200만원이며, 초도 식자재·부자재·플랫폼 비용 등은 별도입니다. 매장 상황에 따라 달라 상담에서 항목별로 안내합니다.</p></details>
+<details><summary>현장교육은 어디에서 진행되나요?</summary><p>실제 운영 매장을 기반으로 현장에서 진행합니다. 회차별 인원이 제한되어 상담 후 일정을 안내합니다.</p></details>
+<details><summary>배달 플랫폼 입점도 지원하나요?</summary><p>배달의민족·쿠팡이츠·요기요 입점과 초기 운영 세팅을 함께 지원합니다.</p></details>
+</div></div></section>
+
+<!-- 13. 상담 신청 -->
+<section class="sec-ivory" id="apply"><div class="wrap center">
+<h2>우리 매장 <b>도입 가능 여부</b> 상담</h2>
+<p class="lead">현재 매장을 기준으로 도입 가능 여부와 운영 방식을 확인해드립니다.</p>
+<div class="formcard">
+<form id="leadForm" onsubmit="return submitLead(event)" novalidate>
+<h3>해장요리전문 임사부국밥 도입 상담</h3>
+<div class="gift">🎁 상담 신청 시, 현재 매장의 배달 운영 상태를 확인할 수 있는 <b>매장 진단 체크리스트</b>를 제공합니다.</div>
+<label for="f-name">성함</label><input id="f-name" required name="name" placeholder="홍길동">
+<label for="f-phone">연락처</label><input id="f-phone" required name="phone" type="tel" placeholder="010-0000-0000">
+<label for="f-commit">현재 매장 운영 여부</label>
+<select id="f-commit" name="commit"><option value="">선택</option><option>매장 운영 중(배달 안 함)</option><option>매장 운영 중(배달 운영 중)</option><option>유휴 주방 보유</option><option>창업 준비 중</option></select>
+<label for="f-biz">운영 지역</label><input id="f-biz" required name="biz" placeholder="예) 평택 서정동">
+<label for="f-pain">상담하고 싶은 내용</label><textarea id="f-pain" name="pain" placeholder="현재 매장 상황, 궁금한 점을 적어주세요."></textarea>
+<label class="consent"><input type="checkbox" id="f-consent" name="consent"><span>개인정보(성함·연락처 등)를 상담 목적으로 수집·이용하는 것에 동의합니다.</span></label>
+<button class="btn" type="submit">우리 매장 도입 가능 여부 상담받기</button>
+<div class="formerr" id="formerr">접수 중 오류가 발생했습니다. 담당자에게 직접 문의해 주세요.</div>
+<p class="fine">제출 시 담당자가 연락드립니다. 개인정보는 상담 목적에만 사용됩니다.</p>
+</form>
+<div class="done" id="done"><div class="c">✓</div><h3>상담 신청이 접수되었습니다!</h3><p style="color:var(--mut);font-size:14px;margin-top:8px">‘매장 진단 체크리스트’와 함께 담당자가 곧 연락드리겠습니다.</p></div>
+</div>
+</div></section>
+
+<!-- 14. 최종 CTA -->
+<section class="sec-deep center"><div class="wrap">
+<h2>지금 계약을 <b>결정하지 않으셔도 됩니다</b></h2>
+<p class="lead">먼저 현재 매장에 해장요리전문 임사부국밥을 도입할 수 있는지 확인해보세요. 매장 구조·운영 인력·배달 상권을 기준으로 안내해드립니다.</p>
+<a href="#apply" class="btn lg" style="margin-top:8px">우리 매장 도입 가능 여부 확인하기</a>
+</div></section>
+
+<footer>해장요리전문 임사부국밥　|　검증된 배달 전문 브랜드
+<div class="src">※ 본 페이지의 매출·수익 수치는 특정 대표 매장의 실제 운영 결과이며, 모든 매장의 수익을 보장하지 않습니다.</div></footer>
+
+<!-- 모바일 고정 CTA -->
+<div class="mobilecta"><a href="#apply" class="btn">우리 매장 도입 가능 여부 상담받기</a></div>
+
+<script>
+const SHEET_URL = "https://script.google.com/macros/s/AKfycby2ddVJN770viLvCSI_wrsIaw2FSRVSkGNP1P6BxhLCF3VCrk2aXHmrDF3JuLzN7Bft/exec";
+function submitLead(e){
+  e.preventDefault();
+  var f=e.target;
+  var err=document.getElementById("formerr");
+  err.classList.remove("show");
+  if(!f.name.value.trim()||!f.phone.value.trim()||!f.biz.value.trim()){alert("성함·연락처·운영 지역을 입력해 주세요.");return false;}
+  if(!f.consent.checked){alert("개인정보 수집·이용에 동의해 주세요.");return false;}
+  var btn=f.querySelector('button[type="submit"]');
+  if(btn.disabled) return false;
+  var label=btn.textContent;
+  btn.disabled=true; btn.textContent="접수 중입니다...";
+  var fd=new FormData(f);
+  fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:fd})
+    .then(function(){
+      document.getElementById("leadForm").style.display="none";
+      var d=document.getElementById("done"); d.classList.add("show");
+      var top=document.getElementById("apply").getBoundingClientRect().top+window.pageYOffset-80;
+      window.scrollTo({top:top,behavior:"smooth"});
+    })
+    .catch(function(){
+      btn.disabled=false; btn.textContent=label;
+      err.classList.add("show");
+    });
+  return false;
+}
+</script>
+</body></html>
+                                                               
