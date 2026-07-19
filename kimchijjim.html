@@ -53,6 +53,7 @@
 .ratingStrip{display:flex;align-items:center;gap:14px;margin-top:22px;padding:16px 20px;border:1px solid rgba(255,255,255,.2);border-radius:10px;background:rgba(255,255,255,.05)}
 .ratingStrip b{font-size:26px;color:#d7a954;white-space:nowrap}
 .ratingStrip span{font-size:13.5px;opacity:.8;line-height:1.6}
+.form textarea{display:block;width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:12px 0;font:inherit;border-radius:0;resize:vertical;min-height:62px;line-height:1.6}
 </style></head><body><main>
 <div class="nav">
   <a class="brand" href="#top"><span>직접 끓인 묵은지 배달 전문</span><b>조선명가 김치찜</b></a>
@@ -180,7 +181,7 @@
 
 <section class="contact section" id="contact">
   <div class="contactCopy"><span>START WITH A CHECK</span><h2>지금 계약하지 않아도<br>괜찮습니다.</h2><p>먼저 우리 매장에 조선명가 묵은지 김치찜을 도입할 수 있는지 확인해보세요.</p><div class="contactBadge">상담 신청 시 제공 <b>매장 진단 체크리스트</b></div></div>
-  <form class="form" id="leadForm" onsubmit="return submitLead(event)" novalidate><h3>도입 가능 여부 상담</h3><label>성함<input name="name" placeholder="성함을 입력해주세요"></label><label>연락처<input name="phone" type="tel" placeholder="010-0000-0000"></label><label>현재 상황<select name="commit"><option value="" disabled selected>선택해주세요</option><option>매장 운영 중 · 배달 운영 중</option><option>매장 운영 중 · 배달 미운영</option><option>유휴 주방 보유</option><option>창업 준비 중</option></select></label><label>운영 지역<input name="biz" placeholder="예) 평택 서정동"></label><label class="check"><input type="checkbox" name="consent" value="1"> 개인정보 수집·이용에 동의합니다.</label><button type="submit" class="button primary">우리 매장 도입 가능 여부 확인하기</button><small id="formMsg">제출 시 담당자가 연락드립니다. 개인정보는 상담 목적에만 사용됩니다.</small></form>
+  <form class="form" id="leadForm" onsubmit="return submitLead(event)" novalidate><h3>도입 가능 여부 상담</h3><label>성함<input name="name" placeholder="성함을 입력해주세요"></label><label>연락처<input name="phone" type="tel" placeholder="010-0000-0000"></label><label>현재 상황<select name="commit"><option value="" disabled selected>선택해주세요</option><option>매장 운영 중 · 배달 운영 중</option><option>매장 운영 중 · 배달 미운영</option><option>유휴 주방 보유</option><option>창업 준비 중</option></select></label><label>운영 지역<input name="biz" placeholder="예) 평택 서정동"></label><label>문의 내용 <span style="font-weight:400;opacity:.55">(선택)</span><textarea name="pain" rows="3" placeholder="현재 매장 상황이나 궁금한 점을 자유롭게 적어주세요."></textarea></label><label class="check"><input type="checkbox" name="consent" value="1"> 개인정보 수집·이용에 동의합니다.</label><button type="submit" class="button primary">우리 매장 도입 가능 여부 확인하기</button><small id="formMsg">제출 시 담당자가 연락드립니다. 개인정보는 상담 목적에만 사용됩니다.</small></form>
 </section>
 
 <footer><div class="brand"><span>직접 끓인 묵은지 배달 전문</span><b>조선명가 묵은지 김치찜</b></div><small>본 페이지의 매출·수익 수치는 특정 매장의 운영 결과이며 모든 매장의 성과를 보장하지 않습니다.</small></footer>
