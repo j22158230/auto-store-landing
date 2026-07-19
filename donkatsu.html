@@ -227,9 +227,34 @@
 
 <section class="contact section" id="contact">
   <div class="contactCopy"><span>START WITH A CHECK</span><h2>지금 계약하지 않아도<br>괜찮습니다.</h2><p>먼저 우리 매장에 임사부 돈카츠를 도입할 수 있는지 확인해보세요.</p><div class="contactBadge">상담 신청 시 제공 <b>매장 진단 체크리스트</b></div></div>
-  <form class="form"><h3>도입 가능 여부 상담</h3><label>성함<input placeholder="성함을 입력해주세요"></label><label>연락처<input placeholder="010-0000-0000"></label><label>현재 상황<select><option value="" disabled selected>선택해주세요</option><option>매장 운영 중 · 배달 운영 중</option><option>매장 운영 중 · 배달 미운영</option><option>유휴 주방 보유</option><option>창업 준비 중</option></select></label><label>운영 지역<input placeholder="예) 평택 서정동"></label><label class="check"><input type="checkbox"> 개인정보 수집·이용에 동의합니다.</label><button type="button" class="button primary">우리 매장 도입 가능 여부 확인하기</button><small>미리보기용 화면입니다. 실제 접수 기능은 연동 후 작동합니다.</small></form>
+  <form class="form" id="leadForm" onsubmit="return submitLead(event)" novalidate><h3>도입 가능 여부 상담</h3><label>성함<input name="name" placeholder="성함을 입력해주세요"></label><label>연락처<input name="phone" type="tel" placeholder="010-0000-0000"></label><label>현재 상황<select name="commit"><option value="" disabled selected>선택해주세요</option><option>매장 운영 중 · 배달 운영 중</option><option>매장 운영 중 · 배달 미운영</option><option>유휴 주방 보유</option><option>창업 준비 중</option></select></label><label>운영 지역<input name="biz" placeholder="예) 평택 서정동"></label><label class="check"><input type="checkbox" name="consent" value="1"> 개인정보 수집·이용에 동의합니다.</label><button type="submit" class="button primary">우리 매장 도입 가능 여부 확인하기</button><small id="formMsg">제출 시 담당자가 연락드립니다. 개인정보는 상담 목적에만 사용됩니다.</small></form>
 </section>
 
 <footer><div class="brand"><span>프리미엄 돈카츠 정식</span><b>임사부 돈카츠</b></div><small>본 페이지의 매출·수익 수치는 특정 매장의 운영 결과이며 모든 매장의 성과를 보장하지 않습니다.</small></footer>
 <a class="mobileCta" href="#contact">도입 가능 여부 상담</a>
-</main></body></html>
+</main><script>
+var LEAD_URL="https://script.google.com/macros/s/AKfycbxu34GK-7sEw8linElLfcNjmxtDU4LXA3rq5Mt4Mq0bwRUpYBNJpZD3O7gj7JgiKwQi/exec";
+var LEAD_BRAND="돈카츠";
+function submitLead(e){
+  e.preventDefault();
+  var f=e.target, msg=document.getElementById('formMsg');
+  var g=function(n){return f.elements[n];};
+  if(!g('name').value.trim()||!g('phone').value.trim()||!g('biz').value.trim()){alert('성함·연락처·운영 지역을 입력해 주세요.');return false;}
+  if(!g('consent').checked){alert('개인정보 수집·이용에 동의해 주세요.');return false;}
+  var btn=f.querySelector('button[type="submit"]');
+  if(btn.disabled) return false;
+  var lbl=btn.textContent;
+  btn.disabled=true; btn.textContent='접수 중입니다...';
+  var fd=new FormData(f);
+  fd.append('brand',LEAD_BRAND);
+  fd.append('page',location.href);
+  fetch(LEAD_URL,{method:'POST',mode:'no-cors',body:fd}).then(function(){
+    f.innerHTML='<h3>상담 신청이 접수되었습니다</h3><p style="opacity:.75;font-size:14px;line-height:1.75;margin-top:12px">‘매장 진단 체크리스트’와 함께 담당자가 곧 연락드리겠습니다.</p>';
+  }).catch(function(){
+    btn.disabled=false; btn.textContent=lbl;
+    if(msg) msg.textContent='접수 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+  });
+  return false;
+}
+</script>
+</body></html>
