@@ -62,6 +62,7 @@
 .ratingStrip b{font-size:26px;color:#d7a954;white-space:nowrap}
 .ratingStrip span{font-size:13.5px;opacity:.8;line-height:1.6}
 .form textarea{display:block;width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:12px 0;font:inherit;border-radius:0;resize:vertical;min-height:62px;line-height:1.6}
+.perfUpdated{text-align:center;font-size:11.5px;opacity:.5;margin-top:10px;letter-spacing:.3px}
 </style></head><body><main>
 <div class="nav">
   <a class="brand" href="#top"><span>여름 별미 배달 전문</span><b>냉면장인 임사부</b></a>
@@ -119,6 +120,7 @@
   </div>
   <div class="ratingStrip"><b>★ 5.0</b><span>배달의민족 별점 · 리뷰 309개<br>냉면장인 임사부&amp;숯불구이 서정점 실제 앱 화면 기준</span></div>
   <p class="disclaimer">실제 매출 데이터는 확정되는 대로 이 페이지에 투명하게 공개합니다. 결과는 매장 위치·운영시간·광고비·상권·운영 방식에 따라 달라질 수 있습니다.</p>
+  <p class="perfUpdated" data-perf="최종업데이트">최종 업데이트 2026-07-19</p>
 </section>
 
 <section class="system section" id="system">
@@ -216,5 +218,64 @@ function submitLead(e){
   });
   return false;
 }
+</script>
+
+<script>
+/* ===== 성과 데이터 시트 연동 ===== */
+var PERF_SHEET_ID="1822D9htbgq9m_L9Z0oKrzaQ7yKGHEhYtC8N5EYwApkk";
+var PERF_BRAND=LEAD_BRAND;
+function _num(v){var n=String(v==null?"":v).replace(/[^0-9.\-]/g,"");return n===""?null:Number(n);}
+function _won(n){return n==null?null:n.toLocaleString("ko-KR");}
+function _csv(t){
+  var rows=[],row=[],cur="",q=false;
+  for(var i=0;i<t.length;i++){var c=t[i];
+    if(q){ if(c==='"'){ if(t[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=c; }
+    else { if(c==='"')q=true; else if(c===','){row.push(cur);cur="";}
+      else if(c==='
+'){row.push(cur);rows.push(row);row=[];cur="";}
+      else if(c!=='
+')cur+=c; }
+  }
+  if(cur!==""||row.length){row.push(cur);rows.push(row);}
+  return rows;
+}
+function _setPerf(el,val){ if(el&&val!=null&&val!=="") el.textContent=val; }
+(function(){
+  var url="https://docs.google.com/spreadsheets/d/"+PERF_SHEET_ID+"/gviz/tq?tqx=out:csv";
+  fetch(url,{cache:"no-store"}).then(function(r){return r.text();}).then(function(t){
+    var rows=_csv(t); if(!rows.length) return;
+    var head=rows[0].map(function(x){return x.trim();});
+    var idx={}; head.forEach(function(h,i){idx[h]=i;});
+    var row=null;
+    for(var i=1;i<rows.length;i++){ if((rows[i][idx["brand"]]||"").trim()===PERF_BRAND){row=rows[i];break;} }
+    if(!row) return;
+    var g=function(k){var i=idx[k];return i==null?"":(row[i]||"").trim();};
+    var d={};["기준기간","총매출","총주문","객단가","배민매출","배민주문","쿠팡매출","쿠팡주문",
+      "요기요매출","요기요주문","노출","클릭","클릭률","주문전환율","별점","리뷰수","최종업데이트"]
+      .forEach(function(k){d[k]=g(k);});
+    // 대표 숫자
+    _setPerf(document.querySelector("[data-perf=총매출]"), _won(_num(d["총매출"])));
+    _setPerf(document.querySelector("[data-perf=총주문]"), _won(_num(d["총주문"])));
+    _setPerf(document.querySelector("[data-perf=객단가]"), _won(_num(d["객단가"])));
+    _setPerf(document.querySelector("[data-perf=기준기간]"), d["기준기간"]);
+    // 플랫폼
+    var pf=[["배민","배민매출","배민주문"],["쿠팡","쿠팡매출","쿠팡주문"],["요기요","요기요매출","요기요주문"]];
+    pf.forEach(function(p){
+      var e=document.querySelector("[data-perf=" + p[0] + "]");
+      var m=_num(d[p[1]]), o=_num(d[p[2]]);
+      if(e&&m!=null&&o!=null) e.textContent=_won(m)+"원 · "+_won(o)+"건";
+    });
+    // 퍼널
+    _setPerf(document.querySelector("[data-perf=노출]"), _won(_num(d["노출"])));
+    _setPerf(document.querySelector("[data-perf=클릭]"), _won(_num(d["클릭"])));
+    _setPerf(document.querySelector("[data-perf=전환율]"), d["주문전환율"]);
+    // 별점/리뷰
+    var rv=document.querySelector("[data-perf=리뷰수]");
+    if(rv&&d["리뷰수"]) rv.textContent=d["리뷰수"];
+    // 최종 업데이트
+    var up=document.querySelector("[data-perf=최종업데이트]");
+    if(up&&d["최종업데이트"]) up.textContent="최종 업데이트 "+d["최종업데이트"];
+  }).catch(function(){ /* 실패 시 HTML에 박힌 기존 값 그대로 유지 */ });
+})();
 </script>
 </body></html>
