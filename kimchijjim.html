@@ -238,6 +238,7 @@ function submitLead(e){
 <script>
 /* ===== 성과 데이터 시트 연동 (4층 · 자동계산) ===== */
 var PERF_SHEET_ID="1bsUKmiPBct5T-gB3UqgspTNNScbq7jDcDaGFFuJKbsc";
+var PERF_GID="603681154";
 var PERF_BRAND=(typeof LEAD_BRAND!=="undefined")?LEAD_BRAND:"";
 function _num(v){var n=String(v==null?"":v).replace(/[^0-9.]/g,"");return n===""?null:Number(n);}
 function _won(n){return n==null?null:Math.round(n).toLocaleString("ko-KR");}
@@ -273,9 +274,19 @@ function _calc(g){
 }
 (function(){
   if(!PERF_BRAND) return;
-  var url="https://docs.google.com/spreadsheets/d/"+PERF_SHEET_ID+"/gviz/tq?tqx=out:csv&_="+Date.now();
-  fetch(url,{cache:"no-store"}).then(function(r){return r.text();}).then(function(t){
-    var rows=_csv(t); if(rows.length<2) return;
+  var base="https://docs.google.com/spreadsheets/d/"+PERF_SHEET_ID+"/gviz/tq?tqx=out:csv";
+  var tries=[base+"&gid="+PERF_GID, base];
+  function grab(n){
+    if(n>=tries.length) return Promise.reject();
+    return fetch(tries[n]+"&_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text();})
+      .then(function(t){
+        var rows=_csv(t);
+        var ok = rows.length>=2 && rows[0].map(function(x){return x.trim();}).indexOf("brand")===0;
+        if(!ok) return grab(n+1);
+        return rows;
+      });
+  }
+  grab(0).then(function(rows){
     var head=rows[0].map(function(x){return x.trim();});
     var ix={}; head.forEach(function(h,i){ ix[h]=i; });
     var mine=[];
