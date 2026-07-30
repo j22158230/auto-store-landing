@@ -104,41 +104,41 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a
     </div>
 
     <div class="card">
-      <h2>발주 제품 <small>1BOX = 1kg · 단가는 kg당 금액</small></h2>
-      <div class="minNote">⚠ 선택한 제품마다 최소 15kg · 15kg 단위로 발주 가능합니다.</div>
+      <h2>발주 제품 <small>1BOX = 15kg · 단가는 BOX 기준</small></h2>
+      <div class="minNote">⚠ 1BOX = 15kg 단위로 발주 (제품당 최소 1BOX).</div>
       <div id="prodList"></div>
       <div class="totalBox">
-        <span class="lbl">총 금액<em id="totalWeightLine">총 0kg</em></span>
+        <span class="lbl">총 금액<em id="totalWeightLine">총 0박스</em></span>
         <span class="val"><span id="grandTotal">0</span><small>원</small></span>
       </div>
     </div>
 
     <label class="check"><input type="checkbox" name="consent" value="1"> 입력하신 정보는 발주 접수·배송 목적으로만 사용됩니다. 동의합니다.</label>
-    <p class="msg" id="formMsg">필수 항목과 제품을 선택하고, 선택한 제품마다 15kg 이상(15kg 단위) 담아주세요.</p>
+    <p class="msg" id="formMsg">필수 항목과 제품을 선택해 주세요. 수량은 1BOX(15kg) 단위입니다.</p>
   </form>
 </div>
 </div>
 
 <div class="bar" id="bar">
   <div class="inner">
-    <div class="sum"><small id="barNote" class="warn">제품별 최소 15kg</small><b><span id="barWeight">0</span>kg · <span id="barTotal">0</span>원</b></div>
+    <div class="sum"><small id="barNote" class="warn">제품을 선택하세요</small><b><span id="barWeight">0</span>박스 · <span id="barTotal">0</span>원</b></div>
     <button type="submit" form="orderForm" class="btn" id="submitBtn" disabled>발주 신청하기</button>
   </div>
 </div>
 
 <script>
 var ORDER_URL="https://script.google.com/macros/s/AKfycby3TzDJK0NcIR_ID2Q5L3yCMR4EDS26poDoakK8EKDS01zZ7ELkyC47A6N0c-6xiC6NgA/exec";
-var MIN_KG=15; /* 제품별 최소 발주 수량(kg) */
-var STEP=15;   /* 수량 증가 단위(kg) — 15kg 단위 */
+var BOX_KG=15;   /* 1BOX = 15kg */
 
-/* 제품 마스터 (인덱스 고정 — 시트 컬럼 순서와 일치). price = kg당 단가 */
+/* 제품 마스터 (인덱스 고정 — 시트 컬럼 순서와 일치). kg=kg당 단가, 1BOX=15kg */
 var PRODUCTS=[
-  {key:"벌집삼겹살", price:13500},
-  {key:"벌집목살",   price:13000},
-  {key:"큐브삼겹살", price:12000},
-  {key:"큐브목전지", price:11500}
+  {key:"벌집삼겹살", kg:13500},
+  {key:"벌집목살",   kg:13000},
+  {key:"큐브삼겹살", kg:12000},
+  {key:"큐브목전지", kg:11500}
 ];
-/* 브랜드별 주문 가능 제품 (PRODUCTS 인덱스) */
+function boxPrice(i){ return PRODUCTS[i].kg*BOX_KG; }  /* 1BOX 금액 */
+
 var BRANDS=[
   {name:"냉면장인 임사부&숯불구이",        items:[2,3]},
   {name:"해장요리전문 임사부 국밥",         items:[2,3]},
@@ -181,15 +181,15 @@ function renderProducts(){
     var row=document.createElement("div");
     row.innerHTML=
       '<div class="prod">'
-      +'<div class="prodInfo"><b>'+p.key+'</b><small>1BOX · 1kg</small></div>'
-      +'<div class="prodPrice">'+won(p.price)+'원<em>/kg</em></div>'
+      +'<div class="prodInfo"><b>'+p.key+'</b><small>1BOX · 15kg</small></div>'
+      +'<div class="prodPrice">'+won(boxPrice(i))+'원<em>/BOX</em></div>'
       +'<label class="tg"><input type="checkbox" data-i="'+i+'" class="tgIn"><span class="tk"></span></label>'
       +'</div>'
       +'<div class="qtyRow" id="qr'+i+'">'
       +'<div class="stepper"><button type="button" data-i="'+i+'" data-d="-1">−</button>'
-      +'<input type="text" inputmode="numeric" class="qtyIn" id="q'+i+'" value="'+MIN_KG+'" data-i="'+i+'"><button type="button" data-i="'+i+'" data-d="1">+</button></div>'
-      +'<span class="qtyUnit">kg</span>'
-      +'<div class="lineSum" id="ls'+i+'">'+won(p.price*MIN_KG)+'원</div>'
+      +'<input type="text" inputmode="numeric" class="qtyIn" id="q'+i+'" value="1" data-i="'+i+'"><button type="button" data-i="'+i+'" data-d="1">+</button></div>'
+      +'<span class="qtyUnit">BOX</span>'
+      +'<div class="lineSum" id="ls'+i+'">'+won(boxPrice(i))+'원</div>'
       +'</div>';
     listEl.appendChild(row);
   });
@@ -197,32 +197,28 @@ function renderProducts(){
 }
 
 function calc(){
-  var total=0, weight=0, sel=0, ok=true;
+  var total=0, boxes=0, sel=0;
   if(currentBrand){
     currentBrand.items.forEach(function(i){
-      var p=PRODUCTS[i];
       var on=document.querySelector('.tgIn[data-i="'+i+'"]').checked;
-      var q=parseInt(document.getElementById('q'+i).value,10); if(isNaN(q)||q<0){q=0;}
-      var ls=document.getElementById('ls'+i);
-      var bad1 = on && (q<MIN_KG || q%STEP!==0);
-      ls.textContent=won(p.price*q)+'원'+(bad1?(q<MIN_KG?' · 최소 15kg':' · 15kg 단위'):'');
-      ls.style.color=bad1?'#b45309':'';
-      if(on){ sel++; total+=p.price*q; weight+=q; if(q<MIN_KG||q%STEP!==0) ok=false; }
+      var q=parseInt(document.getElementById('q'+i).value,10); if(isNaN(q)||q<1){q=1;}
+      var bp=boxPrice(i);
+      document.getElementById('ls'+i).textContent=won(bp*q)+'원';
+      if(on){ sel++; total+=bp*q; boxes+=q; }
     });
   }
   document.getElementById('grandTotal').textContent=won(total);
   document.getElementById('barTotal').textContent=won(total);
-  document.getElementById('barWeight').textContent=weight;
-  document.getElementById('totalWeightLine').textContent='총 '+weight+'kg';
+  document.getElementById('barWeight').textContent=boxes;
+  document.getElementById('totalWeightLine').textContent='총 '+boxes+'박스 ('+(boxes*BOX_KG)+'kg)';
 
-  var canSubmit = sel>0 && ok;
+  var canSubmit = sel>0;
   var btn=document.getElementById('submitBtn');
   var note=document.getElementById('barNote');
   btn.disabled=!canSubmit;
-  if(sel===0){ note.textContent='발주할 제품을 선택하세요'; note.classList.add('warn'); }
-  else if(!ok){ note.textContent='제품별 최소 15kg · 15kg 단위'; note.classList.add('warn'); }
-  else { note.textContent='발주 가능 · 총 '+weight+'kg'; note.classList.remove('warn'); }
-  return {total:total, weight:weight};
+  if(sel===0){ note.textContent='제품을 선택하세요'; note.classList.add('warn'); }
+  else { note.textContent='발주 가능 · 총 '+(boxes*BOX_KG)+'kg'; note.classList.remove('warn'); }
+  return {total:total, boxes:boxes};
 }
 document.addEventListener('change',function(e){
   if(e.target.classList.contains('tgIn')){
@@ -235,13 +231,13 @@ document.addEventListener('click',function(e){
   if(e.target.matches('.stepper button')){
     var i=e.target.getAttribute('data-i'), d=parseInt(e.target.getAttribute('data-d'),10);
     var inp=document.getElementById('q'+i);
-    var q=parseInt(inp.value,10); if(isNaN(q))q=MIN_KG; q+=d*STEP; if(q<MIN_KG)q=MIN_KG; if(q>9999)q=9999;
+    var q=parseInt(inp.value,10); if(isNaN(q))q=1; q+=d; if(q<1)q=1; if(q>999)q=999;
     inp.value=q; calc();
   }
 });
 document.addEventListener('input',function(e){
   if(e.target.classList.contains('qtyIn')){
-    e.target.value=e.target.value.replace(/[^0-9]/g,''); calc();
+    e.target.value=e.target.value.replace(/[^0-9]/g,''); if(e.target.value==='0') e.target.value='1'; calc();
   }
 });
 
@@ -253,17 +249,15 @@ function submitOrder(e){
   if(!g('branch').value.trim()||!g('name').value.trim()||!g('phone').value.trim()||!g('address').value.trim()){
     alert('지점명·성함·연락처·주소를 모두 입력해 주세요.'); return false;
   }
-  var items=[], totalQty=0, total=0, qty=[0,0,0,0], bad=[];
+  var items=[], totalBox=0, total=0, qty=[0,0,0,0];
   currentBrand.items.forEach(function(i){
     if(document.querySelector('.tgIn[data-i="'+i+'"]').checked){
-      var q=parseInt(document.getElementById('q'+i).value,10); if(isNaN(q)||q<0)q=0;
-      qty[i]=q; totalQty+=q; total+=PRODUCTS[i].price*q;
-      items.push(PRODUCTS[i].key+' '+q+'kg');
-      if(q<MIN_KG||q%STEP!==0) bad.push(PRODUCTS[i].key);
+      var q=parseInt(document.getElementById('q'+i).value,10); if(isNaN(q)||q<1)q=1;
+      qty[i]=q; totalBox+=q; total+=boxPrice(i)*q;
+      items.push(PRODUCTS[i].key+' '+q+'박스');
     }
   });
   if(!items.length){ alert('발주할 제품을 1개 이상 선택해 주세요.'); return false; }
-  if(bad.length){ alert('선택한 제품은 각각 최소 15kg이며 15kg 단위여야 합니다.\n확인: '+bad.join(', ')); return false; }
   if(!g('consent').checked){ alert('개인정보 수집·이용에 동의해 주세요.'); return false; }
 
   var btn=document.getElementById('submitBtn');
@@ -279,7 +273,7 @@ function submitOrder(e){
   fd.append('qty1',qty[0]); fd.append('qty2',qty[1]); fd.append('qty3',qty[2]); fd.append('qty4',qty[3]);
   var summary=items.join(', ');
   fd.append('summary',summary);
-  fd.append('totalQty',totalQty);
+  fd.append('totalQty',totalBox);
   fd.append('total',total);
   fd.append('page',location.href);
 
@@ -289,7 +283,7 @@ function submitOrder(e){
       +'<p>담당자가 확인 후 배송을 진행합니다.<br>변경이 필요하시면 담당자에게 연락 주세요.</p>'
       +'<div class="rc"><span class="brandTag">'+currentBrand.name+'</span><br style="line-height:2.4">'
       +'<b>'+g('branch').value.trim()+'</b> · '+g('name').value.trim()+'<br>'
-      +summary+'<br><b style="color:#d94b28">총 '+totalQty+'kg · '+won(total)+'원</b></div></div>';
+      +summary+'<br><b style="color:#d94b28">총 '+totalBox+'박스 ('+(totalBox*BOX_KG)+'kg) · '+won(total)+'원</b></div></div>';
     document.getElementById('bar').classList.remove('on');
   }).catch(function(){
     btn.disabled=false; btn.textContent='발주 신청하기';
