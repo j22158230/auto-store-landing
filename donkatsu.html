@@ -296,16 +296,12 @@ function _csv(t){
 function _set(sel,val){ var el=document.querySelector('[data-perf="'+sel+'"]'); if(el&&val!=null&&val!=="") el.textContent=val; }
 /* 원시값 → 파생지표 계산 */
 function _calc(g){
-  var bm=_num(g("배민매출")), bo=_num(g("배민주문"));
-  var cm=_num(g("쿠팡매출")), co=_num(g("쿠팡주문"));
-  var ym=_num(g("요기요매출")), yo=_num(g("요기요주문"));
+  var rev=_num(g("매출"));
+  var ord=_num(g("주문수"));
   var imp=_num(g("노출")), clk=_num(g("클릭"));
-  var rev=(bm||0)+(cm||0)+(ym||0); if(rev===0) rev=null;
-  var ord=(bo||0)+(co||0)+(yo||0); if(ord===0) ord=null;
   var manual=_num(g("객단가_직접입력"));
   var aov = manual!=null ? manual : ((rev!=null&&ord)? rev/ord : null);
-  return {rev:rev, ord:ord, aov:aov, bm:bm, bo:bo, cm:cm, co:co, ym:ym, yo:yo,
-          imp:imp, clk:clk, ctr:_pct(clk,imp), cvr:_pct(bo,clk)};
+  return {rev:rev, ord:ord, aov:aov, imp:imp, clk:clk, ctr:_pct(clk,imp), cvr:_pct(ord,clk)};
 }
 (function(){
   if(!PERF_BRAND) return;

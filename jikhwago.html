@@ -136,20 +136,8 @@
   <div class="sectionTitle light"><span>REAL PERFORMANCE</span><h2>오픈 3주도 안 됐습니다.<br><b>숫자는 이미 나왔습니다</b></h2></div>
   <div class="proofGrid">
     <div class="bigStat"><span>오픈 첫 달 · 배달 3사 합산 <b style="color:#d7a954">(집계 진행 중)</b></span><strong><span data-perf="총매출">32,938,400</span><small>원</small></strong><p>평택 서정점 · 2026.7.1—7.19 (19일) 실측</p></div>
-    <div class="statStack"><article><span>총 주문</span><strong><span data-perf="총주문">1,269</span><small>건</small></strong></article><article><span>객단가</span><strong><span data-perf="객단가">25,957</span><small>원</small></strong></article><article><span>배민 별점 · 리뷰 265개</span><strong>5.0<small>점</small></strong></article></div>
+    <div class="statStack"><article><span>총 주문</span><strong><span data-perf="총주문">1,269</span><small>건</small></strong></article><article><span>객단가</span><strong><span data-perf="객단가">25,955</span><small>원</small></strong></article><article><span>별점 · 리뷰 265개</span><strong>5.0<small>점</small></strong></article></div>
   </div>
-  <div class="platformRows">
-    <div><span>배달의민족</span><i style="width:100%"></i><b data-perf="배민">30,699,700원 · 1,165건</b></div>
-    <div><span>쿠팡이츠</span><i style="width:7%"></i><b data-perf="쿠팡">1,953,400원 · 94건</b></div>
-    <div><span>요기요</span><i style="width:1%"></i><b data-perf="요기요">285,300원 · 10건</b></div>
-  </div>
-  <div class="funnelBox">
-    <div class="fs"><b data-perf="노출">350,659</b><span>노출</span></div><i>›</i>
-    <div class="fs"><b data-perf="클릭">8,942</b><span>클릭</span></div><i>›</i>
-    <div class="fs"><b>1,165</b><span>주문</span></div>
-    <div class="rate">주문전환율 <span data-perf="전환율">13.0%</span></div>
-  </div>
-  <p class="funnelNote">배달의민족 기준 · 2026.7.1—7.19 · 클릭률 2.6% &nbsp;|&nbsp; 19일 기준 일평균 약 173만원</p>
   <div id="perfLive"></div>
   <div id="perfTrend"></div>
   <p class="disclaimer">위 수치는 평택 서정점의 특정 기간 운영 결과입니다. 매장 위치·운영시간·광고비·상권·운영 방식에 따라 결과가 달라질 수 있습니다.</p>
@@ -278,16 +266,12 @@ function _csv(t){
 function _set(sel,val){ var el=document.querySelector('[data-perf="'+sel+'"]'); if(el&&val!=null&&val!=="") el.textContent=val; }
 /* 원시값 → 파생지표 계산 */
 function _calc(g){
-  var bm=_num(g("배민매출")), bo=_num(g("배민주문"));
-  var cm=_num(g("쿠팡매출")), co=_num(g("쿠팡주문"));
-  var ym=_num(g("요기요매출")), yo=_num(g("요기요주문"));
+  var rev=_num(g("매출"));
+  var ord=_num(g("주문수"));
   var imp=_num(g("노출")), clk=_num(g("클릭"));
-  var rev=(bm||0)+(cm||0)+(ym||0); if(rev===0) rev=null;
-  var ord=(bo||0)+(co||0)+(yo||0); if(ord===0) ord=null;
   var manual=_num(g("객단가_직접입력"));
   var aov = manual!=null ? manual : ((rev!=null&&ord)? rev/ord : null);
-  return {rev:rev, ord:ord, aov:aov, bm:bm, bo:bo, cm:cm, co:co, ym:ym, yo:yo,
-          imp:imp, clk:clk, ctr:_pct(clk,imp), cvr:_pct(bo,clk)};
+  return {rev:rev, ord:ord, aov:aov, imp:imp, clk:clk, ctr:_pct(clk,imp), cvr:_pct(ord,clk)};
 }
 (function(){
   if(!PERF_BRAND) return;
