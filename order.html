@@ -116,8 +116,8 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a
     </div>
 
     <div class="card">
-      <h2>발주 제품 <small>1BOX = 14kg · 단가는 BOX 기준</small></h2>
-      <div class="minNote">⚠ 1BOX = 14kg 단위로 발주 (제품당 최소 1BOX).</div>
+      <h2>발주 제품 <small>1BOX = 16kg · 단가는 BOX 기준</small></h2>
+      <div class="minNote">⚠ 1BOX = 16kg 단위로 발주 (제품당 최소 1BOX).</div>
       <div id="prodList"></div>
       <div class="totalBox">
         <span class="lbl">총 금액<em id="totalWeightLine">총 0박스</em></span>
@@ -126,7 +126,7 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a
     </div>
 
     <label class="check"><input type="checkbox" name="consent" value="1"> 입력하신 정보는 발주 접수·배송 목적으로만 사용됩니다. 동의합니다.</label>
-    <p class="msg" id="formMsg">필수 항목과 제품을 선택해 주세요. 수량은 1BOX(14kg) 단위입니다.</p>
+    <p class="msg" id="formMsg">필수 항목과 제품을 선택해 주세요. 수량은 1BOX(16kg) 단위입니다.</p>
   </form>
 </div>
 </div>
@@ -140,7 +140,7 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a
 
 <script>
 var ORDER_URL="https://script.google.com/macros/s/AKfycby3TzDJK0NcIR_ID2Q5L3yCMR4EDS26poDoakK8EKDS01zZ7ELkyC47A6N0c-6xiC6NgA/exec";
-var BOX_KG=14;   /* 1BOX = 14kg */
+var BOX_KG=16;   /* 1BOX = 16kg */
 
 /* 제품 마스터 (인덱스 고정 — 시트 컬럼 순서와 일치). kg=kg당 단가, 1BOX=15kg */
 var PRODUCTS=[
@@ -193,7 +193,7 @@ function renderProducts(){
     var row=document.createElement("div");
     row.innerHTML=
       '<div class="prod">'
-      +'<div class="prodInfo"><b>'+p.key+'</b><small>1BOX · 14kg</small></div>'
+      +'<div class="prodInfo"><b>'+p.key+'</b><small>1BOX · 16kg</small></div>'
       +'<div class="prodPrice">'+won(boxPrice(i))+'원<em>/BOX</em></div>'
       +'<label class="tg"><input type="checkbox" data-i="'+i+'" class="tgIn"><span class="tk"></span></label>'
       +'</div>'
