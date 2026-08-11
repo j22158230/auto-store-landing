@@ -272,33 +272,12 @@ function submitOrder(e){
   if(!items.length){ alert('발주할 제품을 1개 이상 선택해 주세요.'); return false; }
   if(!g('consent').checked){ alert('개인정보 수집·이용에 동의해 주세요.'); return false; }
 
-  var btn=document.getElementById('submitBtn');
-  if(btn.disabled) return false;
-  btn.disabled=true; btn.textContent='접수 중...';
-
+  /* 발주 단계에서는 저장하지 않음. 사업자등록증+이메일까지 제출해야 최종 접수됨 */
   var orderId=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-  var fd=new FormData();
-  fd.append('orderId',orderId);
-  fd.append('brand',currentBrand.name);
-  fd.append('branch',g('branch').value.trim());
-  fd.append('name',g('name').value.trim());
-  fd.append('phone',g('phone').value.trim());
-  fd.append('address',g('address').value.trim());
-  fd.append('qty1',qty[0]); fd.append('qty2',qty[1]); fd.append('qty3',qty[2]); fd.append('qty4',qty[3]);
   var summary=items.join(', ');
-  fd.append('summary',summary);
-  fd.append('totalQty',totalBox);
-  fd.append('total',total);
-  fd.append('page',location.href);
-
-  fetch(ORDER_URL,{method:'POST',mode:'no-cors',body:fd}).then(function(){
-    _order={orderId:orderId,brand:currentBrand.name,branch:g('branch').value.trim(),name:g('name').value.trim(),summary:summary,totalBox:totalBox,total:total};
-    showPayment();
-    document.getElementById('bar').classList.remove('on');
-  }).catch(function(){
-    btn.disabled=false; btn.textContent='발주 신청하기';
-    if(msg) msg.textContent='접수 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
-  });
+  _order={orderId:orderId,brand:currentBrand.name,branch:g('branch').value.trim(),name:g('name').value.trim(),phone:g('phone').value.trim(),address:g('address').value.trim(),qty:qty,summary:summary,totalBox:totalBox,total:total,page:location.href};
+  showPayment();
+  document.getElementById('bar').classList.remove('on');
   return false;
 }
 
@@ -408,14 +387,23 @@ function submitTax(){
   btn.disabled=true; btn.textContent='제출 중...';
   compressImage(fileEl.files[0], function(b64,mime,name){
     if(!b64){ btn.disabled=false; btn.textContent='제출하고 완료'; alert('이미지 처리에 실패했습니다. 다른 사진으로 시도해 주세요.'); return; }
+    var o=_order||{}; var qq=o.qty||[0,0,0,0];
     var fd=new FormData();
-    fd.append('action','tax');
-    fd.append('orderId', (_order&&_order.orderId)||'');
-    fd.append('payer', (_order&&_order.payer)||'');
+    fd.append('orderId', o.orderId||'');
+    fd.append('brand', o.brand||'');
+    fd.append('branch', o.branch||'');
+    fd.append('name', o.name||'');
+    fd.append('phone', o.phone||'');
+    fd.append('address', o.address||'');
+    fd.append('qty1',qq[0]); fd.append('qty2',qq[1]); fd.append('qty3',qq[2]); fd.append('qty4',qq[3]);
+    fd.append('summary', o.summary||'');
+    fd.append('totalQty', o.totalBox||0);
+    fd.append('payer', o.payer||'');
     fd.append('taxEmail', email);
     fd.append('bizFile', b64);
     fd.append('bizType', mime);
     fd.append('bizName', name);
+    fd.append('page', o.page||location.href);
     fetch(ORDER_URL,{method:'POST',mode:'no-cors',body:fd}).then(function(){ showDone(); })
       .catch(function(){ btn.disabled=false; btn.textContent='제출하고 완료';
         var m=document.getElementById('taxMsg'); if(m) m.textContent='제출 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'; });
