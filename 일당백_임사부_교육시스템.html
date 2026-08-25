@@ -103,8 +103,9 @@ h2{font-size:29px;font-weight:900;line-height:1.3;margin-bottom:10px}h2 b{color:
 .axis .ax.g .n{color:var(--gold)}
 /* 월별 추이 */
 .trend{max-width:600px;margin:20px auto 0}
-.trow{display:grid;grid-template-columns:96px 1fr 116px;align-items:center;gap:10px;margin:8px 0}
-.trow .tm{font-size:13px;color:#cddcf0;text-align:left}
+.trow{display:grid;grid-template-columns:112px 1fr 116px;align-items:center;gap:10px;margin:8px 0}
+.trow .tm{font-size:13px;color:#cddcf0;text-align:left;line-height:1.35}
+.trow .tm small{display:block;font-size:10.5px;color:#6f83a0;font-weight:600}
 .trow .tt{height:14px;background:#0e1a2c;border-radius:7px;overflow:hidden}
 .trow .tf{height:100%;border-radius:7px;background:linear-gradient(90deg,#3C8DAD,var(--gold));width:0;transition:width 1s cubic-bezier(.2,.7,.3,1)}
 .trow .tv{font-size:13px;font-weight:800;text-align:right;color:#fff;font-variant-numeric:tabular-nums}
@@ -250,7 +251,7 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 </div>
 
 <div id="trendWrap" style="display:none">
-<p class="lead rv" style="margin-top:30px;font-size:14px">4개 브랜드 구성이 갖춰진 <b style="color:var(--gold)">2026년 7월 이후</b> 월별 합산 추이입니다.</p>
+<p class="lead rv" style="margin-top:30px;font-size:14px">4개 브랜드 구성이 갖춰진 <b style="color:var(--gold)">2026년 7월 이후</b> 월별 합산 추이입니다. 집계 기간이 한 달에 못 미치는 달은 기간을 함께 표기합니다.</p>
 <div class="trend rv" id="monthTrend"></div>
 </div>
 
@@ -516,9 +517,28 @@ function _setTo(id, val){
           if (!mm || mm < PERF_MONTH) continue;          /* 구성이 다른 이전 달은 제외 */
           var rv2 = _num(g(rows[r], "매출"));
           if (rv2 == null) continue;
-          if (!byMonth[mm]) byMonth[mm] = {rev:0, ing:false};
+          if (!byMonth[mm]) byMonth[mm] = {rev:0, ing:false, period:""};
           byMonth[mm].rev += rv2;
           if (g(rows[r], "상태") === "진행중") byMonth[mm].ing = true;
+          var pd = g(rows[r], "표시기간");
+          if (pd && !byMonth[mm].period) byMonth[mm].period = pd;
+        }
+        /* 부분 기간 판별 — 「완료」로 적혀 있어도 표시기간이 그 달을 다 덮지 않으면 부분 집계다.
+           이 표기가 없으면 16일치가 한 달치와 나란히 놓여 매출 급감으로 오독된다. */
+        function partialNote(m, o){
+          if (o.ing) return "집계 중";
+          var ds = (o.period || "").match(/(\d{1,2})\s*일/g);
+          var yy = parseInt(m.slice(0,4),10), mo = parseInt(m.slice(5,7),10);
+          if (ds && ds.length) {
+            var last = parseInt(ds[ds.length-1],10);
+            var first = ds.length > 1 ? parseInt(ds[0],10) : 1;
+            var lastOfMonth = new Date(yy, mo, 0).getDate();
+            if (last < lastOfMonth) return first + "~" + last + "일 집계";
+          }
+          var n = new Date();
+          var cur = n.getFullYear() + "-" + ("0" + (n.getMonth()+1)).slice(-2);
+          if (m === cur) return "집계 중";
+          return null;
         }
         var months = Object.keys(byMonth).sort();
         if (months.length >= 2) {
@@ -526,10 +546,11 @@ function _setTo(id, val){
           box2.innerHTML = months.map(function(m){
             var o = byMonth[m], w = mx ? Math.max(Math.round(o.rev / mx * 100), 4) : 0;
             var lab = m.replace("-", "년 ").replace(/^(\d{4}년 )0?(\d+)$/, "$1$2월");
-            return '<div class="trow' + (o.ing ? ' ing' : '') + '">'
-                 + '<div class="tm">' + lab + '</div>'
+            var note = partialNote(m, o);
+            return '<div class="trow' + (note ? ' ing' : '') + '">'
+                 + '<div class="tm">' + lab + (note ? '<small>' + note + '</small>' : '') + '</div>'
                  + '<div class="tt"><div class="tf" style="width:' + w + '%"></div></div>'
-                 + '<div class="tv">' + _man(o.rev) + '원' + (o.ing ? ' · 진행중' : '') + '</div></div>';
+                 + '<div class="tv">' + _man(o.rev) + '원</div></div>';
           }).join("");
           var tw = document.getElementById("trendWrap");
           if (tw) tw.style.display = "";
