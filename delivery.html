@@ -72,6 +72,30 @@ h2{font-size:29px;font-weight:900;line-height:1.3;margin-bottom:10px}h2 b{color:
 .enemy li::before{content:"✕";position:absolute;left:0;color:var(--pink);font-weight:900}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-align:center}
 .stat .v{font-size:28px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums}.stat .l{font-size:13px;color:var(--mut);margin-top:4px}
+/* 하루 가동 구조 */
+.daymap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px;text-align:left}
+@media(max-width:760px){.daymap{grid-template-columns:1fr}}
+.slot{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.slot .t{font-size:11px;font-weight:900;letter-spacing:1.5px;color:var(--mut)}
+.slot .b{font-size:20px;font-weight:900;margin:5px 0 7px;color:#fff}
+.slot .d{font-size:13px;color:var(--mut);line-height:1.6}
+.slot.main{border-color:rgba(244,192,71,.45);background:linear-gradient(180deg,#1a2942,#13233c)}
+.slot.main .t{color:var(--gold)}
+.axis{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px;margin:20px auto 0}
+@media(max-width:600px){.axis{grid-template-columns:1fr}}
+.axis .ax{background:#0e1a2c;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left}
+.axis .ax .n{font-size:22px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums}
+.axis .ax .l{font-size:12px;color:var(--mut);margin-top:3px}
+.axis .ax.g .n{color:var(--gold)}
+/* 월별 추이 */
+.trend{max-width:600px;margin:20px auto 0}
+.trow{display:grid;grid-template-columns:96px 1fr 116px;align-items:center;gap:10px;margin:8px 0}
+.trow .tm{font-size:13px;color:#cddcf0;text-align:left}
+.trow .tt{height:14px;background:#0e1a2c;border-radius:7px;overflow:hidden}
+.trow .tf{height:100%;border-radius:7px;background:linear-gradient(90deg,#3C8DAD,var(--gold));width:0;transition:width 1s cubic-bezier(.2,.7,.3,1)}
+.trow .tv{font-size:13px;font-weight:800;text-align:right;color:#fff;font-variant-numeric:tabular-nums}
+.trow.ing .tv{color:var(--mut);font-weight:600}
+.trow.ing .tf{background:#24374f}
 .bars{max-width:600px;margin:18px auto 0}
 .bar{display:grid;grid-template-columns:104px 1fr 110px;align-items:center;gap:10px;margin:9px 0}
 .bar .bn{font-size:13px;color:#cddcf0;text-align:left}
@@ -128,7 +152,7 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 
 <div class="sticky" id="snav"><div class="wrap"><div><b>일당백 시스템</b><span class="s">by 임사부</span></div>
 <nav class="snav">
-<a href="#system">시스템</a><a href="#proof">성과</a><a href="#steps">도입 절차</a><a href="#apply">상담</a>
+<a href="#system">시스템</a><a href="#kitchen">주방 구조</a><a href="#proof">성과</a><a href="#steps">도입 절차</a><a href="#apply">상담</a>
 </nav>
 <a href="#apply" class="cta">무료 매장 진단 신청 ▸</a></div><div class="prog" id="prog"></div></div>
 
@@ -143,7 +167,7 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
   <div><div class="u">한 주방 4개 브랜드</div><div class="w">1<em>억원 / 월</em></div></div>
 </div>
 <a href="#apply" class="btn lg" style="margin-top:24px">내 매장 무료 진단 받기</a>
-<div class="trust">직화고 · 조선명가 · 임사부 · 육동면옥 — 4개 브랜드 한 주방 운영</div>
+<div class="trust">직화고 · 조선명가 · 임사부 · 육동면옥 — 나눠 파는 4개가 아니라, 한 주방에 얹는 하나의 구성입니다</div>
 </div></header>
 
 <!-- 문제(적) -->
@@ -169,6 +193,22 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 <div class="card rv"><div class="k">03 · 현장 교육</div><h4>실제로 되는 매장에서<br>그대로 복사</h4><p>평택 서정점에서 직접 운영을 배우고, 검증된 구조를 그대로 옮겨 오픈합니다. 이론이 아니라 돌아가는 매장을 봅니다.</p></div>
 </div></div></section>
 
+<!-- 주방 가동 구조 -->
+<section id="kitchen" style="background:#0e1a2c"><div class="wrap center">
+<h2 class="rv">4개 브랜드가 아니라,<br><b>하루를 나눠 쓰는 한 주방</b></h2>
+<p class="lead rv">브랜드를 골라 파는 구조가 아닙니다. 비어 있던 시간대를 채우도록 짜인 하나의 구성이라, 넷을 따로 운영하는 부담이 생기지 않습니다.</p>
+<div class="daymap">
+<div class="slot rv"><div class="t">MORNING · 오전</div><div class="b">국밥</div><div class="d">회전이 빠른 단품으로 오전 공백을 채웁니다. 준비가 끝나 있어 주력 시간대 조리를 방해하지 않습니다.</div></div>
+<div class="slot main rv"><div class="t">PRIME · 주력 시간대</div><div class="b">직화고 · 김치찜</div><div class="d">매출을 만드는 축입니다. 객단가가 높고 저녁·주말 수요가 몰리는 두 브랜드를 같은 화구·같은 동선에 올립니다.</div></div>
+<div class="slot rv"><div class="t">SEASON · 여름</div><div class="b">냉면</div><div class="d">여름 수요를 받아 비수기 편차를 줄입니다. 조리 공정이 짧아 주력 시간대와 겹쳐도 부담이 적습니다.</div></div>
+</div>
+<div class="axis">
+<div class="ax g rv"><div class="n"><span id="axMain">83</span>%</div><div class="l">주력축(직화고·김치찜)이 만드는 매출 비중</div></div>
+<div class="ax rv"><div class="n"><span id="axSub">17</span>%</div><div class="l">보조축(국밥·냉면)이 유휴 시간에 얹는 매출</div></div>
+</div>
+<p class="disc rv">※ 비중은 시트의 대표 월 실측값으로 자동 계산됩니다. 매장 상권·운영 시간에 따라 축의 비중은 달라집니다.</p>
+</div></section>
+
 <!-- #3 검증된 성과 -->
 <section id="proof" style="background:var(--bg2)"><div class="wrap center">
 <h2 class="rv">성과로 <b>증명</b>합니다</h2>
@@ -187,6 +227,11 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 <div class="bar"><div class="bn">조선명가</div><div class="track"><div class="fill" style="width:53%"></div></div><div class="bv">3,150만</div></div>
 <div class="bar"><div class="bn">임사부</div><div class="track"><div class="fill" style="width:30%"></div></div><div class="bv">1,800만</div></div>
 <div class="bar pend"><div class="bn">육동면옥</div><div class="track"><div class="fill" style="width:8%"></div></div><div class="bv">집계 중</div></div>
+</div>
+
+<div id="trendWrap" style="display:none">
+<p class="lead rv" style="margin-top:30px;font-size:14px">4개 브랜드 구성이 갖춰진 <b style="color:var(--gold)">2026년 7월 이후</b> 월별 합산 추이입니다.</p>
+<div class="trend rv" id="monthTrend"></div>
 </div>
 
 <div class="funnel rv">
@@ -419,6 +464,55 @@ function _setTo(id, val){
                + '<div class="track"><div class="fill" style="width:'+w+'%"></div></div>'
                + '<div class="bv">'+(pend ? '집계 중' : _man(p.rev)+'원')+'</div></div>';
         }).join("");
+      }
+
+      /* 주력축 / 보조축 비중 — 대표 월 기준 */
+      var MAIN = ["직화고","조선명가"];
+      var mainRev = 0, allRev = 0;
+      per.forEach(function(x){
+        if (x.rev == null) return;
+        allRev += x.rev;
+        if (MAIN.indexOf(x.label) >= 0) mainRev += x.rev;
+      });
+      if (allRev > 0) {
+        var mp = Math.round(mainRev / allRev * 100);
+        var em = document.getElementById("axMain"), es = document.getElementById("axSub");
+        if (em) em.textContent = mp;
+        if (es) es.textContent = 100 - mp;
+      }
+
+      /* 월별 합산 추이 — 4개 브랜드 구성이 갖춰진 대표 월 이후만 */
+      var box2 = document.getElementById("monthTrend");
+      if (box2) {
+        var byMonth = {};
+        for (var r = 1; r < rows.length; r++) {
+          var bn2 = (rows[r][ix["brand"]] || "").trim();
+          var hit2 = PERF_BRANDS.some(function(b){
+            return bn2 === b.key || bn2.indexOf(b.key + "(") === 0;
+          });
+          if (!hit2) continue;
+          var mm = g(rows[r], "기준월");
+          if (!mm || mm < PERF_MONTH) continue;          /* 구성이 다른 이전 달은 제외 */
+          var rv2 = _num(g(rows[r], "매출"));
+          if (rv2 == null) continue;
+          if (!byMonth[mm]) byMonth[mm] = {rev:0, ing:false};
+          byMonth[mm].rev += rv2;
+          if (g(rows[r], "상태") === "진행중") byMonth[mm].ing = true;
+        }
+        var months = Object.keys(byMonth).sort();
+        if (months.length >= 2) {
+          var mx = Math.max.apply(null, months.map(function(m){ return byMonth[m].rev; }));
+          box2.innerHTML = months.map(function(m){
+            var o = byMonth[m], w = mx ? Math.max(Math.round(o.rev / mx * 100), 4) : 0;
+            var lab = m.replace("-", "년 ").replace(/^(\d{4}년 )0?(\d+)$/, "$1$2월");
+            return '<div class="trow' + (o.ing ? ' ing' : '') + '">'
+                 + '<div class="tm">' + lab + '</div>'
+                 + '<div class="tt"><div class="tf" style="width:' + w + '%"></div></div>'
+                 + '<div class="tv">' + _man(o.rev) + '원' + (o.ing ? ' · 진행중' : '') + '</div></div>';
+          }).join("");
+          var tw = document.getElementById("trendWrap");
+          if (tw) tw.style.display = "";
+        }
       }
 
       /* 최종 업데이트 */
