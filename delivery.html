@@ -620,25 +620,35 @@ function _setTo(id, val){
      목표 폭을 dataset으로 옮기고 0에서 시작시킨 뒤, 화면 진입 시 되돌린다.
      sheet 렌더 직후에도 다시 호출되도록 window에 노출한다. */
   function armBars(root){
-    var els = (root || document).querySelectorAll('.bar .fill, .trow .tf');
-    Array.prototype.forEach.call(els, function(el){
-      if (el.dataset.armed) return;
-      var target = el.style.width || '0%';
-      el.dataset.armed = '1';
-      el.dataset.w = target;
-      if (reduce) return;                 /* 동작 줄이기: 최종 폭 그대로 둔다 */
-      el.style.width = '0%';
-    });
-    if (reduce) return;
-    var groups = (root || document).querySelectorAll('.bars, .trend');
-    Array.prototype.forEach.call(groups, function(gp){
-      if (gp.dataset.obs) { fill(gp); return; }
-      gp.dataset.obs = '1';
+    var scope = root || document;
+    var groups = [];
+    if (scope.matches && scope.matches('.bars, .trend')) groups.push(scope);
+    Array.prototype.push.apply(groups, scope.querySelectorAll('.bars, .trend'));
+
+    groups.forEach(function(gp){
+      var els = gp.querySelectorAll('.fill, .tf');
+      Array.prototype.forEach.call(els, function(el){
+        if (el.dataset.armed) return;
+        el.dataset.armed = '1';
+        el.dataset.w = el.style.width || '0%';
+        if (!reduce) el.style.width = '0%';
+      });
+      if (reduce) return;
+
+      /* 이미 화면 안이면 즉시 채운다.
+         시트 응답이 늦게 도착해 다시 그려지는 경우, 관찰자를 새로 달지 않으면
+         이미 지나간 구간의 막대가 0에 멈춘 채 남는다. */
+      var r = gp.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) { fill(gp); return; }
+
+      if (gp.__ob) gp.__ob.disconnect();
       var ob = new IntersectionObserver(function(es){
-        es.forEach(function(e){ if (e.isIntersecting){ fill(e.target); ob.unobserve(e.target); } });
+        es.forEach(function(e){ if (e.isIntersecting){ fill(e.target); ob.disconnect(); } });
       }, {threshold:0.25});
+      gp.__ob = ob;
       ob.observe(gp);
     });
+
     function fill(gp){
       var bs = gp.querySelectorAll('.fill, .tf');
       Array.prototype.forEach.call(bs, function(el,i){
