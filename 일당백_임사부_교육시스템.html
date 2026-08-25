@@ -48,6 +48,10 @@ body{font-family:'Malgun Gothic','Apple SD Gothic Neo',-apple-system,sans-serif;
   .leadbar button{width:100%;order:9}
   .leadbar .agree{order:8;font-size:11px}
 }
+@keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero .hv{animation:heroIn .8s cubic-bezier(.2,.7,.3,1) both}
+@media (prefers-reduced-motion:reduce){
+  .bar .fill,.trow .tf{transition:none}.hero .hv{animation:none}}
 .hero{background:radial-gradient(1000px 500px at 50% -10%,#1c3358 0%,var(--bg2) 55%,var(--bg) 100%);padding:60px 0 54px;text-align:center}
 .tag{display:inline-block;font-size:12px;letter-spacing:2px;color:#8fb6e6;border:1px solid #34547f;border-radius:20px;padding:5px 14px}
 .hero h1{font-size:42px;font-weight:900;line-height:1.2;margin:18px 0 8px}.hero h1 b{color:var(--gold)}
@@ -72,6 +76,16 @@ h2{font-size:29px;font-weight:900;line-height:1.3;margin-bottom:10px}h2 b{color:
 .enemy li::before{content:"✕";position:absolute;left:0;color:var(--pink);font-weight:900}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-align:center}
 .stat .v{font-size:28px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums}.stat .l{font-size:13px;color:var(--mut);margin-top:4px}
+/* 히어로 영상 */
+.vidsec{padding:0;border-top:none;background:#080f1a}
+.vidwrap{position:relative;width:100%;max-width:1280px;margin:0 auto;aspect-ratio:16/9;background:#080f1a;overflow:hidden}
+.vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vidwrap.bg iframe{pointer-events:none}
+.vidwrap .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0e1a2c;color:var(--mut);font-size:14px}
+.vidwrap .thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vidwrap .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(9,16,28,.82);border:1px solid var(--line);
+  color:var(--ink);font-family:inherit;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px;cursor:pointer}
+.vidcap{max-width:1280px;margin:0 auto;padding:12px 22px 0;color:#6f83a0;font-size:12px;text-align:center}
 /* 하루 가동 구조 */
 .daymap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px;text-align:left}
 @media(max-width:760px){.daymap{grid-template-columns:1fr}}
@@ -158,17 +172,23 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 
 <!-- #1 오프닝·후크 -->
 <header class="hero"><div class="wrap">
-<span class="tag">실측 데이터 기반 · 평택 서정점</span>
-<h1>한 주방에서,<br><b>월 매출 1억</b></h1>
-<div class="sub">투입 인원 <b style="color:var(--gold)">1명이 하루 100만원</b>을 만든다 — 그래서 <b style="color:var(--gold)">일당백</b>입니다. 검증된 4개 브랜드를 한 주방에 얹어, 인력을 늘리지 않고 매출만 올리는 구조입니다.</div>
-<div class="defbox">
+<span class="tag hv">실측 데이터 기반 · 평택 서정점</span>
+<h1 class="hv" style="animation-delay:.10s">한 주방에서,<br><b>월 매출 1억</b></h1>
+<div class="sub hv" style="animation-delay:.20s">투입 인원 <b style="color:var(--gold)">1명이 하루 100만원</b>을 만든다 — 그래서 <b style="color:var(--gold)">일당백</b>입니다. 검증된 4개 브랜드를 한 주방에 얹어, 인력을 늘리지 않고 매출만 올리는 구조입니다.</div>
+<div class="defbox hv" style="animation-delay:.30s">
   <div><div class="u">투입 인원 1명당</div><div class="w">100<em>만원 / 일</em></div></div>
   <div class="x">×</div>
   <div><div class="u">한 주방 4개 브랜드</div><div class="w">1<em>억원 / 월</em></div></div>
 </div>
-<a href="#apply" class="btn lg" style="margin-top:24px">내 매장 무료 진단 받기</a>
-<div class="trust">직화고 · 조선명가 · 임사부 · 육동면옥 — 나눠 파는 4개가 아니라, 한 주방에 얹는 하나의 구성입니다</div>
+<a href="#apply" class="btn lg hv" style="margin-top:24px;animation-delay:.40s">내 매장 무료 진단 받기</a>
+<div class="trust hv" style="animation-delay:.50s">직화고 · 조선명가 · 임사부 · 육동면옥 — 나눠 파는 4개가 아니라, 한 주방에 얹는 하나의 구성입니다</div>
 </div></header>
+
+<!-- 히어로 영상 (HERO_VIDEO_ID 지정 시 자동 노출) -->
+<section class="vidsec" id="vidsec" style="display:none">
+<div class="vidwrap bg" id="vidwrap"></div>
+<p class="vidcap" id="vidcap">평택 서정점 · 4개 브랜드 동시 운영 현장</p>
+</section>
 
 <!-- 문제(적) -->
 <section class="enemy"><div class="wrap center">
@@ -464,6 +484,7 @@ function _setTo(id, val){
                + '<div class="track"><div class="fill" style="width:'+w+'%"></div></div>'
                + '<div class="bv">'+(pend ? '집계 중' : _man(p.rev)+'원')+'</div></div>';
         }).join("");
+        if (window.__armBars) window.__armBars(box);
       }
 
       /* 주력축 / 보조축 비중 — 대표 월 기준 */
@@ -512,6 +533,7 @@ function _setTo(id, val){
           }).join("");
           var tw = document.getElementById("trendWrap");
           if (tw) tw.style.display = "";
+          if (window.__armBars) window.__armBars(box2);
         }
       }
 
@@ -571,6 +593,40 @@ function _setTo(id, val){
     es.forEach(function(e){ if (e.isIntersecting){ run(e.target); c.unobserve(e.target); } });
   }, {threshold:0.5});
   document.querySelectorAll('.cnt').forEach(function(el){ c.observe(el); });
+
+  /* ===== 막대 채우기 연출 =====
+     CSS에 transition은 있었지만 인라인 width가 처음부터 최종값이라 전이가 걸리지 않았다.
+     목표 폭을 dataset으로 옮기고 0에서 시작시킨 뒤, 화면 진입 시 되돌린다.
+     sheet 렌더 직후에도 다시 호출되도록 window에 노출한다. */
+  function armBars(root){
+    var els = (root || document).querySelectorAll('.bar .fill, .trow .tf');
+    Array.prototype.forEach.call(els, function(el){
+      if (el.dataset.armed) return;
+      var target = el.style.width || '0%';
+      el.dataset.armed = '1';
+      el.dataset.w = target;
+      if (reduce) return;                 /* 동작 줄이기: 최종 폭 그대로 둔다 */
+      el.style.width = '0%';
+    });
+    if (reduce) return;
+    var groups = (root || document).querySelectorAll('.bars, .trend');
+    Array.prototype.forEach.call(groups, function(gp){
+      if (gp.dataset.obs) { fill(gp); return; }
+      gp.dataset.obs = '1';
+      var ob = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if (e.isIntersecting){ fill(e.target); ob.unobserve(e.target); } });
+      }, {threshold:0.25});
+      ob.observe(gp);
+    });
+    function fill(gp){
+      var bs = gp.querySelectorAll('.fill, .tf');
+      Array.prototype.forEach.call(bs, function(el,i){
+        setTimeout(function(){ el.style.width = el.dataset.w || '0%'; }, i * 110);
+      });
+    }
+  }
+  window.__armBars = armBars;
+  armBars(document);
 })();
 </script>
 
@@ -585,6 +641,62 @@ function _setTo(id, val){
     <button type="button" id="lbBtn">무료 진단 문의</button>
   </div>
 </div>
+
+<script>
+/* ===== 히어로 영상 =====
+   ▼▼▼ 유튜브 영상 ID만 아래 따옴표 안에 넣으면 영상 구간이 자동으로 나타납니다.
+        (주소가 https://youtu.be/AbCdEfGhIjk 라면 AbCdEfGhIjk 부분)
+        비워 두면 영상 구간 전체가 숨겨져 페이지가 정상으로 보입니다. */
+var HERO_VIDEO_ID = "";
+var HERO_VIDEO_CAPTION = "평택 서정점 · 4개 브랜드 동시 운영 현장";
+/* 자동재생 무음 반복(레퍼런스와 동일 방식). false로 두면 재생 버튼을 눌러 소리와 함께 봅니다. */
+var HERO_VIDEO_AUTOLOOP = true;
+
+(function(){
+  var id = (HERO_VIDEO_ID || "").trim();
+  if (!/^[A-Za-z0-9_-]{6,}$/.test(id)) return;      /* 미입력 시 구간 자체를 숨긴 채 종료 */
+
+  var sec = document.getElementById("vidsec");
+  var box = document.getElementById("vidwrap");
+  var cap = document.getElementById("vidcap");
+  if (!sec || !box) return;
+  if (cap && HERO_VIDEO_CAPTION) cap.textContent = HERO_VIDEO_CAPTION;
+  sec.style.display = "";
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var autoloop = HERO_VIDEO_AUTOLOOP && !reduce;
+
+  function src(auto){
+    var q = ["rel=0","modestbranding=1","playsinline=1","iv_load_policy=3"];
+    if (auto) q.push("autoplay=1","mute=1","loop=1","playlist="+id,"controls=0","disablekb=1");
+    else      q.push("autoplay=1","controls=1");
+    return "https://www.youtube-nocookie.com/embed/" + id + "?" + q.join("&");
+  }
+  function mount(auto){
+    box.innerHTML = '<iframe src="' + src(auto) + '" title="현장 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    box.classList.toggle("bg", auto);
+  }
+
+  if (autoloop) {
+    /* 화면에 들어올 때 로드해 초기 로딩을 무겁게 하지 않는다 */
+    box.innerHTML = '<div class="ph">현장 영상</div>';
+    if ('IntersectionObserver' in window) {
+      var ob = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if (e.isIntersecting){ mount(true); ob.unobserve(e.target); } });
+      }, {rootMargin:'200px'});
+      ob.observe(box);
+    } else { mount(true); }
+  } else {
+    /* 자동재생을 쓰지 않거나 동작 줄이기 설정인 경우 — 썸네일 + 재생 버튼 */
+    box.classList.remove("bg");
+    box.innerHTML = '<img class="thumb" alt="현장 영상 미리보기" src="https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg">'
+                  + '<button class="play" type="button">▶ 현장 영상 보기</button>';
+    var img = box.querySelector('img');
+    img.onerror = function(){ img.src = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg"; };
+    box.querySelector('button').addEventListener('click', function(){ mount(false); });
+  }
+})();
+</script>
 
 <script>
 /* ===== S-1 하단 고정 상담 바 · S-2 내비 활성/진행률 ===== */
