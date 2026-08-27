@@ -275,15 +275,15 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 <div class="blab rv">2026년 7월 · 4개 브랜드 합산</div>
 
 <div class="grid3 rv" style="text-align:center;margin-top:24px">
-<div class="stat"><div class="v"><span class="cnt" data-to="5440" id="sumOrd">5,440</span>건</div><div class="l">3사 누적 주문</div></div>
-<div class="stat"><div class="v"><span class="cnt" data-to="20098" id="sumAov">20,098</span>원</div><div class="l">평균 객단가</div></div>
 <div class="stat"><div class="v"><span class="cnt" data-to="4">4</span>개</div><div class="l">한 주방 운영 브랜드</div></div>
+<div class="stat"><div class="v"><span class="cnt" data-to="1350879" id="fImp">1,350,879</span></div><div class="l">노출 (배민 기준)</div></div>
+<div class="stat"><div class="v"><span class="cnt" data-to="36358" id="fClk">36,358</span></div><div class="l">클릭 (배민 기준)</div></div>
 </div>
 
 <div class="bars rv" id="brandBars">
-<div class="bar"><div class="bn">직화고</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="bv">5,983만</div></div>
-<div class="bar"><div class="bn">조선명가</div><div class="track"><div class="fill" style="width:53%"></div></div><div class="bv">3,150만</div></div>
-<div class="bar"><div class="bn">임사부</div><div class="track"><div class="fill" style="width:30%"></div></div><div class="bv">1,800만</div></div>
+<div class="bar"><div class="bn">직화고</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="bv">5,983만원</div></div>
+<div class="bar"><div class="bn">조선명가</div><div class="track"><div class="fill" style="width:53%"></div></div><div class="bv">3,150만원</div></div>
+<div class="bar"><div class="bn">임사부</div><div class="track"><div class="fill" style="width:30%"></div></div><div class="bv">1,800만원</div></div>
 <div class="bar pend"><div class="bn">육동면옥</div><div class="track"><div class="fill" style="width:8%"></div></div><div class="bv">집계 중</div></div>
 </div>
 
@@ -292,15 +292,8 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 <div class="trend rv" id="monthTrend"></div>
 </div>
 
-<div class="funnel rv">
-  <div class="fstep"><div class="fn"><span class="cnt" data-to="1350879" id="fImp">1,350,879</span></div><div class="fl">노출 (배민 기준)</div></div>
-  <div class="farr">›</div>
-  <div class="fstep"><div class="fn"><span class="cnt" data-to="36358" id="fClk">36,358</span></div><div class="fl">클릭 (배민 기준)</div></div>
-  <div class="farr">›</div>
-  <div class="fstep"><div class="fn"><span class="cnt" data-to="5440" id="fOrd">5,440</span></div><div class="fl">주문 (3사 합산)</div></div>
-</div>
-<p class="lead rv" style="margin-top:12px">주문 접수율 100% · 조리시간 준수 99~100% · 별점 4.9~5.0</p>
-<p class="disc rv">※ 노출·클릭은 배달의민족 가게통계 기준이며, 주문·매출은 배민·쿠팡이츠·요기요 3사 합산입니다. 기준이 달라 단순 비율로 비교하지 마십시오.</p>
+<p class="lead rv" style="margin-top:26px">주문 접수율 100% · 조리시간 준수 99~100% · 별점 4.9~5.0</p>
+<p class="disc rv">※ 노출·클릭은 배달의민족 가게통계 기준이며, 매출은 배민·쿠팡이츠·요기요 3사 합산입니다. 기준이 달라 단순 비율로 비교하지 마십시오.</p>
 <p class="disc rv" data-note="최종업데이트">※ 본 수치는 특정 대표 매장(평택 서정점)의 실제 데이터이며, 모든 매장의 수익을 보장하지 않습니다.</p>
 </div></section>
 
@@ -366,9 +359,9 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 <h2 class="rv">한 사람이 만드는 <b>매출</b></h2>
 <p class="lead rv">1인분 간편식 중심이라, 사람을 늘리지 않아도 브랜드마다 매출이 쌓입니다.</p>
 <div class="grid3 rv" style="text-align:center">
-<div class="stat"><div class="v"><span class="cnt" data-to="20098" id="aov2">20,098</span>원</div><div class="l">4개 브랜드 평균 객단가</div></div>
 <div class="stat"><div class="v">1인 100만원</div><div class="l">투입 인원당 일 매출 기준</div></div>
 <div class="stat"><div class="v">4개 브랜드</div><div class="l">주방·동선·식자재 공유</div></div>
+<div class="stat"><div class="v">1개 주방</div><div class="l">추가 인력·추가 공간 없이</div></div>
 </div>
 <p class="disc rv">※ 실제 손익은 매장 임차 조건·인력 구성·광고비에 따라 달라집니다. 무료 진단에서 항목별로 계산해 드립니다.</p>
 </div></section>
@@ -561,7 +554,7 @@ function _setTo(id, val){
       if (ix["brand"] == null) return;
 
       var g = function(r,k){ var i=ix[k]; return (i==null)?"":String(r[i]||"").trim(); };
-      var totals = {rev:0, ord:0, imp:0, clk:0}, per = [], upd = [];
+      var totals = {rev:0, imp:0, clk:0}, per = [], upd = [];
 
       PERF_BRANDS.forEach(function(b){
         var row = null;
@@ -571,24 +564,21 @@ function _setTo(id, val){
           if (hit && g(rows[i],"기준월") === PERF_MONTH) { row = rows[i]; break; }
         }
         if (!row) { per.push({label:b.label, rev:null}); return; }
-        var rev=_num(g(row,"매출")), ord=_num(g(row,"주문수")),
+        var rev=_num(g(row,"매출")),
             imp=_num(g(row,"노출")), clk=_num(g(row,"클릭"));
         if (rev != null) totals.rev += rev;
-        if (ord != null) totals.ord += ord;
         if (imp != null) totals.imp += imp;
         if (clk != null) totals.clk += clk;
         var u = g(row,"최종업데이트"); if (u) upd.push(u);
-        per.push({label:b.label, rev:rev, ord:ord});
+        per.push({label:b.label, rev:rev});
       });
 
       if (!totals.rev) return;   // 조회는 됐으나 값이 없으면 폴백 유지
 
+      /* 주문수·객단가는 페이지에 표시하지 않는다(2026-08-27 결정). 매출과 도달 지표만 갱신. */
       _setTo("sumRev", totals.rev);
-      _setTo("sumOrd", totals.ord);
       _setTo("fImp",   totals.imp);
       _setTo("fClk",   totals.clk);
-      _setTo("fOrd",   totals.ord);
-      if (totals.ord) { _setTo("sumAov", totals.rev/totals.ord); _setTo("aov2", totals.rev/totals.ord); }
 
       /* 브랜드별 막대 — 매출 내림차순, 최대값 대비 폭 */
       var box = document.getElementById("brandBars");
