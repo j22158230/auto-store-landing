@@ -216,6 +216,13 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 .ototitle{font-size:23px;font-weight:900;color:var(--gold);text-align:center;margin-bottom:16px}
 .otolist{list-style:none}.otolist li{color:#e8f0fb;font-size:15.5px;padding-left:26px;position:relative;margin:10px 0;line-height:1.6}.otolist li::before{content:"★";position:absolute;left:0;color:var(--gold)}
 .otowarn{margin-top:16px;background:#5b9bff0f;border:1px solid #5b9bff33;border-radius:10px;padding:12px 14px;color:#a9c4e8;font-size:13px;font-weight:600}
+.fieldgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;text-align:left;margin-top:26px}
+.fieldgrid .otobox{margin:0;max-width:none}
+.fimg{position:relative;margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,.38)}
+.fimg img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 30%}
+.fimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,20,34,0) 52%,rgba(11,20,34,.78))}
+.fcap{position:absolute;left:16px;right:16px;bottom:12px;z-index:2;color:#cfe0f5;font-size:12.5px;font-weight:600;letter-spacing:.02em}
+@media(max-width:860px){.fieldgrid{grid-template-columns:1fr;gap:20px}}
 /* 일당백 정의 */
 .defbox{max-width:660px;margin:22px auto 0;background:#0e1a2c;border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
 @media(max-width:760px){.defbox{grid-template-columns:1fr;text-align:center}}
@@ -436,7 +443,9 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 <span class="tag">FIELD TRAINING · 현장 교육</span>
 <div class="glow g"></div>
 <h2 style="margin-top:14px" class="rv">돌아가는 매장에서, <b>직접 배웁니다</b></h2>
-<div class="otobox rv">
+<div class="fieldgrid rv">
+<div>
+<div class="otobox">
 <div class="ototitle">일당백 현장 교육 시스템</div>
 <ul class="otolist">
 <li>실제로 월 1억을 만들고 있는 평택 서정점에서, 4개 브랜드 운영을 직접 보고 배웁니다.</li>
@@ -445,6 +454,12 @@ footer{background:#08101c;color:#7f93ad;font-size:12px;padding:26px 0 110px;text
 <div class="otowarn">※ 영업 중인 매장에서 진행되므로 교육 일정은 사전 협의로 정합니다.</div>
 </div>
 <a href="#apply" class="btn lg" style="margin-top:22px">현장 교육 문의하기</a>
+</div>
+<figure class="fimg">
+<img src="imsabu_field.jpg" alt="평택 서정점 주방의 임사부" loading="lazy">
+<figcaption class="fcap">평택 서정점 · 임사부</figcaption>
+</figure>
+</div>
 </div></section>
 
 <!-- 점주 인터뷰 영상 (STORY_VIDEO_ID 지정 시 자동 노출) -->
