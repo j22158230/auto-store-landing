@@ -401,9 +401,9 @@ input[type=range].simr::-moz-range-thumb{width:22px;height:22px;border-radius:50
 <div class="blab rv">2026년 7월 · 4개 브랜드 합산</div>
 
 <div class="grid3 rv" style="text-align:center;margin-top:24px">
-<div class="stat"><div class="v"><span class="cnt" data-to="4">4</span>개</div><div class="l">한 주방 운영 브랜드</div></div>
-<div class="stat"><div class="v"><span class="cnt" data-to="1350879" id="fImp">1,350,879</span></div><div class="l">노출 (배민 기준)</div></div>
-<div class="stat"><div class="v"><span class="cnt" data-to="36358" id="fClk">36,358</span></div><div class="l">클릭 (배민 기준)</div></div>
+<div class="stat"><div class="v"><span class="cnt" data-to="4">4</span>개</div><div class="l">도입 브랜드</div></div>
+<div class="stat"><div class="v"><span class="cnt" data-to="8">8</span>개</div><div class="l">배달앱 노출 브랜드</div></div>
+<div class="stat"><div class="v"><span class="cnt" data-to="1">1</span>개</div><div class="l">주방 · 추가 인력 없음</div></div>
 </div>
 
 <div class="donutwrap rv" id="brandDonut">
@@ -431,7 +431,7 @@ input[type=range].simr::-moz-range-thumb{width:22px;height:22px;border-radius:50
 </div>
 
 <p class="lead rv" style="margin-top:26px">주문 접수율 100% · 조리시간 준수 99~100% · 별점 4.9~5.0</p>
-<p class="disc rv">※ 노출·클릭은 배달의민족 가게통계 기준이며, 매출은 배민·쿠팡이츠·요기요 3사 합산입니다. 기준이 달라 단순 비율로 비교하지 마십시오.</p>
+<p class="disc rv">※ 매출은 배달의민족·쿠팡이츠·요기요 3사 합산입니다.</p>
 <p class="disc rv" data-note="최종업데이트">※ 본 수치는 특정 대표 매장(평택 서정점)의 실제 데이터이며, 모든 매장의 수익을 보장하지 않습니다.</p>
 </div></section>
 
@@ -516,7 +516,7 @@ input[type=range].simr::-moz-range-thumb{width:22px;height:22px;border-radius:50
 <div class="row"><span class="ic">✓</span><span class="t">검증된 배달 전문 브랜드 4종 세팅<small>직화고 · 조선명가 · 임사부 · 육동면옥 — 한 주방 다(多)브랜드 구성</small></span></div>
 <div class="row"><span class="ic">✓</span><span class="t">표준 레시피 · 조리 교육<small>누구나 같은 맛, 브랜드가 넷이어도 동선은 하나</small></span></div>
 <div class="row"><span class="ic">✓</span><span class="t">검증된 식자재 물류 공급<small>일정한 품질·안정적 원가</small></span></div>
-<div class="row"><span class="ic">✓</span><span class="t">배민·쿠팡·요기요 입점·운영·전환 최적화<small>노출→클릭→주문 퍼널 세팅</small></span></div>
+<div class="row"><span class="ic">✓</span><span class="t">배민·쿠팡·요기요 입점·운영·전환 최적화<small>주문으로 이어지는 배달앱 퍼널 세팅</small></span></div>
 <div class="row"><span class="ic">✓</span><span class="t">평택 서정점 현장 교육<small>실제로 월 1억을 만들고 있는 매장에서 직접 배우고, 그 구조를 그대로 옮겨 오픈합니다</small></span></div>
 </div>
 <div class="scarce rv">◆ 상권 독점 — 같은 상권에는 한 곳만 세팅합니다.</div>
@@ -799,7 +799,7 @@ function _setTo(id, val){
       if (ix["brand"] == null) return;
 
       var g = function(r,k){ var i=ix[k]; return (i==null)?"":String(r[i]||"").trim(); };
-      var totals = {rev:0, imp:0, clk:0}, per = [], upd = [];
+      var totals = {rev:0}, per = [], upd = [];   /* 매출만 공개한다(2026-08-29 결정) */
 
       PERF_BRANDS.forEach(function(b){
         var row = null;
@@ -809,11 +809,8 @@ function _setTo(id, val){
           if (hit && g(rows[i],"기준월") === PERF_MONTH) { row = rows[i]; break; }
         }
         if (!row) { per.push({label:b.label, rev:null}); return; }
-        var rev=_num(g(row,"매출")),
-            imp=_num(g(row,"노출")), clk=_num(g(row,"클릭"));
+        var rev=_num(g(row,"매출"));
         if (rev != null) totals.rev += rev;
-        if (imp != null) totals.imp += imp;
-        if (clk != null) totals.clk += clk;
         var u = g(row,"최종업데이트"); if (u) upd.push(u);
         per.push({label:b.label, rev:rev});
       });
@@ -822,8 +819,6 @@ function _setTo(id, val){
 
       /* 주문수·객단가는 페이지에 표시하지 않는다(2026-08-27 결정). 매출과 도달 지표만 갱신. */
       _setTo("sumRev", totals.rev);
-      _setTo("fImp",   totals.imp);
-      _setTo("fClk",   totals.clk);
 
       /* 브랜드별 매출 구성 도넛 — 금액 대신 비중으로 제시한다.
          막대를 나란히 두면 작은 브랜드가 「약한 브랜드」로 읽히지만,
