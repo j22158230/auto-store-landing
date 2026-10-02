@@ -72,6 +72,9 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a
 .done p{color:var(--sub);line-height:1.7;font-size:14px}
 .done .rc{text-align:left;background:var(--bg);border-radius:12px;padding:16px;margin-top:18px;font-size:14px;line-height:1.9}
 .hidden{display:none}
+.shipNote{background:#eef7f1;color:var(--ok);font-size:12.5px;font-weight:700;border-radius:10px;padding:10px 12px;margin:8px 0 4px;line-height:1.6}
+.shipNote em{display:block;font-style:normal;font-weight:600;color:var(--sub);font-size:12px}
+.lead{display:block;color:var(--accent);font-size:11.5px;font-weight:700;margin-top:3px}
 .fhint{display:block;font-size:11.5px;color:var(--sub);margin-top:7px;line-height:1.55}
 .payRow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
 .payRow span{color:var(--sub);font-weight:700}
@@ -116,8 +119,9 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a
     </div>
 
     <div class="card">
-      <h2>발주 제품 <small>1BOX = 16kg · 단가는 BOX 기준</small></h2>
-      <div class="minNote">⚠ 1BOX = 16kg 단위로 발주 (제품당 최소 1BOX).</div>
+      <h2>발주 제품 <small>단가는 BOX 기준 · 제품별 규격 확인</small></h2>
+      <div class="minNote">⚠ BOX 단위로 발주 (제품당 최소 1BOX). 제품마다 BOX 규격이 다릅니다.</div>
+      <div class="shipNote" id="shipNote">🚚 12시 이전 주문 시 당일 출고 · 12시 이후 주문 시 익일 출고<em id="shipNow"></em></div>
       <div id="prodList"></div>
       <div class="totalBox">
         <span class="lbl">총 금액<em id="totalWeightLine">총 0박스</em></span>
@@ -126,7 +130,7 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a
     </div>
 
     <label class="check"><input type="checkbox" name="consent" value="1"> 입력하신 정보는 발주 접수·배송 목적으로만 사용됩니다. 동의합니다.</label>
-    <p class="msg" id="formMsg">필수 항목과 제품을 선택해 주세요. 수량은 1BOX(16kg) 단위입니다.</p>
+    <p class="msg" id="formMsg">필수 항목과 제품을 선택해 주세요. 수량은 BOX 단위입니다.</p>
   </form>
 </div>
 </div>
@@ -140,25 +144,80 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a
 
 <script>
 var ORDER_URL="https://script.google.com/macros/s/AKfycby3TzDJK0NcIR_ID2Q5L3yCMR4EDS26poDoakK8EKDS01zZ7ELkyC47A6N0c-6xiC6NgA/exec";
-var BOX_KG=16;   /* 1BOX = 16kg */
 
-/* 제품 마스터 (인덱스 고정 — 시트 컬럼 순서와 일치). kg=kg당 단가, 1BOX=16kg */
+/* 제품 마스터 (인덱스 고정 — 시트 컬럼 순서·Apps Script PRICES 순서와 일치)
+   name=표시 제품명, spec=규격, boxKg=1BOX 중량(kg), price=1BOX 금액(원, 면세) */
 var PRODUCTS=[
-  {key:"벌집삼겹살", kg:13500},
-  {key:"벌집목살",   kg:13000},
-  {key:"큐브삼겹살", kg:12000},
-  {key:"큐브목전지", kg:11500}
+  {key:"벌집삼겹살", name:"[FNB미디어]벌집삼겹살", spec:"16kg*1box",      boxKg:16, price:216000},
+  {key:"벌집목살",   name:"[FNB미디어]벌집목살",   spec:"16kg*1box",      boxKg:16, price:208000},
+  {key:"큐브삼겹살", name:"[FNB미디어]큐브삼겹살", spec:"16kg*1box",      boxKg:16, price:192000},
+  {key:"큐브목전지", name:"[FNB미디어]큐브목전지", spec:"16kg*1box",      boxKg:16, price:184000},
+  {key:"우삼겹",     name:"[FNB미디어]우삼겹",     spec:"7kg*1box",       boxKg:7,  price:216000, lead:"주문 후 2일 뒤 도착"},
+  {key:"육회",       name:"[FNB미디어]육회",       spec:"1kg*12pk*1box",  boxKg:12, price:347200, lead:"주문 후 2일 뒤 도착"}
 ];
-function boxPrice(i){ return PRODUCTS[i].kg*BOX_KG; }  /* 1BOX 금액 */
+function boxPrice(i){ return PRODUCTS[i].price; }  /* 1BOX 금액 */
+/* 출고 안내: 한국 시간 기준 12시 이전 주문 시 당일 출고 */
+var CUTOFF_HOUR=12;
+function kstNow(){ var d=new Date(); return new Date(d.getTime()+(d.getTimezoneOffset()+540)*60000); }
+function beforeCutoff(){ return kstNow().getHours()<CUTOFF_HOUR; }
+function shipLine(){ return beforeCutoff() ? '지금 주문하시면 오늘 출고됩니다.' : '12시가 지나 내일 출고됩니다.'; }
+/* 선택 제품 중 도착 기간 안내가 있는 제품 */
+function leadNotes(qty){
+  var m={}; (qty||[]).forEach(function(n,i){ if(n>0&&PRODUCTS[i].lead){ (m[PRODUCTS[i].lead]=m[PRODUCTS[i].lead]||[]).push(PRODUCTS[i].key); } });
+  return Object.keys(m).map(function(k){ return m[k].join('·')+'는 '+k+'합니다.'; });
+}
+function deliveryHtml(o){
+  var lines=['🚚 '+(o.sameDay?'12시 이전 주문 — 당일 출고 대상입니다.':'12시 이후 주문 — 익일 출고 대상입니다.')];
+  leadNotes(o.qty).forEach(function(t){ lines.push('📦 '+esc(t)); });
+  return '<div class="shipNote" style="text-align:left">'+lines.join('<br>')+'</div>';
+}
+function emptyQty(){ return PRODUCTS.map(function(){return 0;}); }
 
 var BRANDS=[
   {name:"냉면장인 임사부&숯불구이",        items:[2,3]},
   {name:"해장요리전문 임사부 국밥",         items:[2,3]},
   {name:"조선명가 묵은지 김치찜&김치찌개",  items:[2,3]},
-  {name:"정육식당 직화고",                 items:[0,1,2,3]}
+  {name:"정육식당 직화고",                 items:[0,1,2,3,4,5]}
 ];
 
 function won(n){return Number(n).toLocaleString("ko-KR");}
+/* 화면에 사용자 입력을 넣을 때 HTML 특수문자 처리 */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+/* 연락처: 숫자만 추려 010-0000-0000 형식으로 정리 (형식 오류면 빈 값) */
+function normPhone(v){
+  var d=String(v||'').replace(/[^0-9]/g,'');
+  if(!/^0\d{8,10}$/.test(d)) return '';
+  if(d.indexOf('02')===0) return d.length===9?d.replace(/(\d{2})(\d{3})(\d{4})/,'$1-$2-$3'):d.replace(/(\d{2})(\d{4})(\d{4})/,'$1-$2-$3');
+  return d.length===10?d.replace(/(\d{3})(\d{3})(\d{4})/,'$1-$2-$3'):d.replace(/(\d{3})(\d{4})(\d{4})/,'$1-$2-$3');
+}
+/* 서버 전송: 응답을 확인하고, 응답을 읽을 수 없는 환경이면 no-cors로 재전송(서버가 주문ID로 중복 방지) */
+function postOrder(fd){
+  return fetch(ORDER_URL,{method:'POST',body:fd})
+    .then(function(r){return r.json();})
+    .then(function(j){return j;},function(){
+      return fetch(ORDER_URL,{method:'POST',mode:'no-cors',body:fd}).then(function(){return {ok:true,unverified:true};});
+    })
+    .then(function(j){ if(!j||!j.ok) throw new Error((j&&j.error)||'server'); return j; });
+}
+function orderFormData(stage){
+  var o=_order||{}, qq=o.qty||emptyQty(), fd=new FormData();
+  fd.append('stage', stage);
+  fd.append('orderId', o.orderId||'');
+  fd.append('brand', o.brand||'');
+  fd.append('branch', o.branch||'');
+  fd.append('name', o.name||'');
+  fd.append('phone', o.phone||'');
+  fd.append('address', o.address||'');
+  qq.forEach(function(n,k){ fd.append('qty'+(k+1), n||0); });
+  fd.append('summary', o.summary||'');
+  fd.append('totalQty', o.totalBox||0);
+  fd.append('totalKg', o.totalKg||0);
+  fd.append('payer', o.payer||'');
+  fd.append('page', o.page||location.href);
+  return fd;
+}
+/* 입금 안내 이후 단계에서 창을 닫으려 하면 경고 */
+function guardLeave(on){ window.onbeforeunload = on ? function(e){ e.preventDefault(); e.returnValue=''; return ''; } : null; }
 var currentBrand=null;
 
 var bg=document.getElementById("brandGrid");
@@ -173,6 +232,7 @@ function selectBrand(bi){
   currentBrand=BRANDS[bi];
   document.getElementById("brandTag").textContent=currentBrand.name;
   renderProducts();
+  document.getElementById('shipNow').textContent=shipLine();
   document.getElementById("brandStep").classList.add("hidden");
   document.getElementById("orderStep").classList.remove("hidden");
   document.getElementById("bar").classList.add("on");
@@ -193,7 +253,7 @@ function renderProducts(){
     var row=document.createElement("div");
     row.innerHTML=
       '<div class="prod">'
-      +'<div class="prodInfo"><b>'+p.key+'</b><small>1BOX · 16kg</small></div>'
+      +'<div class="prodInfo"><b>'+p.name+'</b><small>규격 '+p.spec+'</small>'+(p.lead?'<span class="lead">⏱ '+p.lead+'</span>':'')+'</div>'
       +'<div class="prodPrice">'+won(boxPrice(i))+'원<em>/BOX</em></div>'
       +'<label class="tg"><input type="checkbox" data-i="'+i+'" class="tgIn"><span class="tk"></span></label>'
       +'</div>'
@@ -209,30 +269,33 @@ function renderProducts(){
 }
 
 function calc(){
-  var total=0, boxes=0, sel=0;
+  var total=0, boxes=0, kg=0, sel=0;
   if(currentBrand){
     currentBrand.items.forEach(function(i){
       var on=document.querySelector('.tgIn[data-i="'+i+'"]').checked;
       var q=parseInt(document.getElementById('q'+i).value,10); if(isNaN(q)||q<1){q=1;}
       var bp=boxPrice(i);
       document.getElementById('ls'+i).textContent=won(bp*q)+'원';
-      if(on){ sel++; total+=bp*q; boxes+=q; }
+      if(on){ sel++; total+=bp*q; boxes+=q; kg+=PRODUCTS[i].boxKg*q; }
     });
   }
   document.getElementById('grandTotal').textContent=won(total);
   document.getElementById('barTotal').textContent=won(total);
   document.getElementById('barWeight').textContent=boxes;
-  document.getElementById('totalWeightLine').textContent='총 '+boxes+'박스 ('+(boxes*BOX_KG)+'kg)';
+  document.getElementById('totalWeightLine').textContent='총 '+boxes+'박스 ('+kg+'kg)';
 
   var canSubmit = sel>0;
   var btn=document.getElementById('submitBtn');
   var note=document.getElementById('barNote');
   btn.disabled=!canSubmit;
   if(sel===0){ note.textContent='제품을 선택하세요'; note.classList.add('warn'); }
-  else { note.textContent='발주 가능 · 총 '+(boxes*BOX_KG)+'kg'; note.classList.remove('warn'); }
-  return {total:total, boxes:boxes};
+  else { note.textContent='발주 가능 · 총 '+kg+'kg'; note.classList.remove('warn'); }
+  return {total:total, boxes:boxes, kg:kg};
 }
 document.addEventListener('change',function(e){
+  if(e.target.classList.contains('qtyIn')){
+    var v=parseInt(e.target.value,10); if(isNaN(v)||v<1)v=1; if(v>999)v=999; e.target.value=v; calc();
+  }
   if(e.target.classList.contains('tgIn')){
     var i=e.target.getAttribute('data-i');
     document.getElementById('qr'+i).classList.toggle('on',e.target.checked);
@@ -261,22 +324,27 @@ function submitOrder(e){
   if(!g('branch').value.trim()||!g('name').value.trim()||!g('phone').value.trim()||!g('address').value.trim()){
     alert('지점명·성함·연락처·주소를 모두 입력해 주세요.'); return false;
   }
-  var items=[], totalBox=0, total=0, qty=[0,0,0,0];
+  var phone=normPhone(g('phone').value);
+  if(!phone){ alert('연락처를 정확히 입력해 주세요. 예) 010-1234-5678'); g('phone').focus(); return false; }
+  g('phone').value=phone;
+  var items=[], totalBox=0, totalKg=0, total=0, qty=emptyQty();
   currentBrand.items.forEach(function(i){
     if(document.querySelector('.tgIn[data-i="'+i+'"]').checked){
       var q=parseInt(document.getElementById('q'+i).value,10); if(isNaN(q)||q<1)q=1;
-      qty[i]=q; totalBox+=q; total+=boxPrice(i)*q;
-      items.push(PRODUCTS[i].key+' '+q+'박스');
+      qty[i]=q; totalBox+=q; totalKg+=PRODUCTS[i].boxKg*q; total+=boxPrice(i)*q;
+      items.push(PRODUCTS[i].name+' '+q+'박스');
     }
   });
   if(!items.length){ alert('발주할 제품을 1개 이상 선택해 주세요.'); return false; }
   if(!g('consent').checked){ alert('개인정보 수집·이용에 동의해 주세요.'); return false; }
 
   /* 발주 단계에서는 저장하지 않음. 사업자등록증+이메일까지 제출해야 최종 접수됨 */
+  var sameDay=beforeCutoff();
   var orderId=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
   var summary=items.join(', ');
-  _order={orderId:orderId,brand:currentBrand.name,branch:g('branch').value.trim(),name:g('name').value.trim(),phone:g('phone').value.trim(),address:g('address').value.trim(),qty:qty,summary:summary,totalBox:totalBox,total:total,page:location.href};
+  _order={orderId:orderId,brand:currentBrand.name,branch:g('branch').value.trim(),name:g('name').value.trim(),phone:phone,address:g('address').value.trim(),qty:qty,sameDay:sameDay,summary:summary,totalBox:totalBox,totalKg:totalKg,total:total,page:location.href};
   showPayment();
+  guardLeave(true);
   document.getElementById('bar').classList.remove('on');
   return false;
 }
@@ -294,16 +362,16 @@ function showPayment(){
     +'<div class="payRow"><span>예금주</span><b>(주)에프엔비히어로</b></div>'
     +'<div class="payRow acc"><span>계좌번호</span><b id="accNo">'+ACC_NO+'</b></div>'
     +'<button type="button" class="copyBtn" onclick="copyAcc()">📋 계좌번호 복사</button>'
-    +'<div class="payTotal"><span>입금 금액</span><b style="color:#d94b28">'+won(o.total)+'원</b></div>'
+    +'<div class="payTotal"><span>입금 금액 <small style="font-weight:600;color:#6b7280;font-size:12px">(면세)</small></span><b style="color:#d94b28">'+won(o.total)+'원</b></div>'
     +'</div>'
     +'<div class="card ord"><h2>발주 내역</h2>'
-    +'<span class="brandTag">'+o.brand+'</span><br style="line-height:2.4">'
-    +'<b>'+o.branch+'</b> · '+o.name+'<br>'+o.summary
-    +'<br><b style="color:#d94b28">총 '+o.totalBox+'박스 ('+(o.totalBox*BOX_KG)+'kg)</b></div>'
+    +'<span class="brandTag">'+esc(o.brand)+'</span><br style="line-height:2.4">'
+    +'<b>'+esc(o.branch)+'</b> · '+esc(o.name)+'<br>'+esc(o.summary)
+    +'<br><b style="color:#d94b28">총 '+o.totalBox+'박스 ('+o.totalKg+'kg)</b>'+deliveryHtml(o)+'</div>'
     +'<div class="card"><h2>입금자명 <small style="font-weight:600;color:#6b7280">입금하실 분 성함</small></h2>'
-    +'<input type="text" id="payerName" placeholder="예) 홍길동" value="'+o.name+'" style="width:100%;border:1px solid var(--line);border-radius:10px;padding:13px 14px;font:inherit;background:#fff"></div>'
-    +'<button type="button" class="btnWide" onclick="goTax()">입금 완료</button>'
-    +'<p class="msg">입금 완료를 누르면 세금계산서 발행 정보를 입력합니다.</p>';
+    +'<input type="text" id="payerName" placeholder="예) 홍길동" value="'+esc(o.name)+'" style="width:100%;border:1px solid var(--line);border-radius:10px;padding:13px 14px;font:inherit;background:#fff"></div>'
+    +'<button type="button" class="btnWide" id="payBtn" onclick="goTax()">입금 완료</button>'
+    +'<p class="msg" id="payMsg">입금 완료를 누르면 입금 내역이 먼저 접수되고, 이어서 세금계산서 발행 정보를 입력합니다.</p>';
   window.scrollTo(0,0);
 }
 function copyAcc(){
@@ -322,15 +390,18 @@ function copiedToast(){
   var o=b.textContent; b.textContent='✓ 복사되었습니다'; b.disabled=true;
   setTimeout(function(){b.textContent=o; b.disabled=false;},1600);
 }
-function showDone(){
+function showDone(unverified){
   var o=_order;
+  guardLeave(false);
   document.getElementById('wrap').innerHTML=
     '<div class="done"><div class="ic">✓</div><h2>발주가 접수되었습니다</h2>'
-    +'<p style="color:#127a3e;font-weight:800;font-size:15px;margin:6px 0 2px;line-height:1.6">카톡 채팅방에 남겨주시면 빠른 확인이 가능합니다.</p>'
-    +'<p>입금 확인 후 담당자가 배송을 진행합니다.<br>변경이 필요하시면 담당자에게 연락 주세요.</p>'
-    +'<div class="rc"><span class="brandTag">'+o.brand+'</span><br style="line-height:2.4">'
-    +'<b>'+o.branch+'</b> · '+o.name+'<br>'+o.summary
-    +'<br><b style="color:#d94b28">총 '+o.totalBox+'박스 ('+(o.totalBox*BOX_KG)+'kg) · '+won(o.total)+'원</b></div></div>';
+    +(unverified
+      ? '<p style="color:#d94b28;font-weight:800;font-size:15px;margin:6px 0 2px;line-height:1.6">전송 결과를 확인하지 못했습니다.<br>아래 발주 내역을 카톡 채팅방에 꼭 남겨주세요.</p>'
+      : '<p style="color:#127a3e;font-weight:800;font-size:15px;margin:6px 0 2px;line-height:1.6">카톡 채팅방에 남겨주시면 빠른 확인이 가능합니다.</p>')
+    +'<p>입금 확인 후 담당자가 출고를 진행합니다.<br>변경이 필요하시면 담당자에게 연락 주세요.</p>'
+    +'<div class="rc"><span class="brandTag">'+esc(o.brand)+'</span><br style="line-height:2.4">'
+    +'<b>'+esc(o.branch)+'</b> · '+esc(o.name)+'<br>'+esc(o.summary)
+    +'<br><b style="color:#d94b28">총 '+o.totalBox+'박스 ('+o.totalKg+'kg) · '+won(o.total)+'원</b>'+deliveryHtml(o)+'</div></div>';
   window.scrollTo(0,0);
 }
 
@@ -339,8 +410,18 @@ function goTax(){
   var pn=(document.getElementById('payerName')||{}).value||'';
   pn=pn.trim();
   if(!pn){ alert('입금자명을 입력해 주세요.'); return; }
+  var btn=document.getElementById('payBtn'); if(btn&&btn.disabled) return;
   _order.payer=pn;
-  showTax();
+  /* 입금 신고 시점에 '입금대기'로 먼저 기록 — 이후 단계에서 이탈해도 입금 건이 누락되지 않음 */
+  if(btn){ btn.disabled=true; btn.textContent='접수 중...'; }
+  postOrder(orderFormData('pay')).then(function(j){
+    _order.payUnverified=!!j.unverified;
+    showTax();
+  }).catch(function(){
+    if(btn){ btn.disabled=false; btn.textContent='입금 완료'; }
+    var m=document.getElementById('payMsg');
+    if(m){ m.style.color='#d94b28'; m.textContent='입금 내역 접수 중 오류가 발생했습니다. 다시 눌러 주시고, 계속 안 되면 카톡 채팅방으로 연락 주세요.'; }
+  });
 }
 function showTax(){
   document.getElementById('wrap').innerHTML=
@@ -381,32 +462,20 @@ function submitTax(){
   var fileEl=document.getElementById('bizFile');
   var email=(document.getElementById('taxEmail')||{}).value||''; email=email.trim();
   if(!fileEl.files||!fileEl.files[0]){ alert('사업자등록증 사진을 첨부해 주세요.'); return; }
-  if(!email||email.indexOf('@')<0){ alert('올바른 이메일을 입력해 주세요.'); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert('올바른 이메일을 입력해 주세요. 예) example@email.com'); return; }
   if(!document.getElementById('taxConsent').checked){ alert('정보 제공에 동의해 주세요.'); return; }
   var btn=document.getElementById('taxBtn'); if(btn.disabled) return;
   btn.disabled=true; btn.textContent='제출 중...';
   compressImage(fileEl.files[0], function(b64,mime,name){
     if(!b64){ btn.disabled=false; btn.textContent='제출하고 완료'; alert('이미지 처리에 실패했습니다. 다른 사진으로 시도해 주세요.'); return; }
-    var o=_order||{}; var qq=o.qty||[0,0,0,0];
-    var fd=new FormData();
-    fd.append('orderId', o.orderId||'');
-    fd.append('brand', o.brand||'');
-    fd.append('branch', o.branch||'');
-    fd.append('name', o.name||'');
-    fd.append('phone', o.phone||'');
-    fd.append('address', o.address||'');
-    fd.append('qty1',qq[0]); fd.append('qty2',qq[1]); fd.append('qty3',qq[2]); fd.append('qty4',qq[3]);
-    fd.append('summary', o.summary||'');
-    fd.append('totalQty', o.totalBox||0);
-    fd.append('payer', o.payer||'');
+    var fd=orderFormData('tax');
     fd.append('taxEmail', email);
     fd.append('bizFile', b64);
     fd.append('bizType', mime);
     fd.append('bizName', name);
-    fd.append('page', o.page||location.href);
-    fetch(ORDER_URL,{method:'POST',mode:'no-cors',body:fd}).then(function(){ showDone(); })
+    postOrder(fd).then(function(j){ showDone(!!j.unverified || !!(_order&&_order.payUnverified)); })
       .catch(function(){ btn.disabled=false; btn.textContent='제출하고 완료';
-        var m=document.getElementById('taxMsg'); if(m) m.textContent='제출 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'; });
+        var m=document.getElementById('taxMsg'); if(m){ m.style.color='#d94b28'; m.textContent='제출 중 오류가 발생했습니다. 다시 눌러 주시고, 계속 안 되면 카톡 채팅방으로 연락 주세요.'; } });
   });
 }
 </script>
